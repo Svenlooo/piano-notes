@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-        <div>Clef</div>
+        <Sheet />
         <Keyboard />
     </div>
 </template>
