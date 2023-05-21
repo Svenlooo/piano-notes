@@ -1,10 +1,10 @@
 <template>
-  <div class="wrapper">
-    <div class="sheet">
+  <div class="sheet">
+    <div class="sheet__wrapper">
       <span
         class="sheet__line sheet__line--extra"
         v-if="additionalLinesDirection == 'top'"
-        v-for="n in additionalLinesCount"
+        v-for="n in additionalLinesCount" :key="n"
       ></span>
       <div class="sheet__line-wrapper">
         <Clef
@@ -29,6 +29,7 @@
         class="sheet__line sheet__line--extra"
         v-if="additionalLinesDirection == 'bottom'"
         v-for="n in additionalLinesCount"
+        :key="n"
       ></span>
     </div>
   </div>
@@ -65,12 +66,20 @@ const props = defineProps({
   },
 });
 
+const clefType = ref("violin");
+const notePosition = ref("c");
+const noteOctave = ref(4);
+const sheetStep = ref(10);
+const c4TopValue = ref(90);
+const additionalLines = ref(0);
+const pastNotes = reactive([]);
+
 const additionalLinesCount = 0;
 
 const additionalLinesDirection = "bottom";
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -79,11 +88,18 @@ const additionalLinesDirection = "bottom";
 }
 
 .sheet {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  height: 100%;
+
   --line-distance: 20px;
 
-  position: relative;
-  width: 100%;
-  margin: 0 30px;
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 30px;
+  }
 
   &__line {
     display: block;

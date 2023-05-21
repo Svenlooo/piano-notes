@@ -30,7 +30,7 @@ const props = defineProps({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .clef {
   height: 100%;
 }
