@@ -74,16 +74,10 @@ const notePosition = ref("c");
 const noteOctave = ref(4);
 const sheetStep = ref(10); // Percent for CSS top property
 const c4TopValue = ref(90); // value for violin clef
-const additionalLines = ref(0);
+const additionalLines = ref(0); // Amount of additional lines to add above or below the sheet
 const pastNotes = reactive([]); // Store past notes ['c4', 'e5', 'c2']
 
-/**
- * Calculates vertical positioning (in %) of the note within the sheet.
- */
-const noteStylePosition = computed(() => {
-  // return this.getNoteCssTopValue();
-  return 0;
-});
+const noteStylePosition = computed(() => getNoteCSSTopValue())
 
 /**
  * Determins how many lines to add above or below note.
@@ -94,8 +88,148 @@ const additionalLinesDirection = computed(() => {
   return "";
 });
 
+/**
+ * Returns the amount of lines to add to the sheet.
+ */
 const additionalLinesCount = computed(() => {
   return Math.abs(additionalLines);
+});
+
+/**
+ * Returns the amount of new lines needed to be added to the sheet
+ * @param sheet     - Sheet meta with min and max range
+ * @param position  - The note's position (css "top" percent value)
+ * @returns {number} - Amount of additional lines
+ */
+const getAdditionalLinesCount = (sheet, position) => {
+  if (position > sheet.min || position < sheet.max) {
+    if (position > sheet.min) {
+      return Math.floor((position - sheet.min) / sheetStep / 2);
+    } else {
+      return Math.ceil((position - sheet.max) / sheetStep / 2);
+    }
+  }
+  return 0;
+};
+
+/**
+ * Returns an object with the sheet's range
+ * @returns {{ min: number, max: number }}
+ */
+const getSheetRange = () => {
+  return { min: 70, max: -10 };
+};
+
+/**
+ * Calculates the note's vertical positioning in % for the css top rule.
+ * @returns {number} - CSS percent value for note's top rule.
+ */
+const getNoteCSSTopValue = () => {
+  // Span of an entire octave in %
+  const octavePercentDiff = sheetStep * props.octaveLength;
+
+  // Note position on the octave
+  const noteOctavePos = props.wholeNotes.indexOf(notePosition.value);
+
+  // Offset from one-line octave (always positve, regardless of direction)
+  const octaveOffset = Math.abs(noteOctave - props.oneLineOctave);
+
+  // Position on the one-line octave
+  const noteOneLineOctaveTopValue = c4TopValue - sheetStep * noteOctavePos;
+
+  // Note is below the one-line octave
+  if (noteOctave > props.oneLineOctave) {
+    return noteOneLineOctaveTopValue - octavePercentDiff * octaveOffset;
+
+    // Note is above the one-line octave
+  } else if (noteOctave < props.oneLineOctave) {
+    return noteOneLineOctaveTopValue + octavePercentDiff * octaveOffset;
+
+    // Note is in the one-line octave
+  } else {
+    return noteOneLineOctaveTopValue;
+  }
+};
+
+/**
+ * Checks a played note for correctness.
+ * Emits events.
+ * @param {String} note - e.g. 'c' or 'c#'
+ */
+const checkNote = (note) => {
+  if (note == notePosition.value) {
+    $emit("correct");
+    $refs.note.confirm();
+    assignNewNote();
+  } else {
+    $emit("incorrect");
+    $refs.note.shake();
+  }
+};
+
+/**
+ * Takes the notes array to generate a random note.
+ * Tries until it gets a note, which isn't already inside the pastNotes array.
+ * @return {Array} Clef + Note + Octave
+ */
+const getNote = () => {
+  const clef = props.clefs[Math.floor(Math.random() * props.clefs.length)];
+  const note =
+    props.wholeNotes[Math.floor(Math.random() * props.wholeNotes.length)];
+  const octave = Math.floor(
+    Math.random() *
+      (props.octaveRange[clef][1] - props.octaveRange[clef][0] + 1) +
+      props.octaveRange[clef][0]
+  );
+
+  if (pastNotes.includes(`${note}${octave}`)) {
+    getNote();
+  }
+
+  return [clef, note, octave];
+};
+
+/**
+ * Adds a note to the list of passed notes.
+ * This avoids the same note being generated in a row.
+ * @param {String} note - e.g. 'c'
+ * @param {Number} octave - e.g. 4
+ */
+const addPastNote = (note, octave) => {
+  pastNotes.unshift(`${note}${octave}`);
+  pastNotes.value = pastNotes.slice(0, 3); // Limit array length to 3
+};
+
+/**
+ * Sets a new note within the sheet.
+ * Updates the view.
+ */
+const assignNewNote = () => {
+  const note = getNote();
+  clefType.value = note[0];
+  notePosition.value = note[1];
+  noteOctave.value = note[2];
+  addPastNote(note[1], note[2]);
+  setC4();
+
+  const position = getNoteCSSTopValue();
+  const sheet = getSheetRange();
+  additionalLines.value = getAdditionalLinesCount(sheet, position);
+};
+
+/**
+ * Sets the top value for the note c4, depending on the Clef type.
+ */
+const setC4 = () => {
+  if (clefType.value == "violin") {
+    c4TopValue.value = 90;
+  } else if (clefType.value == "bass") {
+    c4TopValue.value = -30;
+  }
+};
+
+onMounted(() => {
+  assignNewNote();
 });
 </script>
 
@@ -134,7 +268,7 @@ const additionalLinesCount = computed(() => {
       width: 100%;
       height: 1px;
       top: 0;
-      background-color: map-get($colors, 'black');
+      background-color: map-get($colors, "black");
     }
 
     &-wrapper {
