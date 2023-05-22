@@ -21,16 +21,22 @@ const props = defineProps({
   },
 });
 
+const svg = ref();
+
 /**
  * Triggers a shake animation on the note.
  */
 const shake = () => {
-  this.$refs.svg.classList.add("shake");
+  svg.value.classList.add("shake");
 
   setTimeout(() => {
-    this.$refs.svg.classList.remove("shake");
+    svg.value.classList.remove("shake");
   }, 500);
 };
+
+defineExpose({
+  shake,
+})
 </script>
 
 <style lang="scss" scoped>

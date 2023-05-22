@@ -69,6 +69,9 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(["correct", "incorrect"]);
+
+const note = ref();
 const clefType = ref("violin");
 const notePosition = ref("c");
 const noteOctave = ref(4);
@@ -77,14 +80,16 @@ const c4TopValue = ref(90); // value for violin clef
 const additionalLines = ref(0); // Amount of additional lines to add above or below the sheet
 const pastNotes = reactive([]); // Store past notes ['c4', 'e5', 'c2']
 
-const noteStylePosition = computed(() => getNoteCSSTopValue())
+const noteStylePosition = computed(() => {
+  return getNoteCSSTopValue();
+});
 
 /**
  * Determins how many lines to add above or below note.
  */
 const additionalLinesDirection = computed(() => {
-  if (additionalLines > 0) return "bottom";
-  else if (additionalLines < 0) return "top";
+  if (additionalLines.value > 0) return "bottom";
+  else if (additionalLines.value < 0) return "top";
   return "";
 });
 
@@ -92,7 +97,8 @@ const additionalLinesDirection = computed(() => {
  * Returns the amount of lines to add to the sheet.
  */
 const additionalLinesCount = computed(() => {
-  return Math.abs(additionalLines);
+  console.log('additionalLines', additionalLines.value)
+  return Math.abs(additionalLines.value);
 });
 
 /**
@@ -104,9 +110,9 @@ const additionalLinesCount = computed(() => {
 const getAdditionalLinesCount = (sheet, position) => {
   if (position > sheet.min || position < sheet.max) {
     if (position > sheet.min) {
-      return Math.floor((position - sheet.min) / sheetStep / 2);
+      return Math.floor((position - sheet.min) / sheetStep.value / 2);
     } else {
-      return Math.ceil((position - sheet.max) / sheetStep / 2);
+      return Math.ceil((position - sheet.max) / sheetStep.value / 2);
     }
   }
   return 0;
@@ -126,23 +132,23 @@ const getSheetRange = () => {
  */
 const getNoteCSSTopValue = () => {
   // Span of an entire octave in %
-  const octavePercentDiff = sheetStep * props.octaveLength;
+  const octavePercentDiff = sheetStep.value * props.octaveLength;
 
   // Note position on the octave
   const noteOctavePos = props.wholeNotes.indexOf(notePosition.value);
 
   // Offset from one-line octave (always positve, regardless of direction)
-  const octaveOffset = Math.abs(noteOctave - props.oneLineOctave);
+  const octaveOffset = Math.abs(noteOctave.value - props.oneLineOctave);
 
   // Position on the one-line octave
-  const noteOneLineOctaveTopValue = c4TopValue - sheetStep * noteOctavePos;
+  const noteOneLineOctaveTopValue = c4TopValue.value - sheetStep.value * noteOctavePos;
 
   // Note is below the one-line octave
-  if (noteOctave > props.oneLineOctave) {
+  if (noteOctave.value > props.oneLineOctave) {
     return noteOneLineOctaveTopValue - octavePercentDiff * octaveOffset;
 
     // Note is above the one-line octave
-  } else if (noteOctave < props.oneLineOctave) {
+  } else if (noteOctave.value < props.oneLineOctave) {
     return noteOneLineOctaveTopValue + octavePercentDiff * octaveOffset;
 
     // Note is in the one-line octave
@@ -154,23 +160,22 @@ const getNoteCSSTopValue = () => {
 /**
  * Checks a played note for correctness.
  * Emits events.
- * @param {String} note - e.g. 'c' or 'c#'
+ * @param {String} playedNote - e.g. 'c' or 'c#'
  */
-const checkNote = (note) => {
-  if (note == notePosition.value) {
-    $emit("correct");
-    $refs.note.confirm();
+const checkNote = (playedNote) => {
+  if (playedNote == notePosition.value) {
+    emit("correct");
     assignNewNote();
   } else {
-    $emit("incorrect");
-    $refs.note.shake();
+    emit("incorrect");
+    note.value.shake();
   }
 };
 
 /**
  * Takes the notes array to generate a random note.
  * Tries until it gets a note, which isn't already inside the pastNotes array.
- * @return {Array} Clef + Note + Octave
+ * @return {Array} [Clef, Note, Octave]
  */
 const getNote = () => {
   const clef = props.clefs[Math.floor(Math.random() * props.clefs.length)];
@@ -206,6 +211,7 @@ const addPastNote = (note, octave) => {
  */
 const assignNewNote = () => {
   const note = getNote();
+  console.log("Note:", note);
   clefType.value = note[0];
   notePosition.value = note[1];
   noteOctave.value = note[2];
@@ -230,6 +236,10 @@ const setC4 = () => {
 
 onMounted(() => {
   assignNewNote();
+});
+
+defineExpose({
+  checkNote,
 });
 </script>
 

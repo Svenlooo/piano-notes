@@ -1,11 +1,22 @@
 <template>
   <div class="piano">
-    <Sheet class="piano__sheet" />
-    <Keyboard class="piano__keyboard" />
+    <Sheet class="piano__sheet" ref="sheet" />
+    <Keyboard class="piano__keyboard" @play="handleNote($event)" />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const sheet = ref();
+
+/**
+ * Distribute information about the played note.
+ * @param {string} note
+ */
+const handleNote = (note) => {
+  console.log("Played: ", note);
+  sheet.value.checkNote(note);
+};
+</script>
 
 <style lang="scss" scoped>
 .piano {
