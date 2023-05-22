@@ -1,7 +1,7 @@
 <template>
   <div class="piano">
-    <Sheet class="piano__sheet" ref="sheet" />
-    <Keyboard class="piano__keyboard" @play="handleNote($event)" />
+    <Sheet ref="sheet" />
+    <Keyboard @play="handleNote($event)" />
   </div>
 </template>
 
@@ -18,7 +18,7 @@ const handleNote = (note) => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .piano {
   display: flex;
   flex-flow: column nowrap;
@@ -27,7 +27,7 @@ const handleNote = (note) => {
     flex-flow: row nowrap;
   }
 
-  &__sheet {
+  & .sheet {
     height: 50vh;
     z-index: 1;
 
@@ -37,7 +37,7 @@ const handleNote = (note) => {
     }
   }
 
-  &__keyboard {
+  & .keyboard {
     height: 50vh;
     z-index: 0;
 
