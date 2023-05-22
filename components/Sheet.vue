@@ -3,8 +3,10 @@
     <div class="sheet__wrapper">
       <span
         class="sheet__line sheet__line--extra"
-        v-if="additionalLinesDirection == 'top'"
-        v-for="n in additionalLinesCount" :key="n"
+        v-for="n in additionalLinesDirection == 'top'
+          ? additionalLinesCount
+          : 0"
+        :key="n"
       ></span>
       <div class="sheet__line-wrapper">
         <Clef
@@ -27,8 +29,9 @@
       </div>
       <span
         class="sheet__line sheet__line--extra"
-        v-if="additionalLinesDirection == 'bottom'"
-        v-for="n in additionalLinesCount"
+        v-for="n in additionalLinesDirection == 'bottom'
+          ? additionalLinesCount
+          : 0"
         :key="n"
       ></span>
     </div>
@@ -69,14 +72,31 @@ const props = defineProps({
 const clefType = ref("violin");
 const notePosition = ref("c");
 const noteOctave = ref(4);
-const sheetStep = ref(10);
-const c4TopValue = ref(90);
+const sheetStep = ref(10); // Percent for CSS top property
+const c4TopValue = ref(90); // value for violin clef
 const additionalLines = ref(0);
-const pastNotes = reactive([]);
+const pastNotes = reactive([]); // Store past notes ['c4', 'e5', 'c2']
 
-const additionalLinesCount = 0;
+/**
+ * Calculates vertical positioning (in %) of the note within the sheet.
+ */
+const noteStylePosition = computed(() => {
+  // return this.getNoteCssTopValue();
+  return 0;
+});
 
-const additionalLinesDirection = "bottom";
+/**
+ * Determins how many lines to add above or below note.
+ */
+const additionalLinesDirection = computed(() => {
+  if (additionalLines > 0) return "bottom";
+  else if (additionalLines < 0) return "top";
+  return "";
+});
+
+const additionalLinesCount = computed(() => {
+  return Math.abs(additionalLines);
+});
 </script>
 
 <style lang="scss">
@@ -114,7 +134,7 @@ const additionalLinesDirection = "bottom";
       width: 100%;
       height: 1px;
       top: 0;
-      background-color: #000;
+      background-color: map-get($colors, 'black');
     }
 
     &-wrapper {

@@ -46,13 +46,12 @@ const playNote = (note) => {
 </script>
 
 <style lang="scss" scoped>
-@use "sass:math";
 .keyboard {
   position: relative;
   width: 100%;
   height: 100%;
   min-height: 320px;
-  background-color: var(--color-black);
+  background-color: #000;
 
   & button {
     user-select: none;
@@ -66,11 +65,12 @@ const playNote = (note) => {
     left: 0;
     right: 0;
     height: 4px;
-    background-color: var(--color-red);
+    background-color: #BD3434;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   }
 
   &__octave {
+    box-sizing: border-box;
     display: flex;
     flex-flow: row nowrap;
     height: 100%;
@@ -101,7 +101,7 @@ const playNote = (note) => {
     border-radius: 0px 0px 3px 3px;
     border: solid #000 3px;
 
-    &:not(:nth-child(2)):active {
+    &:active {
         box-shadow: inset 1px -10px 1px rgba(255, 255, 255, 0.25);
     }
 

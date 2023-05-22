@@ -2,6 +2,18 @@
 export default defineNuxtConfig({
     css: [
         "normalize.css/normalize.css",
-        "~/assets/style/main.scss",
+        "@/assets/styles/main.scss",
     ],
+    vite: {
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `
+                        @use "sass:math";
+                        @import "@/assets/styles/_variables.scss";
+                    `,
+                },
+            },
+        },
+    },
 })
