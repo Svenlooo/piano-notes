@@ -1,13 +1,13 @@
 <template>
   <div class="sheet">
     <div class="sheet__wrapper">
-      <span
-        class="sheet__line sheet__line--extra"
-        v-for="n in additionalLinesDirection == 'top'
-          ? additionalLinesCount
-          : 0"
-        :key="n"
-      ></span>
+      <template v-if="additionalLinesDirection == 'top'">
+        <span
+          class="sheet__line sheet__line--extra"
+          v-for="n in additionalLinesCount"
+          :key="n"
+        ></span>
+      </template>
       <div class="sheet__line-wrapper">
         <Clef
           class="sheet__clef"
@@ -27,13 +27,13 @@
         <span class="sheet__line"></span>
         <span class="sheet__line"></span>
       </div>
-      <span
-        class="sheet__line sheet__line--extra"
-        v-for="n in additionalLinesDirection == 'bottom'
-          ? additionalLinesCount
-          : 0"
-        :key="n"
-      ></span>
+      <template v-if="additionalLinesDirection == 'bottom'">
+        <span
+          class="sheet__line sheet__line--extra"
+          v-for="n in additionalLinesCount"
+          :key="n"
+        ></span>
+      </template>
     </div>
   </div>
 </template>
@@ -97,7 +97,6 @@ const additionalLinesDirection = computed(() => {
  * Returns the amount of lines to add to the sheet.
  */
 const additionalLinesCount = computed(() => {
-  console.log('additionalLines', additionalLines.value)
   return Math.abs(additionalLines.value);
 });
 
@@ -141,7 +140,8 @@ const getNoteCSSTopValue = () => {
   const octaveOffset = Math.abs(noteOctave.value - props.oneLineOctave);
 
   // Position on the one-line octave
-  const noteOneLineOctaveTopValue = c4TopValue.value - sheetStep.value * noteOctavePos;
+  const noteOneLineOctaveTopValue =
+    c4TopValue.value - sheetStep.value * noteOctavePos;
 
   // Note is below the one-line octave
   if (noteOctave.value > props.oneLineOctave) {
@@ -211,16 +211,14 @@ const addPastNote = (note, octave) => {
  */
 const assignNewNote = () => {
   const note = getNote();
-  console.log("Note:", note);
   clefType.value = note[0];
   notePosition.value = note[1];
   noteOctave.value = note[2];
   addPastNote(note[1], note[2]);
   setC4();
 
-  const position = getNoteCSSTopValue();
   const sheet = getSheetRange();
-  additionalLines.value = getAdditionalLinesCount(sheet, position);
+  additionalLines.value = getAdditionalLinesCount(sheet, noteStylePosition.value);
 };
 
 /**
