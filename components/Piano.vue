@@ -18,7 +18,7 @@ const handleNote = (note) => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .piano {
   display: flex;
   flex-flow: column nowrap;
