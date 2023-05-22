@@ -13,7 +13,6 @@ const sheet = ref();
  * @param {string} note
  */
 const handleNote = (note) => {
-  console.log("Played: ", note);
   sheet.value.checkNote(note);
 };
 </script>

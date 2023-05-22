@@ -1,9 +1,9 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "engines" : { 
-    "npm" : ">=9.0.0 <=19.5.0",
-    "node" : ">=18.0.0 <=19.7.0"
+  "engines": {
+    "npm": ">=9.0.0 <=19.5.0",
+    "node": ">=18.0.0 <=19.7.0"
   },
   "scripts": {
     "start": "node .output/server/index.mjs",
@@ -20,6 +20,8 @@
     "sass-loader": "^13.2.2"
   },
   "dependencies": {
-    "normalize.css": "^8.0.1"
+    "@pinia/nuxt": "^0.4.11",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.1.3"
   }
 }

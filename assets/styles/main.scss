@@ -10,4 +10,5 @@ body {
     overflow-x: hidden;
     max-height: 100vh;
     color: var(--color-black);
+    background: linear-gradient(179.6deg, map-get($colors, 'light') 1.07%, map-get($colors, 'light2') 98.55%);
 }

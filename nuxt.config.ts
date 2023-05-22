@@ -9,11 +9,12 @@ export default defineNuxtConfig({
             preprocessorOptions: {
                 scss: {
                     additionalData: `
-                        @use "sass:math";
-                        @import "@/assets/styles/_variables.scss";
+                    @use "sass:math";
+                    @import "@/assets/styles/_variables.scss";
                     `,
                 },
             },
         },
     },
+    modules: ['@pinia/nuxt'],
 })
