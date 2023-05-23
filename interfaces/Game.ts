@@ -16,7 +16,7 @@ export default interface Game {
         note: Note,
         
         /** Whether the player managed to play the note */
-        correct: boolean,
+        played: boolean,
         
         /** Amount of attempts to play the note correctly */
         attempts: number 

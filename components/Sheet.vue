@@ -207,7 +207,7 @@ const getNote = () => {
  * @param {Note} note
  */
 const addPastNote = (note) => {
-  store.currentGame.notes.push({...note, correct: null, attempts: 0 })
+  store.currentGame.notes.push({...note, played: null, attempts: 0 })
 };
 
 /**
