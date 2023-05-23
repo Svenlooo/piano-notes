@@ -1,25 +1,32 @@
 import { defineStore } from 'pinia'
 
+interface Note {
+    clef: "violin" | "bass",
+    note: string,
+    octave: number,
+}
+
+interface Game {
+    date: Date,
+    score: number,
+    notes: Array<{ note: Note, correct: boolean }>
+}
+
 export const gamesStore = defineStore('gamesStore', () => {
     
     /**
      * All games in chronological order.
-     * Object structure:
-     * {
-     *  date: Date,
-     *  notes: Array<currentGame>
-     * }
      */
-    const gameList = reactive([])
+    const gameList: Array<Game> = reactive([])
 
     /**
      * The currently running game.
-     * [
-     *      { note: string, correct: boolean }
-     * ]
      */
-    const currentGame = reactive([])
-
+    const currentGame: Game = reactive({
+        date: new Date(),
+        score: 0,
+        notes: []
+    })
 
     return { currentGame }
 })
