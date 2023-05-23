@@ -198,7 +198,7 @@ const getNote = () => {
     getNote();
   }*/
 
-  return { clef: clef, note: note, octave: octave, correct: null }
+  return { clef: clef, note: note, octave: octave }
 };
 
 /**
@@ -207,7 +207,7 @@ const getNote = () => {
  * @param {Note} note
  */
 const addPastNote = (note) => {
-  store.currentGame.notes.push({...note, correct: null})
+  store.currentGame.notes.push({...note, correct: null, attempts: 0 })
 };
 
 /**

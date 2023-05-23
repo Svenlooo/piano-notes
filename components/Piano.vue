@@ -18,6 +18,7 @@ const sheet = ref();
 const handleNote = (note) => {
   // Update current note in store with the value of "correct"
   const lastNote = store.currentGame.notes[store.currentGame.notes.length - 1];
+  lastNote.attempts += 1;
   if (lastNote.correct === null) {
     lastNote.correct = sheet.value.checkNote(note);
   } else {
