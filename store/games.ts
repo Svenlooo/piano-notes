@@ -1,18 +1,7 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import Game from 'interfaces/Game';
 
-interface Note {
-    clef: "violin" | "bass",
-    note: string,
-    octave: number,
-}
-
-interface Game {
-    date: Date,
-    score: number,
-    notes: Array<{ note: Note, correct: boolean }>
-}
-
-export const gamesStore = defineStore('gamesStore', () => {
+export const useGamesStore = defineStore('games', () => {
     
     /**
      * All games in chronological order.
@@ -25,7 +14,7 @@ export const gamesStore = defineStore('gamesStore', () => {
     const currentGame: Game = reactive({
         date: new Date(),
         score: 0,
-        notes: []
+        notes: [],
     })
 
     return { currentGame }

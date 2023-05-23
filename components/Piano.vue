@@ -6,6 +6,9 @@
 </template>
 
 <script setup>
+import { useGamesStore } from "~/store/games";
+
+const store = useGamesStore();
 const sheet = ref();
 
 /**
@@ -13,7 +16,13 @@ const sheet = ref();
  * @param {string} note
  */
 const handleNote = (note) => {
-  sheet.value.checkNote(note);
+  // Update current note in store with the value of "correct"
+  const lastNote = store.currentGame.notes[store.currentGame.notes.length - 1];
+  if (lastNote.correct === null) {
+    lastNote.correct = sheet.value.checkNote(note);
+  } else {
+    sheet.value.checkNote(note);
+  }
 };
 </script>
 

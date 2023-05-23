@@ -39,6 +39,10 @@
 </template>
 
 <script setup>
+import { useGamesStore } from "~/store/games";
+
+const store = useGamesStore();
+
 const props = defineProps({
   octaveLength: {
     type: Number,
@@ -78,7 +82,6 @@ const noteOctave = ref(4);
 const sheetStep = ref(10); // Percent for CSS top property
 const c4TopValue = ref(90); // value for violin clef
 const additionalLines = ref(0); // Amount of additional lines to add above or below the sheet
-const pastNotes = reactive([]); // Store past notes ['c4', 'e5', 'c2']
 
 const noteStylePosition = computed(() => {
   return getNoteCSSTopValue();
@@ -161,21 +164,24 @@ const getNoteCSSTopValue = () => {
  * Checks a played note for correctness.
  * Emits events.
  * @param {String} playedNote - e.g. 'c' or 'c#'
+ * @returns {boolean} - If pressed key was correct or incorrect
  */
 const checkNote = (playedNote) => {
   if (playedNote == notePosition.value) {
     emit("correct");
     assignNewNote();
+    return true;
   } else {
     emit("incorrect");
     note.value.shake();
+    return false;
   }
 };
 
 /**
  * Takes the notes array to generate a random note.
  * Tries until it gets a note, which isn't already inside the pastNotes array.
- * @return {Array} [Clef, Note, Octave]
+ * @returns {Note}
  */
 const getNote = () => {
   const clef = props.clefs[Math.floor(Math.random() * props.clefs.length)];
@@ -187,22 +193,21 @@ const getNote = () => {
       props.octaveRange[clef][0]
   );
 
-  if (pastNotes.includes(`${note}${octave}`)) {
+  // Get a new note, if the current one has been used in the past.
+  /*if (store.currentGame.notes.includes(`${note}${octave}`)) {
     getNote();
-  }
+  }*/
 
-  return [clef, note, octave];
+  return { clef: clef, note: note, octave: octave, correct: null }
 };
 
 /**
  * Adds a note to the list of passed notes.
  * This avoids the same note being generated in a row.
- * @param {String} note - e.g. 'c'
- * @param {Number} octave - e.g. 4
+ * @param {Note} note
  */
-const addPastNote = (note, octave) => {
-  pastNotes.unshift(`${note}${octave}`);
-  pastNotes.value = pastNotes.slice(0, 3); // Limit array length to 3
+const addPastNote = (note) => {
+  store.currentGame.notes.push({...note, correct: null})
 };
 
 /**
@@ -211,10 +216,10 @@ const addPastNote = (note, octave) => {
  */
 const assignNewNote = () => {
   const note = getNote();
-  clefType.value = note[0];
-  notePosition.value = note[1];
-  noteOctave.value = note[2];
-  addPastNote(note[1], note[2]);
+  clefType.value = note.clef;
+  notePosition.value = note.note;
+  noteOctave.value = note.octave;
+  addPastNote(note);
   setC4();
 
   const sheet = getSheetRange();
