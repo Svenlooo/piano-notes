@@ -38,9 +38,6 @@ export const useGamesStore = defineStore('games', () => {
      * Syncronizes the currentGame within the gameList.
      */
     const syncGameList = () => {
-        
-        console.log('syncGameList lastGame', lastGame.value, lastGame.value.startDate !== currentGame.startDate )
-
         // Add new game, if no last game is available OR if Date isn't the latest one
         if (!lastGame.value) {
             gameList.value.push(currentGame)
