@@ -17,9 +17,10 @@ const sheet = ref();
  */
 const handleNote = (note) => {
   // Update current note in store with the value of "correct"
-  const lastNote = store.currentGame.notes[store.currentGame.notes.length - 1];
-  lastNote.attempts += 1;
-  lastNote.played = sheet.value.checkNote(note);
+  store.lastNote.attempts += 1;
+  store.lastNote.played = sheet.value.checkNote(note);
+
+  store.syncGameList();
 };
 </script>
 
