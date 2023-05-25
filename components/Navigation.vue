@@ -3,20 +3,20 @@
         <ul class="navigation__list">
             <li class="navigation__list-item">
                 <button class="navigation__button">
-                    <Icon name="game-icons:scroll-unfurled" color="black" />
-                    <span>Score</span>
+                    <Icon name="game-icons:scroll-unfurled" />
+                    <span class="label">Score</span>
                 </button>
             </li>
             <li class="navigation__list-item">
                 <button class="navigation__button">
-                    <Icon name="game-icons:grand-piano" color="black" />
-                    <span>Play</span>
+                    <Icon name="game-icons:grand-piano" />
+                    <span class="label">Play</span>
                 </button>
             </li>
             <li class="navigation__list-item">
                 <button class="navigation__button">
-                    <Icon name="game-icons:settings-knobs" color="black" />
-                    <span>Settings</span>
+                    <Icon name="game-icons:settings-knobs" />
+                    <span class="label">Settings</span>
                 </button>
             </li>
         </ul>
@@ -45,6 +45,24 @@
 
         &__button {
             height: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+            font-size: .6em;
+            background: transparent;
+            border: none;
+            padding: 8px;
+
+            & .icon {
+                width: 26px;
+                height: 26px;
+                margin-bottom: 4px;
+            }
+
+            & .label {
+                width: 100%;
+            }
         }
     }
 </style>
