@@ -7,6 +7,6 @@ export default interface NoteListElement {
     /** Whether the player managed to play the note */
     played: boolean,
     
-    /** Amount of attempts to play the note correctly */
+    /** How often the player tried to play the note */
     attempts: number
 }
