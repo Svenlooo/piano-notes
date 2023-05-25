@@ -50,7 +50,6 @@ const playNote = (note) => {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 320px;
   background-color: #000;
 
   & button {
