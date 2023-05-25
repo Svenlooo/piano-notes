@@ -6,9 +6,9 @@ export default defineNuxtConfig({
             viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no',
             meta: [
                 { name: 'application-name', content: 'Piano Notes'},
+                { name: 'theme-color', content: '#FBF7F5'},
 
                 /** Android */
-                { name: 'theme-color', content: '#FBF7F5'},
                 { name: 'mobile-web-app-capable', content: 'yes'},
 
                 /** iOS */
@@ -24,29 +24,60 @@ export default defineNuxtConfig({
                 { name: 'full-screen', content: 'yes'},
                 { name: 'browser-mode', content: 'application'},
             ],
+            link: [
+                { rel: 'icon', href: '/favicon.ico'},
+                { rel: 'apple-touch-icon', href: '/images/pwa-icons/apple-touch-icon.png', sizes: '180x180'},
+                { rel: 'mask-icon', href: '/images/pwa-icons/apple-touch-icon.png', sizes: '180x180'}
+            ]
         },
     },
     css: [
-        "normalize.css/normalize.css",
-        "@/assets/styles/main.scss",
+        'normalize.css/normalize.css',
+        '@/assets/styles/main.scss',
     ],
     vite: {
         css: {
             preprocessorOptions: {
                 scss: {
                     additionalData: `
-                    @use "sass:math";
-                    @import "@/assets/styles/_variables.scss";
+                    @use 'sass:math';
+                    @import '@/assets/styles/_variables.scss';
                     `,
                 },
             },
         },
     },
     modules: [
+        '@vite-pwa/nuxt',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
         'nuxt-icon',
     ],
+    pwa: {
+        manifest: {
+            name: 'Piano Notes',
+            short_name: 'Notes',
+            description: 'Learn how to read piano notes in a fun and simple way!',
+            start_url: '/',
+            display: 'standalone',
+            scope: '/',
+            icons: [
+                {
+                    'src': '/images/pwa-icons/android-chrome-192x192.png',
+                    'sizes': '192x192',
+                    'type': 'image/png'
+                },
+                {
+                    'src': '/images/pwa-icons/android-chrome-512x512.png',
+                    'sizes': '512x512',
+                    'type': 'image/png'
+                }
+            ],
+        },
+        client: {
+            installPrompt: true,
+        },
+    },
     piniaPersistedstate: {
         storage: 'localStorage',
     },
