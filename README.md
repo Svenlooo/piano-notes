@@ -46,7 +46,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ## Deployment
 
 Done via Netlify.
-Preview: https://pano-notes.netlify.app/
+Preview: https://piano-notes.netlify.app/
 
 ## Resources
 
