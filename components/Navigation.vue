@@ -2,22 +2,22 @@
     <div class="navigation">
         <ul class="navigation__list">
             <li class="navigation__list-item">
-                <button class="navigation__button">
+                <NuxtLink to="/highscore" class="navigation__button">
                     <Icon name="game-icons:scroll-unfurled" />
                     <span class="label">Score</span>
-                </button>
+                </NuxtLink>
             </li>
             <li class="navigation__list-item">
-                <button class="navigation__button">
+                <NuxtLink to="/" class="navigation__button">
                     <Icon name="game-icons:grand-piano" />
                     <span class="label">Play</span>
-                </button>
+                </NuxtLink>
             </li>
             <li class="navigation__list-item">
-                <button class="navigation__button">
+                <NuxtLink to="/settings" class="navigation__button">
                     <Icon name="game-icons:settings-knobs" />
                     <span class="label">Settings</span>
-                </button>
+                </NuxtLink>
             </li>
         </ul>
     </div>
@@ -44,7 +44,6 @@
         }
 
         &__button {
-            height: 100%;
             display: flex;
             flex-flow: column nowrap;
             align-items: center;
@@ -52,7 +51,8 @@
             font-size: .6em;
             background: transparent;
             border: none;
-            padding: 8px;
+            padding: 14px;
+            text-align: center;
 
             & .icon {
                 width: 26px;
