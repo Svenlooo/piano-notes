@@ -2,13 +2,22 @@
     <div class="navigation">
         <ul class="navigation__list">
             <li class="navigation__list-item">
-                <button class="navigation__button">Play</button>
+                <button class="navigation__button">
+                    <Icon name="game-icons:scroll-unfurled" color="black" />
+                    <span>Score</span>
+                </button>
             </li>
             <li class="navigation__list-item">
-                <button class="navigation__button">Score</button>
+                <button class="navigation__button">
+                    <Icon name="game-icons:grand-piano" color="black" />
+                    <span>Play</span>
+                </button>
             </li>
             <li class="navigation__list-item">
-                <button class="navigation__button">Settings</button>
+                <button class="navigation__button">
+                    <Icon name="game-icons:settings-knobs" color="black" />
+                    <span>Settings</span>
+                </button>
             </li>
         </ul>
     </div>

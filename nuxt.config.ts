@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
+        'nuxt-icon',
     ],
     piniaPersistedstate: {
         storage: 'localStorage',
