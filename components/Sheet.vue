@@ -281,7 +281,7 @@ defineExpose({
       width: 100%;
       height: 1px;
       top: 0;
-      background-color: map-get($colors, "black");
+      background-color: var(--color-black);
     }
 
     &-wrapper {
@@ -294,7 +294,7 @@ defineExpose({
         top: 0;
         height: calc(4 * var(--line-distance));
         content: "";
-        background-color: #000;
+        background-color: var(--color-black);
       }
       &:before {
         width: 1px;

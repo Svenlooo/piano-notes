@@ -64,7 +64,7 @@ const playNote = (note) => {
     left: 0;
     right: 0;
     height: 4px;
-    background-color: #BD3434;
+    background-color: var(--color-red);
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   }
 
@@ -86,11 +86,17 @@ const playNote = (note) => {
     box-sizing: border-box;
     box-shadow: inset 1px -2px 2px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 4px 4px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+
+    &:active {
+      background: linear-gradient(180deg, #fff 0%, #FBF7F5 100%);
+    }
   }
 
   &__black-key {
     position: absolute;
-    background-color: #2b2b2b;
+    background-color: var(--color-piano-black-key);
     width: percentage(math.div((math.div(375, 100) * 24), 1000));
     height: percentage(math.div((math.div(337, 100) * 200), 1000));
     border: 0;
@@ -98,7 +104,9 @@ const playNote = (note) => {
     z-index: 1;
     box-shadow: inset 1px -30px 1px rgba(255, 255, 255, 0.25);
     border-radius: 0px 0px 3px 3px;
-    border: solid #000 3px;
+    border: solid var(--color-black) 3px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
 
     &:active {
         box-shadow: inset 1px -10px 1px rgba(255, 255, 255, 0.25);

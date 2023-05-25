@@ -17,6 +17,8 @@ useServerSeoMeta({
 
 <style lang="scss" scoped>
 .piano {
+  position: relative;
   height: calc(100dvh - #{$navigationHeight});
+  box-shadow: 0px 3px 7px -4px rgba(0,0,0,0.75);
 }
 </style>

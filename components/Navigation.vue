@@ -27,7 +27,7 @@
     .navigation {
         width: 100%;
         height: $navigationHeight;
-        background-color: map-get($colors, 'light');
+        background-color: var(--color-light);
 
         &__list {
             margin: 0;
@@ -53,6 +53,12 @@
             border: none;
             padding: 14px;
             text-align: center;
+            text-decoration: none;
+            color: var(--color-piano-black-key);
+
+            &.router-link-active {
+                color: var(--color-red);
+            }
 
             & .icon {
                 width: 26px;
