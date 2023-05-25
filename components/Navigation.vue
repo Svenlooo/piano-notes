@@ -25,6 +25,8 @@
 
 <style lang="scss">
     .navigation {
+        position: fixed;
+        bottom: 0;
         width: 100%;
         height: $navigationHeight;
         background-color: map-get($colors, 'light');
