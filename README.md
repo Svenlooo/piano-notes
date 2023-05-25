@@ -43,6 +43,11 @@ npm run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+## Deployment
+
+Done via Netlify.
+Preview: https://pano-notes.netlify.app/
+
 ## Resources
 
 Here is a list of external resources used for this project, with a big thanks to the creators.
