@@ -6,8 +6,12 @@
 </template>
 
 <script setup>
-useHead({
-  title: 'Piano Notes | Settings'
+useServerSeoMeta({
+  title: 'Piano Notes | Settings',
+  ogTitle: 'Piano Notes | Settings',
+  description: 'Change your settings.',
+  ogDescription: 'Change your settings.',
+  ogImage: 'assets/images/titleImage.webp',
 })
 </script>
 
