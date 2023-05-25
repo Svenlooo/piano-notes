@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             charset: 'utf-8',
-            viewport: 'width=device-width, initial-scale=1',
+            viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no',
             meta: [
                 { name: 'application-name', content: 'Piano Notes'},
 
@@ -23,7 +23,6 @@ export default defineNuxtConfig({
                 /** UC Browser */
                 { name: 'full-screen', content: 'yes'},
                 { name: 'browser-mode', content: 'application'},
-                { name: 'viewport', content: 'uc-fitscreen=yes'},
             ],
         },
     },
