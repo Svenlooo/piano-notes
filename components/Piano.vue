@@ -28,27 +28,28 @@ const handleNote = (note) => {
 .piano {
   display: flex;
   flex-flow: column nowrap;
+  height: auto;
 
   @media screen and (orientation: landscape) {
     flex-flow: row nowrap;
   }
 
   & .sheet {
-    height: 50vh;
+    height: 50%;
     z-index: 1;
 
     @media screen and (orientation: landscape) {
-      height: 100vh;
+      height: 100%;
       width: 50vw;
     }
   }
 
   & .keyboard {
-    height: 50vh;
+    height: 50%;
     z-index: 0;
 
     @media screen and (orientation: landscape) {
-      height: 100vh;
+      height: 100%;
       width: 50vw;
     }
   }
