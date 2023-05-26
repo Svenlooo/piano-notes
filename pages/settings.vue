@@ -11,7 +11,7 @@ useServerSeoMeta({
   ogTitle: 'Piano Notes | Settings',
   description: 'Change your settings.',
   ogDescription: 'Change your settings.',
-  ogImage: 'assets/images/titleImage.webp',
+  ogImage: '/images/titleImage.webp',
 })
 </script>
 
