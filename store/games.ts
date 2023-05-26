@@ -21,6 +21,21 @@ export const useGamesStore = defineStore('games', () => {
     })
 
     /**
+     * Update the last note within the currentGame.
+     * @param {number} newAttempts - Amount of attempts to be added
+     * @param {boolean} newPlayed - true: note has been played, false: note hasn't been played
+     */
+    const updateLastNote = (newAttempts: number, newPlayed: boolean) => {
+        const updatedNote = {
+          ...lastNote.value,
+          attempts: newAttempts,
+          played: newPlayed,
+        };
+      
+        currentGame.notes[currentGame.notes.length - 1] = updatedNote;
+    }
+
+    /**
      * All games in chronological order.
      */
     const gameList = ref<Array<Game>>([])
@@ -48,6 +63,7 @@ export const useGamesStore = defineStore('games', () => {
 
     return { 
         currentGame,
+        updateLastNote,
         lastNote,
         gameList,
         lastGame,

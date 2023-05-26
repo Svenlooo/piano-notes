@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <StatusBar />
     <Piano />
     <Navigation />
   </div>
