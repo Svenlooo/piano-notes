@@ -15,7 +15,7 @@
             </li>
             <li class="navigation__list-item">
                 <NuxtLink to="/settings" class="navigation__button">
-                    <Icon name="game-icons:settings-knobs" />
+                    <Icon name="ion:md-options" />
                     <span class="label">Settings</span>
                 </NuxtLink>
             </li>

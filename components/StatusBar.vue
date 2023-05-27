@@ -2,12 +2,12 @@
   <div class="statusBar">
     <div class="statusBar__item statusBar__item--successful" 
       :class="successfulAttempts > 0 && 'visible'">
-      <Icon name="ph:check-circle" />
+      <Icon name="fluent:music-note-1-24-filled" />
       {{ successfulAttempts }}
     </div>
     <div class="statusBar__item statusBar__item--unsuccessful"
       :class="unsuccessfulAttempts > 0 && 'visible'">
-      <Icon name="ph:x-circle" />
+      <Icon name="fluent:music-note-off-1-24-filled" />
       {{ unsuccessfulAttempts }}
     </div>
   </div>
