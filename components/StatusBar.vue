@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="statusBar">
     <Icon name="ph:check-circle" />
     {{ store.currentGameSuccessfulAttempts }}
     <Icon name="ph:x-circle" />
@@ -12,3 +12,9 @@ import { useGamesStore } from "~/store/games";
 
 const store = useGamesStore();
 </script>
+
+<style lang="scss" scoped>
+  .statusBar {
+    height: $statusBarHeight;
+  }
+</style>
