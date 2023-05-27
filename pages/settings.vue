@@ -11,7 +11,7 @@ useServerSeoMeta({
   ogTitle: 'Piano Notes | Settings',
   description: 'Change your settings.',
   ogDescription: 'Change your settings.',
-  ogImage: '/images/titleImage.jpg',
+  ogImage: 'https://piano-notes.netlify.app/images/titleImage.jpg',
 })
 </script>
 
