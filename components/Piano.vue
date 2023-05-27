@@ -34,7 +34,7 @@ const handleNote = (note) => {
   flex-flow: column nowrap;
   height: 100%;
 
-  @media screen and (orientation: landscape) {
+  @media #{map-get($mediaSituations, 'landscape')} {
     flex-flow: row nowrap;
   }
 
@@ -42,9 +42,9 @@ const handleNote = (note) => {
     height: 50%;
     z-index: 1;
 
-    @media screen and (orientation: landscape) {
+    @media #{map-get($mediaSituations, 'landscape')} {
       height: 100%;
-      width: 50vw;
+      width: 50%;
     }
   }
 
@@ -52,9 +52,9 @@ const handleNote = (note) => {
     height: 50%;
     z-index: 0;
 
-    @media screen and (orientation: landscape) {
+    @media #{map-get($mediaSituations, 'landscape')} {
       height: 100%;
-      width: 50vw;
+      width: 50%;
     }
   }
 }

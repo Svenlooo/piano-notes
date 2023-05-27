@@ -8,3 +8,7 @@ $breakpoints: (
 // Page element sizes
 $statusBarHeight: 24px;
 $navigationHeight: 70px;
+
+$mediaSituations: (
+    'landscape': 'screen and (orientation: landscape)',
+);

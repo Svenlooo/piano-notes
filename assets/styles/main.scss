@@ -33,6 +33,10 @@ body {
     flex-direction: column;
     height: 100dvh;
 
+    @media #{map-get($mediaSituations, 'landscape')} {
+        flex-direction: row;
+    }
+
     & > main {
         flex: 1;
     }

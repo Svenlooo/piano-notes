@@ -29,18 +29,25 @@
         height: $navigationHeight;
         background-color: var(--color-light);
 
+        @media #{map-get($mediaSituations, 'landscape')} {
+            width: $navigationHeight;
+            height: 100%;
+        }
+
         &__list {
             margin: 0;
             padding: 0;
             height: 100%;
             display: flex;
-            flex-flow: row nowrap;
+            flex-flow: row wrap;
             justify-content: space-around;
             list-style-type: none;
         }
 
         &__list-item {
-            height: 100%;
+            @media #{map-get($mediaSituations, 'landscape')} {
+                display: flex;
+            }
         }
 
         &__button {

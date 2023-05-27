@@ -34,7 +34,7 @@ useServerSeoMeta({
   top: 0;
   z-index: 1;
 
-  @media screen and (orientation: landscape) {
+  @media #{map-get($mediaSituations, 'landscape')} {
     width: 50%;
     top: 8px;
   }
