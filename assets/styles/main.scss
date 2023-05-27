@@ -7,6 +7,10 @@
     --color-piano-black-key: #2b2b2b;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
     min-height: calc(100% + env(safe-area-inset-top));
@@ -21,4 +25,16 @@ body {
     max-height: 100vh;
     color: var(--color-black);
     background: linear-gradient(179.6deg, var(--color-light) 1.07%, var(--color-light2) 98.55%);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+
+    & > main {
+        flex: 1;
+    }
+}
+

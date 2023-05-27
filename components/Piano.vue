@@ -32,7 +32,7 @@ const handleNote = (note) => {
 .piano {
   display: flex;
   flex-flow: column nowrap;
-  height: auto;
+  height: 100%;
 
   @media screen and (orientation: landscape) {
     flex-flow: row nowrap;

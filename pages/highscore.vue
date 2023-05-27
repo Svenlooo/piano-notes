@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="content">Highscore</div>
+    <main>Highscore</main>
     <Navigation />
   </div>
 </template>
@@ -17,9 +17,3 @@ useServerSeoMeta({
   twitterImage: 'https://piano-notes.netlify.app/images/titleImage.jpg',
 })
 </script>
-
-<style lang="scss" scoped>
-.content {
-  height: calc(100dvh - #{$navigationHeight});
-}
-</style>
