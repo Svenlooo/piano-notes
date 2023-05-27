@@ -9,6 +9,7 @@
 useServerSeoMeta({
   title: 'Piano Notes | Settings',
   ogTitle: 'Piano Notes | Settings',
+  twitterTitle: 'Piano Notes | Settings',
   description: 'Change your settings.',
   ogDescription: 'Change your settings.',
   twitterDescription: 'Change your settings.',

@@ -10,6 +10,7 @@
 useServerSeoMeta({
   title: "Piano Notes",
   ogTitle: "Piano Notes",
+  twitterTitle: "Piano Notes",
   description: "Learn how to read piano notes in a fun and simple way!",
   ogDescription: "Learn how to read piano notes in a fun and simple way!",
   twitterDescription: "Learn how to read piano notes in a fun and simple way!",
