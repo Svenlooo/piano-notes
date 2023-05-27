@@ -169,7 +169,6 @@ const getNoteCSSTopValue = () => {
 const checkNote = (playedNote) => {
   if (playedNote == notePosition.value) {
     emit("correct");
-    assignNewNote();
     return true;
   } else {
     emit("incorrect");
@@ -243,6 +242,7 @@ onMounted(() => {
 
 defineExpose({
   checkNote,
+  assignNewNote,
 });
 </script>
 

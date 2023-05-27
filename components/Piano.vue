@@ -16,11 +16,14 @@ const sheet = ref();
  * @param {string} note
  */
 const handleNote = (note) => {
-  // Update current note in store with the value of "correct"
-  const newAttempts = store.lastNote.attempts + 1;
-  const newPlayed = sheet.value.checkNote(note);
+  const checkResult = sheet.value.checkNote(note);
+  store.addAttempt();
+  store.setPlayed(checkResult);
 
-  store.updateLastNote(newAttempts, newPlayed);
+  if (checkResult) {
+    sheet.value.assignNewNote();
+  }
+
   store.syncGameList();
 };
 </script>

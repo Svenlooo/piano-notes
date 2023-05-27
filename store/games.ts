@@ -16,24 +16,9 @@ export const useGamesStore = defineStore('games', () => {
      * Returns the last Note within the list of played notes.
      * @returns {NoteListElement} - the note which was played last
      */
-    const lastNote = computed<NoteListElement>(() => {
+    const currentNote = computed<NoteListElement>(() => {
         return currentGame.notes[currentGame.notes.length - 1];
     })
-
-    /**
-     * Update the last note within the currentGame.
-     * @param {number} newAttempts - Amount of attempts to be added
-     * @param {boolean} newPlayed - true: note has been played, false: note hasn't been played
-     */
-    const updateLastNote = (newAttempts: number, newPlayed: boolean) => {
-        const updatedNote = {
-          ...lastNote.value,
-          attempts: newAttempts,
-          played: newPlayed,
-        };
-      
-        currentGame.notes[currentGame.notes.length - 1] = updatedNote;
-    }
 
     /**
      * All games in chronological order.
@@ -61,13 +46,55 @@ export const useGamesStore = defineStore('games', () => {
         }
     }
 
+    /**
+     * Add one more attempt to the current note.
+     */
+    const addAttempt = () => {
+        currentNote.value.attempts += 1;
+    }
+
+    /**
+     * Set the "played" value of the current note.
+     * @param {boolean} played - whether the note has been played
+     */
+    const setPlayed = (played: boolean) => {
+        currentNote.value.played = played;
+    }
+
+    /**
+     * Calculates the amount of total attempts by the player, by counting the amount of attempts
+     * within the note list.
+     * @returns {number} - total amount of attempts
+     */
+    const currentGameTotalAttempts = computed<number>(() => {
+        return currentGame.notes.reduce((prev, note) => prev + note.attempts, 0);
+    })
+
+    /**
+     * Calculates the amount of successfully played notes, by iterating through all past notes
+     * of the current game  and counting the "played" property being true.
+     * @returns {number} - amount of correctly played notes
+     */
+    const currentGameSuccessfulAttempts = computed<number>(() => {
+        return currentGame.notes.reduce(
+            (prev, note) => prev + (note.played ? 1 : 0), 0);
+    })
+
+    /**
+     * Returns the amount of time the player has failed to play a note within the currently active game.
+     * @returns {number} - total amount of failed tries
+     */
+    const currentGameFailedAttempts = computed<number>(() => {
+        return Math.max(currentGameTotalAttempts.value - currentGameSuccessfulAttempts.value, 0);
+    })
+
     return { 
         currentGame,
-        updateLastNote,
-        lastNote,
-        gameList,
-        lastGame,
-        syncGameList
+        syncGameList,
+        addAttempt,
+        setPlayed,
+        currentGameSuccessfulAttempts,
+        currentGameFailedAttempts,
     }
 }, {
     persist: {
