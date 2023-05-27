@@ -19,7 +19,14 @@ useServerSeoMeta({
 <style lang="scss" scoped>
 .piano {
   position: relative;
-  height: calc(100dvh - #{$statusBarHeight} - #{$navigationHeight});
+  height: calc(100dvh - #{$navigationHeight});
   box-shadow: 0px 3px 7px -4px rgba(0,0,0,0.75);
+}
+
+.statusBar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
 }
 </style>

@@ -17,6 +17,6 @@ useServerSeoMeta({
 
 <style lang="scss" scoped>
 .content {
-  height: calc(100dvh - #{$statusBarHeight} - #{$navigationHeight});
+  height: calc(100dvh - #{$navigationHeight});
 }
 </style>
