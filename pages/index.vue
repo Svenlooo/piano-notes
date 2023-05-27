@@ -12,7 +12,7 @@ useServerSeoMeta({
   ogTitle: 'Piano Notes',
   description: 'Learn how to read piano notes in a fun and simple way!',
   ogDescription: 'Learn how to read piano notes in a fun and simple way!',
-  ogImage: '/images/titleImage.webp',
+  ogImage: '/images/titleImage.jpg',
 })
 </script>
 

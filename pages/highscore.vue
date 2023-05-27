@@ -11,7 +11,7 @@ useServerSeoMeta({
   ogTitle: 'Piano Notes | Past games',
   description: 'View your past games and see your rate of improvement.',
   ogDescription: 'View your past games and see your rate of improvement.',
-  ogImage: '/images/titleImage.webp',
+  ogImage: '/images/titleImage.jpg',
 })
 </script>
 
