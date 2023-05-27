@@ -56,7 +56,7 @@ export default defineNuxtConfig({
     pwa: {
         manifest: {
             name: 'Piano Notes',
-            short_name: 'Notes',
+            short_name: 'Piano Notes',
             description: 'Learn how to read piano notes in a fun and simple way!',
             start_url: '/',
             display: 'standalone',
@@ -74,8 +74,15 @@ export default defineNuxtConfig({
                 }
             ],
         },
+        workbox: {
+            navigateFallback: '/',
+        },
+        devOptions: {
+            enabled: true,
+            type: 'module',
+        },
         client: {
-            installPrompt: true,
+            installPrompt: false,
         },
     },
     piniaPersistedstate: {
