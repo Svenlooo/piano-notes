@@ -12,7 +12,9 @@ useServerSeoMeta({
   ogTitle: "Piano Notes",
   description: "Learn how to read piano notes in a fun and simple way!",
   ogDescription: "Learn how to read piano notes in a fun and simple way!",
+  twitterDescription: "Learn how to read piano notes in a fun and simple way!",
   ogImage: "https://piano-notes.netlify.app/images/titleImage.jpg",
+  twitterImage: 'https://piano-notes.netlify.app/images/titleImage.jpg',
 });
 </script>
 
