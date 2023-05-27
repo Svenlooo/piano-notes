@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import Game from 'interfaces/Game';
+import Game from '~/interfaces/Game';
 import NoteListElement from '~/interfaces/NoteListElement';
 
 export const useGamesStore = defineStore('games', () => {
@@ -13,7 +13,7 @@ export const useGamesStore = defineStore('games', () => {
     })
 
     /**
-     * Returns the last Note within the list of played notes.
+     * Returns the last NoteListElement within the list of played notes.
      * @returns {NoteListElement} - the note which was played last
      */
     const currentNote = computed<NoteListElement>(() => {
