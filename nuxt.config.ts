@@ -76,6 +76,9 @@ export default defineNuxtConfig({
         },
         workbox: {
             navigateFallback: '/',
+            globDirectory: '.nuxt/dist/client',
+            globPatterns: ['**/*.{js,css,html}'],
+            globIgnores: ['**/node_modules/**/*', 'sw.js', 'workbox-*.js'],
         },
         devOptions: {
             enabled: true,

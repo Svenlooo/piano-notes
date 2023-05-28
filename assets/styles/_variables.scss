@@ -11,4 +11,5 @@ $navigationHeight: 70px;
 
 $mediaSituations: (
     'landscape': 'screen and (orientation: landscape)',
+    'landscape-mobile': 'screen and (orientation: landscape) and (max-width: #{map-get($breakpoints, 'md')})',
 );
