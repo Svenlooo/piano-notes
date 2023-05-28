@@ -1,17 +1,19 @@
 <template>
   <div class="highscoreList">
-    <ul class="highscoreList__list">
-      <li
-        class="highscoreList__list-item"
-        v-for="(game, index) in pastGames"
-        :key="index"
-      >
-        <Icon name="fluent:music-note-1-24-filled" />
-        <div>{{ parseDay(game.startDate) }}</div>
-        <div>{{ parseTime(game.startDate) }}</div>
-        <div>Score: {{ game.score }}</div>
-      </li>
-    </ul>
+    <ClientOnly fallback="Loading highscore list...">
+      <ul class="highscoreList__list">
+        <li
+          class="highscoreList__list-item"
+          v-for="(game, index) in pastGames"
+          :key="index"
+        >
+          <Icon name="fluent:music-note-1-24-filled" />
+          <div>{{ parseDay(game.startDate) }}</div>
+          <div>{{ parseTime(game.startDate) }}</div>
+          <div>Score: {{ game.score }}</div>
+        </li>
+      </ul>
+    </ClientOnly>
   </div>
 </template>
 
@@ -20,7 +22,11 @@ import { useGamesStore } from "~/store/games";
 
 const store = useGamesStore();
 
-const pastGames = computed(() => store.getPastGames());
+const pastGames = computed(() => {
+  const pastGames = store.getPastGames();
+  console.log("PastGames", pastGames);
+  return pastGames;
+});
 
 const parseDay = (dateString) => {
   const date = new Date(dateString);
