@@ -10,7 +10,10 @@
           <Icon name="fluent:music-note-1-24-filled" />
           <div>{{ parseDay(game.startDate) }}</div>
           <div>{{ parseTime(game.startDate) }}</div>
-          <div>Score: {{ game.score }}</div>
+          <div class="highscoreList__score">
+            <span class="label">Score:</span>
+            <span class="value">{{ game.score }} %</span>
+          </div>
         </li>
       </ul>
     </ClientOnly>
@@ -61,6 +64,13 @@ const parseTime = (dateString) => {
     margin: 0;
     padding: 0;
     list-style-type: none;
+
+    @media (min-width: map-get($breakpoints, 'md')) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @media (min-width: map-get($breakpoints, 'lg')) {
+        grid-template-columns: repeat(6, 1fr);
+    }
   }
 
   &__list-item {
@@ -69,6 +79,16 @@ const parseTime = (dateString) => {
     border-radius: 4px;
     aspect-ratio: 1/1;
     color: var(--color-light);
+  }
+
+  &__score {
+
+    & .label {
+
+    }
+    & .value {
+        font-size: 2em;
+    }
   }
 }
 </style>
