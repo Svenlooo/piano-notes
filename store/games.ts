@@ -70,6 +70,16 @@ export const useGamesStore = defineStore('games', () => {
     }
 
     /**
+     * Removes a game from the gameList.
+     * @param index - The index of the game to be removed
+     * @returns {boolean} - true: success, false: failure
+     */
+    const deleteGame = (index: number) => {
+        const removedElement = gameList.value.splice(index, 1);
+        return removedElement.length > 0;
+    }
+
+    /**
      * Calculates the amount of total attempts by the player, by counting the amount of attempts
      * within the note list.
      * @returns {number} - total amount of attempts
@@ -103,6 +113,7 @@ export const useGamesStore = defineStore('games', () => {
         syncGameList,
         addAttempt,
         setPlayed,
+        deleteGame,
         currentGameSuccessfulAttempts,
         currentGameFailedAttempts,
     }
