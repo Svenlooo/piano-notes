@@ -38,11 +38,12 @@ export const useGamesStore = defineStore('games', () => {
      * Syncronizes the currentGame within the gameList.
      */
     const syncGameList = () => {
+        console.log('syncGameList', gameList)
         // Add new game, if no last game is available OR if Date isn't the latest one
         if (!lastGame.value) {
-            gameList.value.push(currentGame)
+            gameList.value.push(currentGame);
         } else if (lastGame.value.startDate !== currentGame.startDate) {
-            gameList.value.push(currentGame)
+            gameList.value.push(currentGame);
         }
     }
 
@@ -88,8 +89,9 @@ export const useGamesStore = defineStore('games', () => {
         return Math.max(currentGameTotalAttempts.value - currentGameSuccessfulAttempts.value, 0);
     })
 
-    return { 
+    return {
         currentGame,
+        gameList,
         syncGameList,
         addAttempt,
         setPlayed,
