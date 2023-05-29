@@ -22,7 +22,13 @@
           </div>
         </li>
       </ul>
-      <div v-else>No games.</div>
+      <div v-else class="highscoreList--empty">
+        <NuxtLink to="/" class="emptyListIcon">
+          <Icon class="emptyListIcon__icon" name="game-icons:piano-keys" />
+          <br />
+          <span class="emptyListIcon__cta">Go ahead and start a new game!</span>
+        </NuxtLink>
+      </div>
     </ClientOnly>
   </div>
 </template>
@@ -86,6 +92,16 @@ const handleDelete = (index) => {
 
 <style lang="scss" scoped>
 .highscoreList {
+  height: 100%;
+  overflow-y: auto;
+
+  &--empty {
+    height: calc(100% - 80px); // Magic number: Height of heading
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__list {
     display: grid;
     grid-template-columns: 1fr;
@@ -132,6 +148,7 @@ const handleDelete = (index) => {
 
     &--score {
       align-self: flex-end;
+
       & .value {
         font-size: 3em;
         color: var(--color-light2);
@@ -139,6 +156,20 @@ const handleDelete = (index) => {
       & .label {
         font-size: 0.8em;
       }
+    }
+  }
+
+  & .emptyListIcon {
+    text-align: center;
+
+    &__icon {
+      width: 200px;
+      height: auto;
+      color: var(--color-white);
+      opacity: .8;
+    }
+    &__label {
+
     }
   }
 }
