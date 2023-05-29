@@ -106,6 +106,24 @@ export const useGamesStore = defineStore('games', () => {
         return Math.max(currentGameTotalAttempts.value - currentGameSuccessfulAttempts.value, 0);
     })
 
+    /**
+     * Watch for any attempts to calculate the current game's score.
+     */
+    watch(
+        () => currentGame.notes.map(note => [note.attempts, note.played]),
+        (lastPlay) => {
+            let totalTries = 0;
+            let totalSuccesses = 0;
+
+            lastPlay.forEach((note) => {
+                totalTries += typeof note[0] === 'number' ? note[0] : 0;
+                totalSuccesses += note[1] ? 1 : 0;
+            });
+
+            if (totalTries > 0) currentGame.score = Math.round((100 / totalTries) * totalSuccesses);
+        }
+    )
+
     return {
         currentGame,
         gameList,
