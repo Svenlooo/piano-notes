@@ -107,7 +107,7 @@ export const useGamesStore = defineStore('games', () => {
     })
 
     /**
-     * Watch for any attempts to calculate the current game's score.
+     * Watch for any player attempts to calculate the current game's score.
      */
     watch(
         () => currentGame.notes.map(note => [note.attempts, note.played]),

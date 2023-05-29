@@ -12,17 +12,17 @@
             name="game-icons:trash-can"
             @click="handleDelete(index)"
           />
-          <div>{{ parseDay(game.startDate) }}</div>
-          <div>{{ parseTime(game.startDate) }}</div>
-          <div class="highscoreList__score">
-            <span class="label">Score:</span>
-            <span class="value">{{ game.score }} %</span>
+          <div class="highscoreList__meta">
+            {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
+          </div>
+          <div class="highscoreList__meta highscoreList__meta--score">
+            <span class="value">{{ game.score }}%</span>
+            <br />
+            <span class="label">Notes played correctly</span>
           </div>
         </li>
       </ul>
-      <div v-else>
-        No games.
-      </div>
+      <div v-else>No games.</div>
     </ClientOnly>
   </div>
 </template>
@@ -77,7 +77,7 @@ const parseTime = (dateString) => {
  * @param {number} index - Index of the game to delete from localstorage
  */
 const handleDelete = (index) => {
-    // TODO: Instead of confirm(), create a nice looking modal
+  // TODO: Instead of confirm(), create a nice looking modal
   if (confirm("Do you really want to delete this game?")) {
     store.deleteGame(index);
   }
@@ -88,12 +88,18 @@ const handleDelete = (index) => {
 .highscoreList {
   &__list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 8px;
     margin: 0;
     padding: 0;
     list-style-type: none;
 
+    @media (min-width: map-get($breakpoints, "xs")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: map-get($breakpoints, "sm")) {
+      grid-template-columns: repeat(3, 1fr);
+    }
     @media (min-width: map-get($breakpoints, "md")) {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -110,7 +116,7 @@ const handleDelete = (index) => {
     aspect-ratio: 1/1;
     color: var(--color-light);
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
   }
 
   &__icon {
@@ -121,13 +127,18 @@ const handleDelete = (index) => {
     height: 32px;
   }
 
-  &__score {
-    flex: 1;
+  &__meta {
+    width: 100%;
 
-    & .label {
-    }
-    & .value {
-      font-size: 2em;
+    &--score {
+      align-self: flex-end;
+      & .value {
+        font-size: 3em;
+        color: var(--color-light2);
+      }
+      & .label {
+        font-size: 0.8em;
+      }
     }
   }
 }
