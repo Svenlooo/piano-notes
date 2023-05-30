@@ -8,14 +8,22 @@
 </template>
 
 <script setup>
-  import { useSettingsStore } from '~/store/settings';
+import { useSettingsStore } from "~/store/settings";
 
-  const settings = useSettingsStore();
+const settings = useSettingsStore();
 
-  // Set theme on init
-  watch(() => settings.theme, (newTheme) => {
+// Set theme on init
+watch(
+  () => settings.theme,
+  (newTheme) => {
     if (process.client) {
-      document.documentElement.setAttribute('data-theme', newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
     }
-  }, { immediate: true })
+  },
+  { immediate: true }
+);
+
+onMounted(() => {
+  settings.setInitialSuccessOnly();
+});
 </script>

@@ -22,7 +22,6 @@ useServerSeoMeta({
 </script>
 
 <style lang="scss" scoped>
-
 .piano {
   position: relative;
   box-shadow: 0px 3px 7px -4px rgba(0, 0, 0, 0.75);

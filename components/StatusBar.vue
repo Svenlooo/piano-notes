@@ -6,7 +6,7 @@
       {{ successfulAttempts }}
     </div>
     <div class="statusBar__item statusBar__item--unsuccessful"
-      v-if="!settings.successOnly"
+      v-show="!settings.successOnly"
       :class="unsuccessfulAttempts > 0 && 'visible'">
       <Icon name="fluent:music-note-off-1-24-filled" />
       {{ unsuccessfulAttempts }}
