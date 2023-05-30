@@ -6,6 +6,7 @@
       {{ successfulAttempts }}
     </div>
     <div class="statusBar__item statusBar__item--unsuccessful"
+      v-if="!settings.successOnly"
       :class="unsuccessfulAttempts > 0 && 'visible'">
       <Icon name="fluent:music-note-off-1-24-filled" />
       {{ unsuccessfulAttempts }}
@@ -15,11 +16,13 @@
 
 <script setup>
 import { useGamesStore } from "~/store/games";
+import { useSettingsStore } from "~/store/settings";
 
-const store = useGamesStore();
+const games = useGamesStore();
+const settings = useSettingsStore();
 
-const successfulAttempts = computed(() => store.currentGameSuccessfulAttempts);
-const unsuccessfulAttempts = computed(() => store.currentGameFailedAttempts);
+const successfulAttempts = computed(() => games.currentGameSuccessfulAttempts);
+const unsuccessfulAttempts = computed(() => games.currentGameFailedAttempts);
 </script>
 
 <style lang="scss" scoped>

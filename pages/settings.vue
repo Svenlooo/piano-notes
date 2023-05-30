@@ -3,14 +3,20 @@
     <main>
       <ul>
         <li>
-          <label>Mode:</label>
-          <input type="radio" id="light" value="light" v-model="isDarkMode">
+          <input type="radio" id="light" value="light" v-model="isDarkMode" />
           <label for="light">Light</label>
-          <input type="radio" id="dark" value="dark" v-model="isDarkMode">
+          <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
           <label for="dark">Dark</label>
         </li>
         <li>Black keys toggle</li>
-        <li>Toggle failure display</li>
+        <li>
+          <label for="successOnly">Show only successful plays:</label
+          ><input
+            id="successOnly"
+            type="checkbox"
+            v-model="settings.successOnly"
+          />
+        </li>
       </ul>
     </main>
     <Navigation />
@@ -18,7 +24,7 @@
 </template>
 
 <script setup>
-import { useSettingsStore } from '~/store/settings';
+import { useSettingsStore } from "~/store/settings";
 
 useServerSeoMeta({
   title: "Piano Notes | Settings",
@@ -38,7 +44,7 @@ const settings = useSettingsStore();
  * @param {"light" | "dark"} theme name
  */
 const isDarkMode = computed({
-  get: () => settings.theme === 'dark' ? 'dark' : 'light',
+  get: () => (settings.theme === "dark" ? "dark" : "light"),
   set: (value) => settings.setTheme(value),
 });
 </script>
