@@ -61,7 +61,7 @@
             padding: 14px;
             text-align: center;
             text-decoration: none;
-            color: var(--color-piano-black-key);
+            color: var(--color-piano-black);
 
             &.router-link-active {
                 color: var(--color-red);
