@@ -79,7 +79,7 @@ const playNote = (note) => {
   &__white-key {
     width: calc(100% / 7);
     height: 100%;
-    background-color:#fff;
+    background-color: var(--color-piano-white-key);
     border: 0;
     padding: 0;
     margin: 0 percentage(math.div((math.div(375, 100) * 1.5), 1000));

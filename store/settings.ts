@@ -5,16 +5,26 @@ export const useSettingsStore = defineStore('settings', () => {
     /** Add black key notes */
     const blackKeys = ref(false);
 
-    /** Light, Dark or System */
-    const screenMode = ref('light');
-
     /** Show only successes / hide failures */
     const successOnly = ref(false);
+
+    /** Adjust theme according to user's system settings */
+    const theme = ref(process.client && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    /** Toggle the theme */
+    const setTheme = (mode: string) => {
+        theme.value = mode;
+    }
+
+    return {
+        theme,
+        setTheme
+    }
 }, {
     persist: {
         paths: [
             'blackKeys',
-            'screenMode',
+            'theme',
             'successOnly'
         ]
     }

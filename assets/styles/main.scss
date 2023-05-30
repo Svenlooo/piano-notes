@@ -3,10 +3,22 @@
     --color-light2: #F6E8E1;
     --color-red: #BD3434;
     --color-green: #34bd3b;
+    --color-piano-white-key: #fff;
     --color-piano-black-key: #2b2b2b;
     --color-white: #fff;
     --color-black: #000;
     --content-padding: 8px;
+}
+
+[data-theme="dark"] {
+    --color-light: #2b2b2b;
+    --color-light2: #3b3b3b;
+    --color-red: #ff7f7f;
+    --color-green: #7fff7f;
+    --color-piano-white-key: #fff;
+    --color-piano-black-key: #2b2b2b;
+    --color-white: #000;
+    --color-black: #fff;
 }
 
 * {
@@ -39,7 +51,7 @@ body {
         flex-direction: row;
     }
 
-    & > main {
+    &>main {
         flex: 1;
     }
 }
