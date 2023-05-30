@@ -127,7 +127,7 @@ const handleDelete = (index) => {
   &__list-item {
     position: relative;
     padding: 16px;
-    background-color: var(--color-piano-black-key);
+    background-color: var(--color-piano-black);
     border-radius: 4px;
     aspect-ratio: 1/1;
     color: var(--color-light);
