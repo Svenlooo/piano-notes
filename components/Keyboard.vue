@@ -1,33 +1,33 @@
 <template>
   <div class="keyboard">
     <div class="keyboard__octave">
-      <button v-on:click="playNote('c')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('C')" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('c#')"
+        v-on:click="playNote('C#')"
         class="keyboard__black-key keyboard__black-key--csharp"
       ></button>
-      <button v-on:click="playNote('d')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('D')" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('d#')"
+        v-on:click="playNote('D#')"
         class="keyboard__black-key keyboard__black-key--dsharp"
       ></button>
-      <button v-on:click="playNote('e')" class="keyboard__white-key"></button>
-      <button v-on:click="playNote('f')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('E')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('F')" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('f#')"
+        v-on:click="playNote('F#')"
         class="keyboard__black-key keyboard__black-key--fsharp"
       ></button>
-      <button v-on:click="playNote('g')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('G')" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('g#')"
+        v-on:click="playNote('G#')"
         class="keyboard__black-key keyboard__black-key--gsharp"
       ></button>
-      <button v-on:click="playNote('a')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('A')" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('a#')"
+        v-on:click="playNote('A#')"
         class="keyboard__black-key keyboard__black-key--asharp"
       ></button>
-      <button v-on:click="playNote('h')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote('H')" class="keyboard__white-key"></button>
     </div>
   </div>
 </template>

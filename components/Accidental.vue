@@ -1,7 +1,7 @@
 <template>
   <div class="accidental">
-    <Icon v-if="scale == 'flat'" name="mdi:music-accidental-flat" />
-    <Icon v-if="scale == 'sharp'" name="mdi:music-accidental-sharp" />
+    <Icon v-if="scale == 'b'" name="mdi:music-accidental-flat" />
+    <Icon v-if="scale == '#'" name="mdi:music-accidental-sharp" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ const props = defineProps({
     type: String,
     default: "",
     validator: (value) => {
-      return ["", "sharp", "flat"].includes(value);
+      return ["", "#", "b"].includes(value);
     },
   },
 });

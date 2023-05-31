@@ -63,7 +63,7 @@ const props = defineProps({
   },
   wholeNotes: {
     type: Array,
-    default: () => ["c", "d", "e", "f", "g", "a", "h"],
+    default: () => ["C", "D", "E", "F", "G", "A", "H"],
   },
   clefs: {
     type: Array,
@@ -71,7 +71,7 @@ const props = defineProps({
   },
   scales: {
     type: Array,
-    default: () => ["", "sharp", "flat"],
+    default: () => ["", "#", "b"],
   },
 
   // Where to put the accidental symbols on the sheet
@@ -171,7 +171,11 @@ const getNoteCSSTopValue = (accidental = false) => {
 
   // Offset from one-line octave (always positve, regardless of direction)
   // TODO: Fix offset for accidental
-  const octaveOffset = accidental ? clefType.value == "violin"? 1 : 2 : Math.abs(noteOctave.value - props.oneLineOctave);
+  const octaveOffset = accidental
+    ? clefType.value == "violin"
+      ? 1
+      : 2
+    : Math.abs(noteOctave.value - props.oneLineOctave);
 
   // Position on the one-line octave
   const noteOneLineOctaveTopValue =
@@ -194,11 +198,19 @@ const getNoteCSSTopValue = (accidental = false) => {
 /**
  * Checks a played note for correctness.
  * Emits events.
- * @param {String} playedNote - e.g. 'c' or 'c#'
+ * @param {String} playedNote - e.g. 'C', 'C#' or Cb
  * @returns {boolean} - If pressed key was correct or incorrect
  */
 const checkNote = (playedNote) => {
-  if (playedNote == notePosition.value) {
+  // Only check for # because keys only have # assigned at this point.
+  const blackKeyPressed = playedNote.includes("#");
+
+  // Extract note from playedNote string
+  const notePart = blackKeyPressed
+    ? playedNote.replace("#", "").replace("b", "")
+    : playedNote;
+
+  if (notePart == notePosition.value && scale.value.length > 0 == blackKeyPressed) {
     emit("correct");
     return true;
   } else {
