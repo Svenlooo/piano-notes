@@ -242,10 +242,11 @@ const setC4 = () => {
 };
 
 onMounted(() => {
+  // Only add a new note, if Sheet hasn't been mounted before.
   if (games.currentGame.notes.length == 0) {
     assignNewNote();
   } else {
-    console.log(games.currentNote)
+    // Add the last note. Prevents the note resetting on every re-mount.
     clefType.value = games.currentNote.clef;
     notePosition.value = games.currentNote.note;
     noteOctave.value = games.currentNote.octave;
