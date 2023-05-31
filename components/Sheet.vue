@@ -276,10 +276,11 @@ onMounted(() => {
   if (games.currentGame.notes.length == 0) {
     assignNewNote();
   } else {
-    // Add the last note. Prevents the note resetting on every re-mount.
+    // Restore last game state on component re-mount
     clefType.value = games.currentNote.clef;
     notePosition.value = games.currentNote.note;
     noteOctave.value = games.currentNote.octave;
+    scale.value = games.currentNote.scale;
     setC4();
     setAdditionalLines();
   }
