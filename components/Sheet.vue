@@ -14,7 +14,11 @@
           :class="`sheet__clef--${clefType}`"
           :type="clefType"
         />
-        <Accidental class="sheet__accidental" :scale="scale" />
+        <Accidental
+          class="sheet__accidental"
+          :scale="scale"
+          :style="`top: calc(${accidentalStylePosition}% - 8px)`"
+        />
         <Note
           class="sheet__note"
           ref="note"
@@ -108,6 +112,10 @@ const noteStylePosition = computed(() => {
   return getNoteCSSTopValue();
 });
 
+const accidentalStylePosition = computed(() => {
+  return getNoteCSSTopValue(true);
+});
+
 /**
  * Determins how many lines to add above or below note.
  */
@@ -151,9 +159,10 @@ const getSheetRange = () => {
 
 /**
  * Calculates the note's vertical positioning in % for the css top rule.
+ * @param {boolean} - accidental
  * @returns {number} - CSS percent value for note's top rule.
  */
-const getNoteCSSTopValue = () => {
+const getNoteCSSTopValue = (accidental = false) => {
   // Span of an entire octave in %
   const octavePercentDiff = sheetStep.value * props.octaveLength;
 
@@ -161,7 +170,8 @@ const getNoteCSSTopValue = () => {
   const noteOctavePos = props.wholeNotes.indexOf(notePosition.value);
 
   // Offset from one-line octave (always positve, regardless of direction)
-  const octaveOffset = Math.abs(noteOctave.value - props.oneLineOctave);
+  // TODO: Fix offset for accidental
+  const octaveOffset = accidental ? clefType.value == "violin"? 1 : 2 : Math.abs(noteOctave.value - props.oneLineOctave);
 
   // Position on the one-line octave
   const noteOneLineOctaveTopValue =
@@ -214,7 +224,7 @@ const getNote = () => {
   );
 
   const scale =
-    Math.random() < 0.66 // Choose no scale 66% of the time
+    Math.random() < 0 // Choose no scale 66% of the time
       ? props.scales[0]
       : props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
 
