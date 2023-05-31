@@ -99,10 +99,10 @@ const props = defineProps({
 
 const emit = defineEmits(["correct", "incorrect"]);
 
-const clefType = ref("violin");
-const scale = ref("");
-const note = ref();
-const notePosition = ref("c");
+const clefType = ref("violin"); // "violin" or "bass"
+const scale = ref(""); // "", "#" or "b"
+const note = ref(); // tbd.
+const notePosition = ref("C"); // The pure note
 const noteOctave = ref(4);
 const sheetStep = ref(10); // % for CSS top rule
 const c4TopValue = ref(90); // % CSS top value for violin clef
@@ -165,16 +165,18 @@ const getNoteCSSTopValue = (accidental = false) => {
   // Offset from one-line octave (always positve, regardless of direction)
   const octaveOffset = Math.abs(noteOctave.value - props.oneLineOctave);
 
-  console.log("accidental?", accidental, "noteOctavePos", noteOctavePos);
-
   // Position on the one-line octave
   const noteOneLineOctaveTopValue =
     c4TopValue.value - sheetStep.value * noteOctavePos;
 
-  console.log("top:", noteOneLineOctaveTopValue);
-
   if (accidental) {
-    // Boundaries must always be the one-line max and min values.
+    // Map CSS top % values to each note within prop.wholeNotes
+    // TODO: Find a way to make this more dynamic
+    const notesCssTopValues = {
+      violin: [20, 10, 0, -10, 50, 40, 30],
+      bass: [40, 30, 20, 10, 0, -10, 50],
+    };
+    return notesCssTopValues[clefType.value][props.wholeNotes.indexOf(notePosition.value)];
   }
 
   // Note is below the one-line octave
