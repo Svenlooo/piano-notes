@@ -41,7 +41,7 @@
 <script setup>
 import { useGamesStore } from "~/store/games";
 
-const store = useGamesStore();
+const games = useGamesStore();
 
 const props = defineProps({
   octaveLength: {
@@ -193,7 +193,7 @@ const getNote = () => {
   );
 
   // Get a new note, if the current one has been used in the past.
-  /*if (store.currentGame.notes.includes(`${note}${octave}`)) {
+  /*if (games.currentGame.notes.includes(`${note}${octave}`)) {
     getNote();
   }*/
 
@@ -206,7 +206,7 @@ const getNote = () => {
  * @param {Note} note
  */
 const addPastNote = (note) => {
-  store.currentGame.notes.push({...note, played: false, attempts: 0 })
+  games.currentGame.notes.push({...note, played: false, attempts: 0 })
 };
 
 /**
@@ -220,10 +220,15 @@ const assignNewNote = () => {
   noteOctave.value = note.octave;
   addPastNote(note);
   setC4();
-
-  const sheet = getSheetRange();
-  additionalLines.value = getAdditionalLinesCount(sheet, noteStylePosition.value);
+  setAdditionalLines();
 };
+
+/**
+ * Adds additional lines above or below the sheet, if necessary.
+ */
+const setAdditionalLines = () => {
+  additionalLines.value = getAdditionalLinesCount(getSheetRange(), noteStylePosition.value);
+}
 
 /**
  * Sets the top value for the note c4, depending on the Clef type.
@@ -237,7 +242,16 @@ const setC4 = () => {
 };
 
 onMounted(() => {
-  assignNewNote();
+  if (games.currentGame.notes.length == 0) {
+    assignNewNote();
+  } else {
+    console.log(games.currentNote)
+    clefType.value = games.currentNote.clef;
+    notePosition.value = games.currentNote.note;
+    noteOctave.value = games.currentNote.octave;
+    setC4();
+    setAdditionalLines();
+  }
 });
 
 defineExpose({

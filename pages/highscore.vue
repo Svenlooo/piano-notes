@@ -23,6 +23,7 @@ useServerSeoMeta({
 
 <style lang="scss" scoped>
 main {
+  overflow-y: auto;
   padding: var(--content-padding);
 }
 </style>

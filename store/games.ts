@@ -126,6 +126,7 @@ export const useGamesStore = defineStore('games', () => {
 
     return {
         currentGame,
+        currentNote,
         gameList,
         getPastGames,
         syncGameList,
