@@ -1,33 +1,33 @@
 <template>
   <div class="keyboard">
     <div class="keyboard__octave">
-      <button v-on:click="playNote('C')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['C', 'B#'])" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('C#')"
+        v-on:click="playNote(['C#', 'Db'])"
         class="keyboard__black-key keyboard__black-key--csharp"
       ></button>
-      <button v-on:click="playNote('D')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['D'])" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('D#')"
+        v-on:click="playNote(['D#', 'Eb'])"
         class="keyboard__black-key keyboard__black-key--dsharp"
       ></button>
-      <button v-on:click="playNote('E')" class="keyboard__white-key"></button>
-      <button v-on:click="playNote('F')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['E', 'Fb'])" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['F', 'E#'])" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('F#')"
+        v-on:click="playNote(['F#', 'Gb'])"
         class="keyboard__black-key keyboard__black-key--fsharp"
       ></button>
-      <button v-on:click="playNote('G')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['G'])" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('G#')"
+        v-on:click="playNote(['G#', 'Ab'])"
         class="keyboard__black-key keyboard__black-key--gsharp"
       ></button>
-      <button v-on:click="playNote('A')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['A'])" class="keyboard__white-key"></button>
       <button
-        v-on:click="playNote('A#')"
+        v-on:click="playNote(['A#', 'Bb'])"
         class="keyboard__black-key keyboard__black-key--asharp"
       ></button>
-      <button v-on:click="playNote('H')" class="keyboard__white-key"></button>
+      <button v-on:click="playNote(['B', 'Cb'])" class="keyboard__white-key"></button>
     </div>
   </div>
 </template>
@@ -38,10 +38,10 @@ const emit = defineEmits(['play'])
 
 /**
  * Emits a note event, which other components can capture.
- * @param {String} note - e.g. 'c' or 'c#'
+ * @param {array} noteList - e.g. ['C'] or ['C#', 'Db']
  */
-const playNote = (note) => {
-  emit('play', note);
+const playNote = (noteList) => {
+  emit('play', noteList);
 };
 </script>
 

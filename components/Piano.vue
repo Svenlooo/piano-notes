@@ -13,17 +13,15 @@ const sheet = ref();
 
 /**
  * Distribute information about the played note.
- * @param {string} note
+ * @param {array} noteList
  */
-const handleNote = (note) => {
-  const checkResult = sheet.value.checkNote(note);
+const handleNote = (noteList) => {
+  const result = noteList.map((note) => sheet.value.checkNote(note));
+  const isCorrect = result.some(value => value === true);
+
   store.addAttempt();
-  store.setPlayed(checkResult);
-
-  if (checkResult) {
-    sheet.value.assignNewNote();
-  }
-
+  store.setPlayed(isCorrect);
+  isCorrect && sheet.value.assignNewNote();
   store.syncGameList();
 };
 </script>

@@ -63,7 +63,7 @@ const props = defineProps({
   },
   wholeNotes: {
     type: Array,
-    default: () => ["C", "D", "E", "F", "G", "A", "H"],
+    default: () => ["C", "D", "E", "F", "G", "A", "B"],
   },
   clefs: {
     type: Array,
@@ -198,19 +198,13 @@ const getNoteCSSTopValue = (accidental = false) => {
 /**
  * Checks a played note for correctness.
  * Emits events.
- * @param {String} playedNote - e.g. 'C', 'C#' or Cb
+ * @param {String} playedNote - e.g. 'C', 'C#' or 'Cb'
  * @returns {boolean} - If pressed key was correct or incorrect
  */
 const checkNote = (playedNote) => {
-  // Only check for # because keys only have # assigned at this point.
-  const blackKeyPressed = playedNote.includes("#");
+  const requiredNote = notePosition.value + scale.value;
 
-  // Extract note from playedNote string
-  const notePart = blackKeyPressed
-    ? playedNote.replace("#", "").replace("b", "")
-    : playedNote;
-
-  if (notePart == notePosition.value && scale.value.length > 0 == blackKeyPressed) {
+  if (playedNote == requiredNote) {
     emit("correct");
     return true;
   } else {
