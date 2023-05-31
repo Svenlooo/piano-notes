@@ -104,8 +104,9 @@ const scale = ref("");
 const note = ref();
 const notePosition = ref("c");
 const noteOctave = ref(4);
-const sheetStep = ref(10); // Percent for CSS top property
-const c4TopValue = ref(90); // value for violin clef
+const sheetStep = ref(10); // % for CSS top rule
+const c4TopValue = ref(90); // % CSS top value for violin clef
+const sheetRange = reactive({ min: 70, max: -10 }); // min and max range in % for CSS top rule
 const additionalLines = ref(0); // Amount of additional lines to add above or below the sheet
 
 const noteStylePosition = computed(() => {
@@ -134,11 +135,11 @@ const additionalLinesCount = computed(() => {
 
 /**
  * Returns the amount of new lines needed to be added to the sheet
- * @param sheet     - Sheet meta with min and max range
  * @param position  - The note's position (css "top" percent value)
  * @returns {number} - Amount of additional lines
  */
-const getAdditionalLinesCount = (sheet, position) => {
+const getAdditionalLinesCount = (position) => {
+  const sheet = sheetRange;
   if (position > sheet.min || position < sheet.max) {
     if (position > sheet.min) {
       return Math.floor((position - sheet.min) / sheetStep.value / 2);
@@ -147,14 +148,6 @@ const getAdditionalLinesCount = (sheet, position) => {
     }
   }
   return 0;
-};
-
-/**
- * Returns an object with the sheet's range
- * @returns {{ min: number, max: number }}
- */
-const getSheetRange = () => {
-  return { min: 70, max: -10 };
 };
 
 /**
@@ -170,16 +163,19 @@ const getNoteCSSTopValue = (accidental = false) => {
   const noteOctavePos = props.wholeNotes.indexOf(notePosition.value);
 
   // Offset from one-line octave (always positve, regardless of direction)
-  // TODO: Fix offset for accidental
-  const octaveOffset = accidental
-    ? clefType.value == "violin"
-      ? 1
-      : 2
-    : Math.abs(noteOctave.value - props.oneLineOctave);
+  const octaveOffset = Math.abs(noteOctave.value - props.oneLineOctave);
+
+  console.log("accidental?", accidental, "noteOctavePos", noteOctavePos);
 
   // Position on the one-line octave
   const noteOneLineOctaveTopValue =
     c4TopValue.value - sheetStep.value * noteOctavePos;
+
+  console.log("top:", noteOneLineOctaveTopValue);
+
+  if (accidental) {
+    // Boundaries must always be the one-line max and min values.
+  }
 
   // Note is below the one-line octave
   if (noteOctave.value > props.oneLineOctave) {
@@ -270,10 +266,7 @@ const assignNewNote = () => {
  * Adds additional lines above or below the sheet, if necessary.
  */
 const setAdditionalLines = () => {
-  additionalLines.value = getAdditionalLinesCount(
-    getSheetRange(),
-    noteStylePosition.value
-  );
+  additionalLines.value = getAdditionalLinesCount(noteStylePosition.value);
 };
 
 /**
