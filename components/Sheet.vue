@@ -14,6 +14,7 @@
           :class="`sheet__clef--${clefType}`"
           :type="clefType"
         />
+        <Accidental :scale="''" />
         <Note
           class="sheet__note"
           ref="note"
@@ -43,6 +44,10 @@ import { useGamesStore } from "~/store/games";
 
 const games = useGamesStore();
 
+/**
+ * Default prop values are for the piano.
+ * Just pass new values for other instruments.
+ */
 const props = defineProps({
   octaveLength: {
     type: Number,
@@ -60,7 +65,10 @@ const props = defineProps({
     type: Array,
     default: () => ["violin", "bass"],
   },
-
+  scales: {
+    type: Array,
+    default: () => ["", "sharp", "flat"],
+  },
   // Vertical range on the sheet.
   octaveRange: {
     type: Object,

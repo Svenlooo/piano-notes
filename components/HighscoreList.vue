@@ -92,9 +92,6 @@ const handleDelete = (index) => {
 
 <style lang="scss" scoped>
 .highscoreList {
-  height: 100%;
-  overflow-y: auto;
-
   &--empty {
     height: calc(100% - 80px); // Magic number: Height of heading
     display: flex;
