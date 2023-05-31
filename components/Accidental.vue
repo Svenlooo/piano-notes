@@ -19,7 +19,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
     .icon {
-        width: 28px;
+        width: 36px;
         height: auto;
     }
 </style>

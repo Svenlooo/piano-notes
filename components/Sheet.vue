@@ -14,7 +14,7 @@
           :class="`sheet__clef--${clefType}`"
           :type="clefType"
         />
-        <Accidental :scale="''" />
+        <Accidental class="sheet__accidental" :scale="scale" />
         <Note
           class="sheet__note"
           ref="note"
@@ -69,6 +69,18 @@ const props = defineProps({
     type: Array,
     default: () => ["", "sharp", "flat"],
   },
+
+  // Where to put the accidental symbols on the sheet
+  scalesOctave: {
+    type: Object,
+    default: () => {
+      return {
+        violin: 4,
+        bass: 3,
+      };
+    },
+  },
+
   // Vertical range on the sheet.
   octaveRange: {
     type: Object,
@@ -83,8 +95,9 @@ const props = defineProps({
 
 const emit = defineEmits(["correct", "incorrect"]);
 
-const note = ref();
 const clefType = ref("violin");
+const scale = ref("");
+const note = ref();
 const notePosition = ref("c");
 const noteOctave = ref(4);
 const sheetStep = ref(10); // Percent for CSS top property
@@ -200,12 +213,17 @@ const getNote = () => {
       props.octaveRange[clef][0]
   );
 
+  const scale =
+    Math.random() < 0.66 // Choose no scale 66% of the time
+      ? props.scales[0]
+      : props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
+
   // Get a new note, if the current one has been used in the past.
   /*if (games.currentGame.notes.includes(`${note}${octave}`)) {
     getNote();
   }*/
 
-  return { clef: clef, note: note, octave: octave }
+  return { clef: clef, note: note, octave: octave, scale: scale };
 };
 
 /**
@@ -214,7 +232,7 @@ const getNote = () => {
  * @param {Note} note
  */
 const addPastNote = (note) => {
-  games.currentGame.notes.push({...note, played: false, attempts: 0 })
+  games.currentGame.notes.push({ ...note, played: false, attempts: 0 });
 };
 
 /**
@@ -226,6 +244,7 @@ const assignNewNote = () => {
   clefType.value = note.clef;
   notePosition.value = note.note;
   noteOctave.value = note.octave;
+  scale.value = note.scale;
   addPastNote(note);
   setC4();
   setAdditionalLines();
@@ -235,8 +254,11 @@ const assignNewNote = () => {
  * Adds additional lines above or below the sheet, if necessary.
  */
 const setAdditionalLines = () => {
-  additionalLines.value = getAdditionalLinesCount(getSheetRange(), noteStylePosition.value);
-}
+  additionalLines.value = getAdditionalLinesCount(
+    getSheetRange(),
+    noteStylePosition.value
+  );
+};
 
 /**
  * Sets the top value for the note c4, depending on the Clef type.
@@ -345,6 +367,11 @@ defineExpose({
     &--bass {
       top: 0;
     }
+  }
+
+  &__accidental {
+    position: absolute;
+    left: 68px;
   }
 
   &__note {
