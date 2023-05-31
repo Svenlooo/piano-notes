@@ -23,7 +23,4 @@ watch(
   { immediate: true }
 );
 
-onMounted(() => {
-  settings.setInitialSuccessOnly();
-});
 </script>

@@ -1,16 +1,22 @@
 <template>
   <div class="statusBar">
-    <div class="statusBar__item statusBar__item--successful" 
-      :class="successfulAttempts > 0 && 'visible'">
-      <Icon name="fluent:music-note-1-24-filled" />
-      {{ successfulAttempts }}
-    </div>
-    <div class="statusBar__item statusBar__item--unsuccessful"
-      v-show="!settings.successOnly"
-      :class="unsuccessfulAttempts > 0 && 'visible'">
-      <Icon name="fluent:music-note-off-1-24-filled" />
-      {{ unsuccessfulAttempts }}
-    </div>
+    <ClientOnly>
+      <div
+        class="statusBar__item statusBar__item--successful"
+        :class="successfulAttempts > 0 && 'visible'"
+      >
+        <Icon name="fluent:music-note-1-24-filled" />
+        {{ successfulAttempts }}
+      </div>
+      <div
+        class="statusBar__item statusBar__item--unsuccessful"
+        v-show="!settings.successOnly"
+        :class="unsuccessfulAttempts > 0 && 'visible'"
+      >
+        <Icon name="fluent:music-note-off-1-24-filled" />
+        {{ unsuccessfulAttempts }}
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
