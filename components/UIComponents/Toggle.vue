@@ -38,7 +38,7 @@ const updateValue = computed({
 
 <style lang="scss">
 .toggle {
-  --toggle-width: 70px;
+  --toggle-width: 50px;
   --toggle-height: 30px;
   --toggle-track-padding: 2px;
 
