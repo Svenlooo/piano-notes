@@ -1,5 +1,6 @@
 <template>
   <div class="toggle">
+    <Icon :name="props.icon" />
     <label :for="props.id">{{ props.label }}</label>
     <input :id="props.id" type="checkbox" v-model="updateValue" />
   </div>
@@ -14,6 +15,10 @@ const props = defineProps({
   id: {
     type: String,
     required: true,
+  },
+  icon: {
+    type: String,
+    default: '',
   },
   modelValue: {
     type: Boolean,
@@ -32,3 +37,22 @@ const updateValue = computed({
     }
 });
 </script>
+
+<style lang="scss">
+    .toggle {
+        padding: 16px 8px;
+        color: var(--color-white);
+        background-color: var(--color-piano-black);
+        border-top: solid var(--color-white) 1px;
+
+        &:last-child {
+            border-bottom: solid var(--color-white) 1px;
+        }
+
+        & .icon {
+            width: 24px;
+            height: auto;
+            margin-right: 8px;
+        }
+    }
+</style>

@@ -1,28 +1,25 @@
 <template>
   <div>
     <main>
-      <ul>
-        <li>
-          <input type="radio" id="light" value="light" v-model="isDarkMode" />
-          <label for="light">Light</label>
-          <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
-          <label for="dark">Dark</label>
-        </li>
-        <li>
-          <SettingsToggle
-            id="blackKeysToggle"
-            label="Include black keys"
-            v-model="settings.blackKeys"
-          />
-        </li>
-        <li>
-          <SettingsToggle
-            id="successOnly"
-            label="Show only successful plays"
-            v-model="settings.successOnly"
-          />
-        </li>
-      </ul>
+      <h1>Settings</h1>
+      <input type="radio" id="light" value="light" v-model="isDarkMode" />
+      <label for="light">Light</label>
+      <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
+      <label for="dark">Dark</label>
+
+      <SettingsToggle
+        id="blackKeysToggle"
+        label="Include black keys"
+        icon="mdi:music-accidental-sharp"
+        v-model="settings.blackKeys"
+      />
+
+      <SettingsToggle
+        id="successOnly"
+        label="Show only successful plays"
+        icon="fluent:music-note-1-24-filled"
+        v-model="settings.successOnly"
+      />
     </main>
     <Navigation />
   </div>
