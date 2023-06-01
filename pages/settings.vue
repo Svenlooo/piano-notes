@@ -7,14 +7,14 @@
       <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
       <label for="dark">Dark</label>
 
-      <SettingsToggle
+      <SettingsOption
         id="blackKeysToggle"
         label="Include black keys"
         icon="mdi:music-accidental-sharp"
         v-model="settings.blackKeys"
       />
 
-      <SettingsToggle
+      <SettingsOption
         id="successOnly"
         label="Show only successful plays"
         icon="fluent:music-note-1-24-filled"
