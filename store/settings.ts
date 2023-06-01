@@ -9,7 +9,8 @@ export const useSettingsStore = defineStore('settings', () => {
     const successOnly = ref<boolean>(false);
 
     /** Adjust theme according to user's system settings */
-    const theme = ref<string>(process.client && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const theme = ref<string>(process.client 
+        && window.matchMedia('(prefers-color-scheme: dark)').matches? 'dark' : 'light');
 
     /**
      * Toggle the theme
@@ -20,6 +21,7 @@ export const useSettingsStore = defineStore('settings', () => {
     }
 
     return {
+        blackKeys,
         successOnly,
         theme,
         setTheme

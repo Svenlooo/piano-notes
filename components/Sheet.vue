@@ -45,8 +45,10 @@
 
 <script setup>
 import { useGamesStore } from "~/store/games";
+import { useSettingsStore } from "~/store/settings";
 
 const games = useGamesStore();
+const settings = useSettingsStore();
 
 /**
  * Default prop values are for the piano.
@@ -165,7 +167,9 @@ const getNoteCSSTopValue = (accidental = false) => {
       violin: [20, 10, 0, -10, 50, 40, 30],
       bass: [40, 30, 20, 10, 0, -10, 50],
     };
-    return notesCssTopValues[clefType.value][props.wholeNotes.indexOf(notePosition.value)];
+    return notesCssTopValues[clefType.value][
+      props.wholeNotes.indexOf(notePosition.value)
+    ];
   }
 
   // Note is below the one-line octave
@@ -215,10 +219,11 @@ const generateRandomNote = () => {
       props.octaveRange[clef][0]
   );
 
-  const scale =
-    Math.random() < 0.66 // Choose no scale 66% of the time
-      ? props.scales[0]
-      : props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
+  let scale = props.scales[0];
+  const accidentalProbability = 0.66;
+  if (Math.random() > accidentalProbability && settings.blackKeys) {
+    scale = props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
+  }
 
   // TODO: Get a new note, if the current one has been used in the past.
   /*if (games.currentGame.notes.includes(`${note}${octave}`)) {
@@ -275,7 +280,7 @@ const setC4 = () => {
  */
 const shakeNote = () => {
   noteComponent.value.shake();
-}
+};
 
 onMounted(() => {
   // Only add a new note, if Sheet hasn't been mounted before.

@@ -8,10 +8,17 @@
           <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
           <label for="dark">Dark</label>
         </li>
-        <li>Black keys toggle</li>
         <li>
-          <label for="successOnly">Show only successful plays:</label
-          ><input
+          <label for="blackKeysToggle">Include black keys:</label>
+          <input
+            id="blackKeysToggle"
+            type="checkbox"
+            v-model="settings.blackKeys"
+          />
+        </li>
+        <li>
+          <label for="successOnly">Show only successful plays:</label>
+          <input
             id="successOnly"
             type="checkbox"
             v-model="settings.successOnly"
