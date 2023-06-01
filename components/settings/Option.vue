@@ -1,9 +1,9 @@
 <template>
   <div class="settingsOption">
     <Icon :name="props.icon" />
-    <label class="settingsOption__label" :for="props.id">{{
-      props.label
-    }}</label>
+    <label class="settingsOption__label" :for="props.id">
+      <span class="settingsOption__label-inner">{{ props.label }}</span>
+    </label>
     <UIComponentsToggle :id="props.id" v-model="updateValue" />
   </div>
 </template>
@@ -62,6 +62,12 @@ const updateValue = computed({
 
   &__label {
     flex: 1;
+    display: flex;
+    align-items: center;
+
+    &-inner {
+      display: block;
+    }
   }
 }
 </style>
