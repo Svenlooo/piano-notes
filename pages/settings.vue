@@ -9,18 +9,16 @@
           <label for="dark">Dark</label>
         </li>
         <li>
-          <label for="blackKeysToggle">Include black keys:</label>
-          <input
+          <SettingsToggle
             id="blackKeysToggle"
-            type="checkbox"
+            label="Include black keys"
             v-model="settings.blackKeys"
           />
         </li>
         <li>
-          <label for="successOnly">Show only successful plays:</label>
-          <input
+          <SettingsToggle
             id="successOnly"
-            type="checkbox"
+            label="Show only successful plays"
             v-model="settings.successOnly"
           />
         </li>
