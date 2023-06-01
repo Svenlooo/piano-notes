@@ -1,11 +1,11 @@
 <template>
-  <div class="settingsOption">
+  <label class="settingsOption" :for="props.id">
     <Icon :name="props.icon" />
-    <label class="settingsOption__label" :for="props.id">
+    <div class="settingsOption__label">
       <span class="settingsOption__label-inner">{{ props.label }}</span>
-    </label>
+    </div>
     <UIComponentsToggle :id="props.id" v-model="updateValue" />
-  </div>
+  </label>
 </template>
 
 <script setup>
@@ -49,6 +49,7 @@ const updateValue = computed({
   color: var(--color-white);
   background-color: var(--color-piano-black);
   border-radius: var(--border-radius-sm);
+  cursor: pointer;
 
   &:last-child {
     border-bottom: solid var(--color-white) 1px;
@@ -64,10 +65,9 @@ const updateValue = computed({
     flex: 1;
     display: flex;
     align-items: center;
-
-    &-inner {
-      display: block;
-    }
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    user-select: none;
   }
 }
 </style>

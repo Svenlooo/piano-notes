@@ -10,7 +10,7 @@
       <SettingsOption
         id="blackKeysToggle"
         label="Include black keys"
-        icon="mdi:music-accidental-sharp"
+        icon="game-icons:piano-keys"
         v-model="settings.blackKeys"
       />
 
