@@ -2,10 +2,13 @@
   <div>
     <main>
       <h1>Settings</h1>
-      <input type="radio" id="light" value="light" v-model="isDarkMode" />
-      <label for="light">Light</label>
-      <input type="radio" id="dark" value="dark" v-model="isDarkMode" />
-      <label for="dark">Dark</label>
+
+      <SettingsOption
+        id="darkmode"
+        label="Dark Mode"
+        icon="bi:yin-yang"
+        v-model="isDarkMode"
+      />
 
       <SettingsOption
         id="blackKeysToggle"
@@ -46,7 +49,7 @@ const settings = useSettingsStore();
  * @param {"light" | "dark"} theme name
  */
 const isDarkMode = computed({
-  get: () => (settings.theme === "dark" ? "dark" : "light"),
+  get: () => (settings.theme === "dark" ? true : false),
   set: (value) => settings.setTheme(value),
 });
 </script>

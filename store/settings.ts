@@ -14,10 +14,10 @@ export const useSettingsStore = defineStore('settings', () => {
 
     /**
      * Toggle the theme
-     * @param {string} mode
+     * @param {boolean} darkMode
      */
-    const setTheme = (mode: string) => {
-        theme.value = mode;
+    const setTheme = (darkMode: boolean) => {
+        theme.value = darkMode ? 'dark' : 'light';
     }
 
     return {
