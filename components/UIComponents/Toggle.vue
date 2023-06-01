@@ -6,9 +6,7 @@
       type="checkbox"
       v-model="updateValue"
     />
-    <label class="toggle__track" :for="props.id">
-      <span class="toggle__switch"></span>
-    </label>
+    <label class="toggle__track" :for="props.id"></label>
   </div>
 </template>
 
@@ -59,25 +57,27 @@ const updateValue = computed({
     border-radius: calc(var(--toggle-width) / 2);
     background-color: var(--color-light2);
     transition: all 200ms;
-  }
 
-  &__switch {
-    position: absolute;
-    z-index: 1;
-    height: calc(100% - var(--toggle-track-padding) * 2);
-    box-sizing: border-box;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    background-color: var(--color-white);
-    transform: translateX(var(--toggle-track-padding));
-    transition: all 200ms;
+    // Switch
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      height: calc(100% - var(--toggle-track-padding) * 2);
+      box-sizing: border-box;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      background-color: var(--color-white);
+      transform: translateX(var(--toggle-track-padding));
+      transition: all 200ms;
+    }
   }
 
   // Active styles
   & input:checked ~ .toggle__track {
     background-color: var(--color-green);
 
-    & .toggle__switch {
+    &::after {
       transform: translateX(calc(var(--toggle-width) - var(--toggle-height)));
     }
   }
