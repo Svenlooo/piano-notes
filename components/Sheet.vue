@@ -171,15 +171,15 @@ const getNoteCSSTopValue = (accidental = false) => {
   // Note is below the one-line octave
   if (noteOctave.value > props.oneLineOctave) {
     return noteOneLineOctaveTopValue - octavePercentDiff * octaveOffset;
-
-    // Note is above the one-line octave
-  } else if (noteOctave.value < props.oneLineOctave) {
-    return noteOneLineOctaveTopValue + octavePercentDiff * octaveOffset;
-
-    // Note is in the one-line octave
-  } else {
-    return noteOneLineOctaveTopValue;
   }
+
+  // Note is above the one-line octave
+  if (noteOctave.value < props.oneLineOctave) {
+    return noteOneLineOctaveTopValue + octavePercentDiff * octaveOffset;
+  }
+
+  // Note is within the one-line octave
+  return noteOneLineOctaveTopValue;
 };
 
 /**
@@ -205,7 +205,7 @@ const checkNote = (playedNote) => {
  * Tries until it gets a note, which isn't already inside the pastNotes array.
  * @returns {Note}
  */
-const getNote = () => {
+const generateRandomNote = () => {
   const clef = props.clefs[Math.floor(Math.random() * props.clefs.length)];
   const note =
     props.wholeNotes[Math.floor(Math.random() * props.wholeNotes.length)];
@@ -220,9 +220,9 @@ const getNote = () => {
       ? props.scales[0]
       : props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
 
-  // Get a new note, if the current one has been used in the past.
+  // TODO: Get a new note, if the current one has been used in the past.
   /*if (games.currentGame.notes.includes(`${note}${octave}`)) {
-    getNote();
+    generateRandomNote();
   }*/
 
   return { clef: clef, note: note, octave: octave, scale: scale };
@@ -242,7 +242,7 @@ const addPastNote = (note) => {
  * Updates the view.
  */
 const assignNewNote = () => {
-  const note = getNote();
+  const note = generateRandomNote();
   clefType.value = note.clef;
   notePosition.value = note.note;
   noteOctave.value = note.octave;
