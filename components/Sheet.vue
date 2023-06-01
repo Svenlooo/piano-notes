@@ -21,7 +21,7 @@
         />
         <Note
           class="sheet__note"
-          ref="note"
+          ref="noteComponent"
           :style="`top: ${noteStylePosition}%`"
           :position="notePosition"
           :octave="noteOctave"
@@ -74,17 +74,6 @@ const props = defineProps({
     default: () => ["", "#", "b"],
   },
 
-  // Where to put the accidental symbols on the sheet
-  scalesOctave: {
-    type: Object,
-    default: () => {
-      return {
-        violin: 4,
-        bass: 3,
-      };
-    },
-  },
-
   // Vertical range on the sheet.
   octaveRange: {
     type: Object,
@@ -99,9 +88,9 @@ const props = defineProps({
 
 const emit = defineEmits(["correct", "incorrect"]);
 
+const noteComponent = ref(); // The Note component ref
 const clefType = ref("violin"); // "violin" or "bass"
 const scale = ref(""); // "", "#" or "b"
-const note = ref(); // tbd.
 const notePosition = ref("C"); // The pure note
 const noteOctave = ref(4);
 const sheetStep = ref(10); // % for CSS top rule
@@ -207,7 +196,6 @@ const checkNote = (playedNote) => {
     return true;
   } else {
     emit("incorrect");
-    note.value.shake();
     return false;
   }
 };
@@ -228,7 +216,7 @@ const getNote = () => {
   );
 
   const scale =
-    Math.random() < 0 // Choose no scale 66% of the time
+    Math.random() < 0.66 // Choose no scale 66% of the time
       ? props.scales[0]
       : props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
 
@@ -282,6 +270,13 @@ const setC4 = () => {
   }
 };
 
+/**
+ * Triggers the Note's shake animation.
+ */
+const shakeNote = () => {
+  noteComponent.value.shake();
+}
+
 onMounted(() => {
   // Only add a new note, if Sheet hasn't been mounted before.
   if (games.currentGame.notes.length == 0) {
@@ -300,6 +295,7 @@ onMounted(() => {
 defineExpose({
   checkNote,
   assignNewNote,
+  shakeNote,
 });
 </script>
 

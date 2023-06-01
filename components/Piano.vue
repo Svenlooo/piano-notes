@@ -17,11 +17,11 @@ const sheet = ref();
  */
 const handleNote = (noteList) => {
   const result = noteList.map((note) => sheet.value.checkNote(note));
-  const isCorrect = result.some(value => value === true);
+  const isCorrect = result.some((value) => value === true);
 
   store.addAttempt();
   store.setPlayed(isCorrect);
-  isCorrect && sheet.value.assignNewNote();
+  isCorrect ? sheet.value.assignNewNote() : sheet.value.shakeNote();
   store.syncGameList();
 };
 </script>
