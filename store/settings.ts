@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 export const useSettingsStore = defineStore('settings', () => {
     
     /** Add black key notes */
-    const blackKeys = ref<boolean>(false);
+    const blackKeys = ref<boolean>(true);
 
     /** Show only successes / hide failures */
     const successOnly = ref<boolean>(false);
