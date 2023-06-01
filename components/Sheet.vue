@@ -225,12 +225,19 @@ const generateRandomNote = () => {
     scale = props.scales[Math.floor(Math.random() * (props.scales.length - 1)) + 1];
   }
 
-  // TODO: Get a new note, if the current one has been used in the past.
-  /*if (games.currentGame.notes.includes(`${note}${octave}`)) {
-    generateRandomNote();
-  }*/
+  // Prevent double notes by checking last N entries for duplicates.
+  const checkLastNEntries = 10;
+  const newNote = { clef: clef, note: note, octave: octave, scale: scale };
+  const pastNotes = games.currentGame.notes.slice(-checkLastNEntries);
+  const noteAlreadyExists = pastNotes.some(note => 
+    note.clef === newNote.clef &&
+    note.note === newNote.note &&
+    note.octave === newNote.octave &&
+    note.scale === newNote.scale
+  );
+  noteAlreadyExists && generateRandomNote();
 
-  return { clef: clef, note: note, octave: octave, scale: scale };
+  return newNote;
 };
 
 /**
