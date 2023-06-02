@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app-wrapper">
     <VitePwaManifest />
     <NuxtLayout>
       <NuxtPage class="page-wrapper" />
@@ -22,5 +22,4 @@ watch(
   },
   { immediate: true }
 );
-
 </script>

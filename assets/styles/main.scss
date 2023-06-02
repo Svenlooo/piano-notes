@@ -42,22 +42,41 @@ body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    max-height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
     color: var(--color-black);
     background: linear-gradient(179.6deg, var(--color-light) 1.07%, var(--color-light2) 98.55%);
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+    & #__nuxt, #app-wrapper {
+        min-height: inherit;
+        min-width: inherit;
+    }
+
+    & #app-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
+/** Global layout */
 .page-wrapper {
     display: flex;
     flex-direction: column;
     height: 100dvh;
+    width: 100dvw;
+    max-height: map-get($contentMaxSizes, 'portrait-max-height');
+    max-width: map-get($contentMaxSizes, 'portrait-max-width');
+    overflow: hidden;
 
     @media #{map-get($mediaSituations, 'landscape')} {
         flex-direction: row;
+        max-height: map-get($contentMaxSizes, 'landscape-max-height');
+        max-width: map-get($contentMaxSizes, 'landscape-max-width');
     }
 
-    &>main {
+    & > main {
         flex: 1;
     }
 }
