@@ -116,9 +116,6 @@ const handleDelete = (index) => {
     @media (min-width: map-get($breakpoints, "md")) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (min-width: map-get($breakpoints, "lg")) {
-      grid-template-columns: repeat(6, 1fr);
-    }
   }
 
   &__list-item {
