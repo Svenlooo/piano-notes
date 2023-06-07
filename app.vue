@@ -2,10 +2,7 @@
   <div id="app-wrapper">
     <VitePwaManifest />
     <NuxtLayout>
-      <div class="title">
-        <h1 class="title__heading">Piano Notes</h1>
-        <span class="title__subline">by Sven Lochner</span>
-      </div>
+      <AppTitle title="Piano Notes" subline="by Sven Lochner" />
       <NuxtPage class="page-wrapper" />
     </NuxtLayout>
   </div>
