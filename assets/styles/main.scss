@@ -62,6 +62,7 @@ body {
 
 /** Global layout */
 .page-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100dvh;
@@ -69,8 +70,10 @@ body {
     max-height: map-get($contentMaxSizes, 'portrait-max-height');
     max-width: map-get($contentMaxSizes, 'portrait-max-width');
     overflow: hidden;
+    box-sizing: content-box;
     border-radius: 32px;
     box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.15);
+    border: solid var(--color-piano-black) 5px;
 
     @media #{map-get($mediaSituations, 'landscape')} {
         flex-direction: row;
@@ -80,7 +83,9 @@ body {
 
     @media #{map-get($mediaSituations, 'fills-screen')} {
         border-radius: 0px;
+        box-sizing: border-box;
         box-shadow: none;
+        border: none;
     }
 
     & > main {

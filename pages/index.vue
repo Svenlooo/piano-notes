@@ -28,13 +28,16 @@ useServerSeoMeta({
 }
 
 .statusBar {
-  position: fixed;
+  position: absolute;
   width: 100%;
-  top: 0;
+  top: 12px;
   z-index: 1;
 
   @media #{map-get($mediaSituations, 'landscape')} {
-    width: 50%;
+    width: 47%;
+  }
+
+  @media #{map-get($mediaSituations, 'fills-screen')} {
     top: 8px;
   }
 }
