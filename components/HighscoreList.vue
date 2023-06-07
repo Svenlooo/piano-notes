@@ -53,14 +53,9 @@ const pastGames = computed(() => {
  */
 const parseDay = (dateString) => {
   const date = new Date(dateString);
-  const day = date.getUTCDate();
-  const month = date.getUTCMonth() + 1;
-  const year = date.getUTCFullYear();
-
-  // Format the date as "dd.mm.yyyy"
-  return `${day < 10 ? "0" + day : day}.${
-    month < 10 ? "0" + month : month
-  }.${year}`;
+  const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const complete = new Intl.DateTimeFormat('de-DE', optionsDate).format(date);
+  return complete;
 };
 
 /**
@@ -69,13 +64,9 @@ const parseDay = (dateString) => {
  */
 const parseTime = (dateString) => {
   const date = new Date(dateString);
-  const hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes();
-
-  // Format the time as "hh:mm Uhr"
-  return `${hours < 10 ? "0" + hours : hours}:${
-    minutes < 10 ? "0" + minutes : minutes
-  } Uhr`;
+  const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: false };
+  const time = new Intl.DateTimeFormat('de-DE', optionsTime).format(date);
+  return `${time} Uhr`;
 };
 
 /**
