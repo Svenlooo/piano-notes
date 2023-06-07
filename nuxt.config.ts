@@ -41,6 +41,7 @@ export default defineNuxtConfig({
                 scss: {
                     additionalData: `
                     @use 'sass:math';
+                    @import '@/assets/styles/_fonts.scss';
                     @import '@/assets/styles/_variables.scss';
                     `,
                 },
