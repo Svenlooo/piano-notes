@@ -24,6 +24,10 @@
   top: 32px;
   text-align: center;
 
+  @media #{map-get($mediaSituations, 'fills-screen')} {
+    display: none;
+  }
+
   &__heading {
     font-family: $serifFont;
     font-size: 80px;
