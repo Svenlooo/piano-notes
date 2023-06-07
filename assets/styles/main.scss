@@ -69,11 +69,18 @@ body {
     max-height: map-get($contentMaxSizes, 'portrait-max-height');
     max-width: map-get($contentMaxSizes, 'portrait-max-width');
     overflow: hidden;
+    border-radius: 32px;
+    box-shadow: 10px 10px 71px 0px rgba(0,0,0,0.15);
 
     @media #{map-get($mediaSituations, 'landscape')} {
         flex-direction: row;
         max-height: map-get($contentMaxSizes, 'landscape-max-height');
         max-width: map-get($contentMaxSizes, 'landscape-max-width');
+    }
+
+    @media #{map-get($mediaSituations, 'fills-screen')} {
+        border-radius: 0px;
+        box-shadow: none;
     }
 
     & > main {
