@@ -15,8 +15,6 @@
 
 <style lang="scss">
     .footer {
-        position: absolute;
-        bottom: 0px;
         text-align: center;
     }
 </style>

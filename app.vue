@@ -2,9 +2,12 @@
   <div id="app-wrapper">
     <VitePwaManifest />
     <NuxtLayout>
-      <DesktopTitle title="Piano Notes" />
+      <DesktopTitle
+        class="title"
+        title="Piano Notes"
+        subline="by Sven Lochner"
+      />
       <NuxtPage class="page-wrapper" />
-      <DesktopFooter text="by Sven Lochner" />
     </NuxtLayout>
   </div>
 </template>
@@ -31,6 +34,37 @@ watch(
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & .title {
+    position: fixed;
+    top: 60px;
+    opacity: 1;
+
+    @media #{map-get($mediaSituations, 'fills-screen')} {
+      display: none;
+    }
+
+    /** Magic numbers used for fading out headline + subline below specific screen sizes */
+    &__heading {
+      @media #{map-get($mediaSituations, 'landscape')} and (max-height: 800px) {
+        opacity: 0;
+      }
+      @media #{map-get($mediaSituations, 'portrait')} and (max-height: 1370px) {
+        opacity: 0;
+      }
+    }
+
+    &__subline {
+      transition-delay: 0ms;
+
+      @media #{map-get($mediaSituations, 'landscape')} and (max-height: 870px) {
+        opacity: 0;
+      }
+      @media #{map-get($mediaSituations, 'portrait')} and (max-height: 1450px) {
+        opacity: 0;
+      }
+    }
+  }
 
   /** Global layout */
   & .page-wrapper {
@@ -68,6 +102,10 @@ watch(
     & > main {
       flex: 1;
     }
+  }
+
+  & .footer {
+    margin-bottom: 30px;
   }
 }
 </style>

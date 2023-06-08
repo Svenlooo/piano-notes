@@ -20,25 +20,19 @@ const props = defineProps({
 
 <style lang="scss">
 .title {
-  position: absolute;
-  top: 32px;
   text-align: center;
-
-  @media #{map-get($mediaSituations, 'fills-screen')} {
-    display: none;
-  }
-
-  @media #{map-get($mediaSituations, 'landscape')} {
-  }
-
-  @media #{map-get($mediaSituations, 'portrait')} {
-  }
 
   &__heading {
     font-family: $serifFont;
     font-size: 80px;
     color: var(--color-piano-black);
     margin: 0;
+    opacity: 1;
+    transition: all 600ms;
+  }
+  &__subline {
+    opacity: 1;
+    transition: all 400ms 300ms;
   }
 }
 </style>
