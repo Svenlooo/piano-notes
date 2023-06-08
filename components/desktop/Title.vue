@@ -6,16 +6,16 @@
 </template>
 
 <script setup>
-    const props = defineProps({
-        title: {
-            type: String,
-            required: true
-        },
-        subline: {
-            type: String,
-            required: false,
-        }
-    });
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  subline: {
+    type: String,
+    required: false,
+  },
+});
 </script>
 
 <style lang="scss">
@@ -26,6 +26,12 @@
 
   @media #{map-get($mediaSituations, 'fills-screen')} {
     display: none;
+  }
+
+  @media #{map-get($mediaSituations, 'landscape')} {
+  }
+
+  @media #{map-get($mediaSituations, 'portrait')} {
   }
 
   &__heading {

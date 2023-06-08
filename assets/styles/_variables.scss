@@ -18,6 +18,7 @@ $contentMaxSizes: (
 );
 
 $mediaSituations: (
+    'portrait': 'screen and (orientation: portrait)',
     'landscape': 'screen and (orientation: landscape)',
     'landscape-mobile': 'screen and (orientation: landscape) and (max-width: #{map-get($breakpoints, 'md')})',
     'fills-screen': '(max-width: #{map-get($contentMaxSizes, 'portrait-max-width')}) and (max-height: #{map-get($contentMaxSizes, 'portrait-max-height')}), (max-width: #{map-get($contentMaxSizes, 'landscape-max-width')}) and (max-height: #{map-get($contentMaxSizes, 'landscape-max-height')})',
