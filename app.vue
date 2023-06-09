@@ -4,8 +4,8 @@
     <NuxtLayout>
       <DesktopTitle
         class="title"
-        :title="$t('DesktopTitle.title')"
-        :subline="$t('DesktopTitle.subline')"
+        :title="$t('title')"
+        :subline="$t('subline')"
       />
       <NuxtPage class="page-wrapper" />
     </NuxtLayout>
@@ -16,8 +16,6 @@
 import { useSettingsStore } from "~/store/settings";
 
 const settings = useSettingsStore();
-
-const { locale } = useI18n()
 
 // Set theme on init
 watch(
