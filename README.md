@@ -10,6 +10,7 @@ This app showcases the following features within a Nuxt 3 app:
 - Server-side and client-side rendering
 - Pinia store
 - Persistence of the store in localstorage
+- Progressive Web App caching via Service Worker
 - Routing
 - Variable themes (light + dark mode)
 
