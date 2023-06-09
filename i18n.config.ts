@@ -18,6 +18,7 @@ export default defineI18nConfig(() => ({
     lazy: false,
     defaultLocale: 'en',
     fallbackLocale: 'en',
+    missingWarn: false,
     messages: {
         en: en,
         de: de,
