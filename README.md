@@ -4,6 +4,15 @@ A web-app for learning to read piano notes from a sheet.
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Features
+
+This app showcases the following features within a Nuxt 3 app:
+- Server-side and client-side rendering
+- Pinia store
+- Persistence of the store in localstorage
+- Routing
+- Variable themes (light + dark mode)
+
 ## Setup
 
 Make sure to install the dependencies:
