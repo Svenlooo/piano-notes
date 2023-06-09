@@ -18,21 +18,6 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  modelValue: {
-    type: Boolean,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["update:modelValue"]);
-
-const updateValue = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(value) {
-    emit("update:modelValue", value);
-  },
 });
 </script>
 
