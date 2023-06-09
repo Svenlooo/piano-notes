@@ -4,17 +4,13 @@
     <div class="settingsOption__label">
       <span class="settingsOption__label-inner">{{ props.label }}</span>
     </div>
-    <UIComponentsToggle :id="props.id" v-model="updateValue" />
+    <slot></slot>
   </label>
 </template>
 
 <script setup>
 const props = defineProps({
   label: {
-    type: String,
-    required: true,
-  },
-  id: {
     type: String,
     required: true,
   },
