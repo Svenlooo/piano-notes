@@ -3,6 +3,8 @@
     <main>
       <h1>Settings</h1>
 
+      <UIComponentsLanguagePicker />
+
       <SettingsOption
         id="darkmode"
         label="Dark Mode"

@@ -53,7 +53,11 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
         'nuxt-icon',
+        '@nuxtjs/i18n',
     ],
+    i18n: {
+        vueI18n: './i18n.config.ts' // if you are using custom path, default 
+    },
     pwa: {
         manifest: {
             name: 'Piano Notes',
