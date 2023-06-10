@@ -30,7 +30,9 @@ const shake = () => {
   svg.value.classList.add("shake");
 
   setTimeout(() => {
-    svg.value.classList.remove("shake");
+    if (svg.value !== null) {
+      svg.value.classList.remove("shake");
+    }
   }, 500);
 };
 
