@@ -49,6 +49,7 @@ export default defineNuxtConfig({
         },
     },
     modules: [
+        '@nuxtjs/i18n',
         '@vite-pwa/nuxt',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
