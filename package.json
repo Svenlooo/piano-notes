@@ -1,11 +1,7 @@
 {
-  "name": "nuxt-app",
+  "name": "piano-notes",
   "private": true,
   "type": "module",
-  "engines": {
-    "npm": ">=9.0.0",
-    "node": ">=16.0.0"
-  },
   "scripts": {
     "start": "node .output/server/index.mjs",
     "build": "nuxt build",
