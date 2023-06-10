@@ -3,26 +3,20 @@
     <main>
       <h1>Settings</h1>
 
-      <SettingsOption
-        id="darkmode"
-        label="Dark Mode"
-        icon="bi:yin-yang"
-        v-model="isDarkMode"
-      />
+      <SettingsOption label="Dark Mode" icon="bi:yin-yang">
+        <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
+      </SettingsOption>
+
+      <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
+        <UIComponentsToggle id="blackKeysToggle" v-model="settings.blackKeys" />
+      </SettingsOption>
 
       <SettingsOption
-        id="blackKeysToggle"
-        label="Include black keys"
-        icon="game-icons:piano-keys"
-        v-model="settings.blackKeys"
-      />
-
-      <SettingsOption
-        id="successOnly"
         label="Show only successful plays"
         icon="fluent:music-note-1-24-filled"
-        v-model="settings.successOnly"
-      />
+      >
+        <UIComponentsToggle id="successOnly" v-model="settings.successOnly" />
+      </SettingsOption>
     </main>
     <Navigation />
   </div>
