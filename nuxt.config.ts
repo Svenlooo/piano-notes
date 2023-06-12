@@ -76,11 +76,8 @@ export default defineNuxtConfig({
             ],
         },
         workbox: {
-            globPatterns: [
-                '*/*.*',
-                '*.*'
-            ],
-            navigateFallback: '/',
+            globPatterns: ['**/*.{js,css}'],
+            navigateFallback: null,
             runtimeCaching: [
                 {
                     urlPattern: /^https?.*/,
