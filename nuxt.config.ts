@@ -77,7 +77,7 @@ export default defineNuxtConfig({
         },
         workbox: {
             globPatterns: ['**/*.{js,css}'],
-            navigateFallback: null,
+            navigateFallback: null, // must be set even though null's the default value.
             runtimeCaching: [
                 {
                     urlPattern: /^https?.*/,
