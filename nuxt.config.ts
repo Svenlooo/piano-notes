@@ -76,6 +76,7 @@ export default defineNuxtConfig({
             ],
         },
         workbox: {
+            globPatterns: ['/*'],
             navigateFallback: '/',
             runtimeCaching: [
                 {
