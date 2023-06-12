@@ -79,10 +79,10 @@ export default defineNuxtConfig({
             navigateFallback: '/',
             runtimeCaching: [
                 {
-                    urlPattern: '/',
+                    urlPattern: /.*/,
                     handler: 'NetworkFirst',
                     options: {
-                        cacheName: 'homepage',
+                        cacheName: 'pages',
                         expiration: {
                             maxEntries: 10,
                             maxAgeSeconds: 86400, // 24 hours
@@ -92,15 +92,10 @@ export default defineNuxtConfig({
                         },
                     },
                 },
-                {
-                    urlPattern: '/(highscore|settings)?',
-                    handler: 'NetworkOnly',
-                    method: 'GET'
-                },
             ],
         },
         devOptions: {
-            enabled: false,
+            enabled: true,
             type: 'module',
         },
         client: {
