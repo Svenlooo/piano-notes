@@ -79,12 +79,12 @@ export default defineNuxtConfig({
             navigateFallback: '/',
             runtimeCaching: [
                 {
-                    urlPattern: /.*/,
+                    urlPattern: /^https?.*/,
                     handler: 'NetworkFirst',
                     options: {
-                        cacheName: 'pages',
+                        cacheName: 'all-resources',
                         expiration: {
-                            maxEntries: 10,
+                            maxEntries: 100,
                             maxAgeSeconds: 86400, // 24 hours
                         },
                         cacheableResponse: {
