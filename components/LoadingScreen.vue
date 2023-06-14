@@ -1,39 +1,58 @@
 <template>
   <div
-    :style="`--loading-duration-ms: ${loadingOutDuration};`"
-    :class="[$style.loadingScreen, loading ? $style.loading : $style.loaded]"
+    :style="`--loading-duration-ms: ${config.animationDuration}ms;`"
+    :class="[
+      $style.loadingScreen,
+      statusStore.loading ? $style.loading : $style.loaded,
+      animationsRunning && $style.animating
+    ]"
   >
-    <SvgoClef :class="$style.loadingIcon" :style="'width: 250px;height: 250px;'" />
+    <SvgoClef
+      :class="$style.loadingIcon"
+      :style="'width: 250px;height: 250px;'"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+/**
+  Show loading screen -> Loading done ->
+  start animation (duration) -> after animation done: remove loading screen
+ */
+import { useStatusStore } from "~/store/status";
+
+const statusStore = useStatusStore();
+
 const nuxtApp = useNuxtApp();
 
-const loading = ref(true);
+const animationsRunning = ref(false);
 
-const loadingOutDuration = 400;
+const config = {
+  animationDuration: 600,
+};
 
 nuxtApp.hook("page:start", () => {
-  loading.value = true;
+  statusStore.loading = true;
 });
 
-nuxtApp.hook("page:finish", () => {
-  loading.value = false;
-});
-
-nuxtApp.hook("app:mounted", () => {
-  loading.value = false;
-});
+// nuxtApp.hook("page:finish", () => loadingComplete());
+nuxtApp.hook("app:mounted", () => loadingComplete());
 
 /**
- * Responsible for hiding the screen completely.
+ * Functions to perform after the loading has been completed.
  */
-const hideLoadingScreen = computed(() => {});
+const loadingComplete = () => {
+  animationsRunning.value = true;
+
+  // Wait until the animation has completed, before hiding the loading screen.
+  setTimeout(() => {
+    statusStore.loading = false;
+    animationsRunning.value = false;
+  }, config.animationDuration);
+};
 </script>
 
 <style lang="scss" module>
-
 .loadingScreen {
   position: fixed;
   top: 0;
@@ -44,6 +63,13 @@ const hideLoadingScreen = computed(() => {});
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(
+    179.6deg,
+    var(--color-light) 1.07%,
+    var(--color-light2) 98.55%
+  );
+  opacity: 1;
+  transition: all var(--loading-duration-ms);
 }
 
 .loadingIcon {
@@ -53,12 +79,8 @@ const hideLoadingScreen = computed(() => {});
   animation: pulseAnimation 1500ms ease-in-out infinite;
 }
 
-.loading {
-  background: linear-gradient(
-    179.6deg,
-    var(--color-light) 1.07%,
-    var(--color-light2) 98.55%
-  );
+.animating {
+  opacity: 0;
 }
 
 .loaded {
