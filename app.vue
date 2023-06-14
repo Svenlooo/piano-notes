@@ -8,6 +8,7 @@
         title="Piano Notes"
         subline="by Sven Lochner"
       />
+      <DesktopFrame />
       <NuxtPage class="page-wrapper" />
     </NuxtLayout>
   </div>
@@ -78,14 +79,14 @@ watch(
     max-width: map-get($contentMaxSizes, "portrait-max-width");
     overflow: hidden;
     box-sizing: content-box;
-    border-radius: 32px;
+    border-radius: 30px;
     box-shadow: 10px 10px 71px 0px rgba(0, 0, 0, 0.15);
-    border: solid var(--color-piano-black) 5px;
     background: linear-gradient(
       179.6deg,
       var(--color-light) 1.07%,
       var(--color-light2) 98.55%
     );
+    z-index: 1;
 
     @media #{map-get($mediaSituations, 'landscape')} {
       flex-direction: row;

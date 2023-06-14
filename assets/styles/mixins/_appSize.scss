@@ -1,0 +1,14 @@
+/**
+ * Sets the size of the app, according to breakpoint situations.
+ */
+@mixin appSize() {
+    height: 100dvh;
+    width: 100dvw;
+    max-height: map-get($contentMaxSizes, "portrait-max-height");
+    max-width: map-get($contentMaxSizes, "portrait-max-width");
+
+    @media #{map-get($mediaSituations, 'landscape')} {
+        max-height: map-get($contentMaxSizes, "landscape-max-height");
+        max-width: map-get($contentMaxSizes, "landscape-max-width");
+    }
+}
