@@ -1,6 +1,7 @@
 <template>
   <div id="app-wrapper">
     <VitePwaManifest />
+    <LoadingScreen />
     <NuxtLayout>
       <DesktopTitle
         class="title"

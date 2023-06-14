@@ -53,7 +53,11 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
         'nuxt-icon',
+        'nuxt-svgo',
     ],
+    svgo: {
+        autoImportPath: './assets/svg/',
+    },
     pwa: {
         manifest: {
             name: 'Piano Notes',
@@ -96,11 +100,11 @@ export default defineNuxtConfig({
             ],
         },
         devOptions: {
-            enabled: true,
+            enabled: false,
             type: 'module',
         },
         client: {
-            installPrompt: false,
+            installPrompt: true,
         },
     },
     piniaPersistedstate: {
