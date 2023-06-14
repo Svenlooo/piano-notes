@@ -73,13 +73,9 @@ watch(
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100dvh;
-    width: 100dvw;
-    max-height: map-get($contentMaxSizes, "portrait-max-height");
-    max-width: map-get($contentMaxSizes, "portrait-max-width");
     overflow: hidden;
     box-sizing: content-box;
-    border-radius: 30px;
+    border-radius: 26px;
     box-shadow: 10px 10px 71px 0px rgba(0, 0, 0, 0.15);
     background: linear-gradient(
       179.6deg,
@@ -87,11 +83,10 @@ watch(
       var(--color-light2) 98.55%
     );
     z-index: 1;
+    @include appSize;
 
     @media #{map-get($mediaSituations, 'landscape')} {
       flex-direction: row;
-      max-height: map-get($contentMaxSizes, "landscape-max-height");
-      max-width: map-get($contentMaxSizes, "landscape-max-width");
     }
 
     @media #{map-get($mediaSituations, 'fills-screen')} {
