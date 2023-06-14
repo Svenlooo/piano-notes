@@ -3,7 +3,7 @@
     :style="`--loading-duration-ms: ${loadingOutDuration};`"
     :class="[$style.loadingScreen, loading ? $style.loading : $style.loaded]"
   >
-    <SvgoClef :class="$style.loadingIcon" />
+    <SvgoClef :class="$style.loadingIcon" :style="'width: 250px;height: 250px;'" />
   </div>
 </template>
 
@@ -33,6 +33,7 @@ const hideLoadingScreen = computed(() => {});
 </script>
 
 <style lang="scss" module>
+
 .loadingScreen {
   position: fixed;
   top: 0;
