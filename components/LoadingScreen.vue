@@ -36,7 +36,6 @@ const config = {
  */
 const loadingComplete = () => {
   animationsRunning.value = true;
-  console.log("all loaded. start animation.");
 
   // Wait until the animation has completed, before hiding the loading screen.
   setTimeout(() => {
