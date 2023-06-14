@@ -4,7 +4,7 @@
     :class="[
       $style.loadingScreen,
       statusStore.loading ? $style.loading : $style.loaded,
-      animationsRunning && $style.animating
+      animationsRunning && $style.animating,
     ]"
   >
     <SvgoClef
@@ -31,11 +31,6 @@ const config = {
   animationDuration: 600,
 };
 
-nuxtApp.hook("page:start", () => {
-  statusStore.loading = true;
-});
-
-// nuxtApp.hook("page:finish", () => loadingComplete());
 nuxtApp.hook("app:mounted", () => loadingComplete());
 
 /**
