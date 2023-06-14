@@ -31,13 +31,12 @@ const config = {
   animationDuration: 600,
 };
 
-nuxtApp.hook("app:mounted", () => loadingComplete());
-
 /**
  * Functions to perform after the loading has been completed.
  */
 const loadingComplete = () => {
   animationsRunning.value = true;
+  console.log("all loaded. start animation.");
 
   // Wait until the animation has completed, before hiding the loading screen.
   setTimeout(() => {
@@ -45,6 +44,14 @@ const loadingComplete = () => {
     animationsRunning.value = false;
   }, config.animationDuration);
 };
+
+onBeforeMount(() => {
+  if (document.readyState === "complete") {
+    loadingComplete();
+  } else {
+    window.onload = loadingComplete;
+  }
+});
 </script>
 
 <style lang="scss" module>
