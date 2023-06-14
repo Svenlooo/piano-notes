@@ -1,30 +1,22 @@
 <template>
   <svg
     class="frame"
+    :class="statusStore.loadingScreenAnimationComplete && 'animate'"
     width="1034"
     height="460"
     viewBox="0 0 1034 460"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    ref="frame"
     preserveAspectRatio="none"
   >
-    <rect
-      x="2.5"
-      y="2.5"
-      rx="30"
-      stroke="black"
-      class="animated-rect"
-    />
+    <rect x="2.5" y="2.5" rx="30" stroke="black" class="animated-rect" />
   </svg>
 </template>
 
 <script setup>
-const frame = ref(null);
+import { useStatusStore } from "~/store/status";
 
-onMounted(() => {
-  frame.value.classList.add("animate");
-});
+const statusStore = useStatusStore();
 </script>
 
 <style lang="scss">
