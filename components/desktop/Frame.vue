@@ -2,14 +2,21 @@
   <svg
     class="frame"
     :class="statusStore.loadingScreenAnimationComplete && 'animate'"
-    width="1034"
-    height="460"
-    viewBox="0 0 1034 460"
+    :width="svgWidth"
+    :height="svgHeight"
+    :viewBox="svgViewBox"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="none"
   >
-    <rect x="2.5" y="2.5" rx="30" stroke="black" class="animated-rect" />
+    <rect
+      :width="rectWidth"
+      :height="rectHeight"
+      x="2.5"
+      y="2.5"
+      rx="30"
+      class="animated-rect"
+    />
   </svg>
 </template>
 
@@ -17,6 +24,37 @@
 import { useStatusStore } from "~/store/status";
 
 const statusStore = useStatusStore();
+
+let svgWidth = ref("1034");
+let svgHeight = ref("460");
+let svgViewBox = ref("0 0 1034 460");
+let rectWidth = ref("100%");
+let rectHeight = ref("100%");
+
+/**
+ * Sets the SVG's size attributes, according to the screen's orientation.
+ * This is required to prevent the <rect> element from distorting.
+ */
+const updateSvgAttributes = () => {
+  if (window.matchMedia("(orientation: portrait)").matches) {
+    svgWidth.value = "460";
+    svgHeight.value = "1034";
+    svgViewBox.value = "0 0 460 1034";
+  } else {
+    svgWidth.value = "1034";
+    svgHeight.value = "460";
+    svgViewBox.value = "0 0 1034 460";
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("resize", updateSvgAttributes);
+  updateSvgAttributes();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateSvgAttributes);
+});
 </script>
 
 <style lang="scss">
@@ -30,14 +68,7 @@ const statusStore = useStatusStore();
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
-  width: 100vw;
-  height: 100vh;
-  max-width: 1034px;
-  max-height: 460px;
-
-  @media #{map-get($mediaSituations, 'portrait')} {
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
+  @include appSize(10px);
 
   & .animated-rect {
     width: var(--width);
