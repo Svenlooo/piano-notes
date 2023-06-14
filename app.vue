@@ -75,7 +75,7 @@ watch(
     flex-direction: column;
     overflow: hidden;
     box-sizing: content-box;
-    border-radius: 26px;
+    border-radius: 28px;
     box-shadow: 10px 10px 71px 0px rgba(0, 0, 0, 0.15);
     background: linear-gradient(
       179.6deg,
