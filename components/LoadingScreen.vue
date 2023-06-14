@@ -1,7 +1,7 @@
 <template>
   <div
     :style="`--loading-duration-ms: ${loadingOutDuration};`"
-    :class="[$style.loadingScreen, !loading ? $style.loading : $style.loaded]"
+    :class="[$style.loadingScreen, loading ? $style.loading : $style.loaded]"
   >
     <SvgoClef :class="$style.loadingIcon" />
   </div>
