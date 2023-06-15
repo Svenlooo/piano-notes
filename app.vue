@@ -5,8 +5,8 @@
     <NuxtLayout>
       <DesktopTitle
         class="title"
-        title="Piano Notes"
-        subline="by Sven Lochner"
+        :title="$t('title')"
+        :subline="$t('subline')"
       />
       <DesktopFrame />
       <NuxtPage class="page-wrapper" />

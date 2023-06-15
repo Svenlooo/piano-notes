@@ -3,6 +3,10 @@
     <main>
       <h1>Settings</h1>
 
+      <SettingsOption label="Language" icon="bi:globe2">
+        <UIComponentsLanguagePicker />
+      </SettingsOption>
+
       <SettingsOption label="Dark Mode" icon="bi:yin-yang">
         <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
       </SettingsOption>
