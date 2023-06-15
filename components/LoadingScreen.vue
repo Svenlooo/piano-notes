@@ -26,7 +26,8 @@ const statusStore = useStatusStore();
 const nuxtApp = useNuxtApp();
 
 const config = {
-  animationDuration: 600,
+  animationDuration: 600, // Duration of the loading screen transition
+  uiAnimationsStart: 200, // Starting time of UI animations
 };
 
 nuxtApp.hook("app:mounted", () => loadingComplete());
@@ -40,9 +41,12 @@ const loadingComplete = () => {
   // Wait until the animation has completed, before hiding the loading screen.
   setTimeout(() => {
     statusStore.appResourcesLoading = false;
-    statusStore.loadingScreenAnimationComplete = true;
     statusStore.loadingScreenAnimationInProgress = false;
   }, config.animationDuration);
+
+  setTimeout(() => {
+    statusStore.loadingScreenAnimationComplete = true;
+  }, config.uiAnimationsStart)
 };
 </script>
 
