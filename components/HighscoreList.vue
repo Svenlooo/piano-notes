@@ -53,8 +53,8 @@ const pastGames = computed(() => {
  */
 const parseDay = (dateString) => {
   const date = new Date(dateString);
-  const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  const complete = new Intl.DateTimeFormat('de-DE', optionsDate).format(date);
+  const optionsDate = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const complete = new Intl.DateTimeFormat("de-DE", optionsDate).format(date);
   return complete;
 };
 
@@ -64,8 +64,8 @@ const parseDay = (dateString) => {
  */
 const parseTime = (dateString) => {
   const date = new Date(dateString);
-  const optionsTime = { hour: '2-digit', minute: '2-digit', hour12: false };
-  const time = new Intl.DateTimeFormat('de-DE', optionsTime).format(date);
+  const optionsTime = { hour: "2-digit", minute: "2-digit", hour12: false };
+  const time = new Intl.DateTimeFormat("de-DE", optionsTime).format(date);
   return `${time} Uhr`;
 };
 
@@ -103,9 +103,17 @@ const handleDelete = (index) => {
     }
     @media (min-width: map-get($breakpoints, "sm")) {
       grid-template-columns: repeat(3, 1fr);
+
+      @media #{map-get($mediaSituations, 'portrait')} {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
     @media (min-width: map-get($breakpoints, "md")) {
       grid-template-columns: repeat(4, 1fr);
+
+      @media #{map-get($mediaSituations, 'portrait')} {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
 
@@ -151,7 +159,7 @@ const handleDelete = (index) => {
       width: 200px;
       height: auto;
       color: var(--color-white);
-      opacity: .8;
+      opacity: 0.8;
     }
   }
 }
