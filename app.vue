@@ -3,11 +3,13 @@
     <VitePwaManifest />
     <LoadingScreen />
     <NuxtLayout>
-      <DesktopTitle
-        class="title"
-        title="Piano Notes"
-        subline="by Sven Lochner"
-      />
+      <ClientOnly>
+        <DesktopTitle
+          class="title"
+          :title="$t('title')"
+          :subline="$t('subline')"
+        />
+      </ClientOnly>
       <DesktopFrame />
       <NuxtPage class="page-wrapper" />
     </NuxtLayout>
