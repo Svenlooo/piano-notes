@@ -30,6 +30,7 @@ export default defineNuxtConfig({
                 { rel: 'mask-icon', href: '/images/pwa-icons/apple-touch-icon.png', sizes: '180x180'}
             ]
         },
+        pageTransition: { name: 'settings', mode: 'out-in' }
     },
     css: [
         'normalize.css/normalize.css',
@@ -43,6 +44,7 @@ export default defineNuxtConfig({
                     @use 'sass:math';
                     @import '@/assets/styles/_fonts.scss';
                     @import '@/assets/styles/_variables.scss';
+                    @import '@/assets/styles/_mixins.scss';
                     `,
                 },
             },
@@ -52,9 +54,13 @@ export default defineNuxtConfig({
         '@vite-pwa/nuxt',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
-        'nuxt-icon',
         '@nuxtjs/i18n',
+        'nuxt-icon',
+        'nuxt-svgo',
     ],
+    svgo: {
+        autoImportPath: './assets/svg/',
+    },
     pwa: {
         manifest: {
             name: 'Piano Notes',
@@ -77,26 +83,22 @@ export default defineNuxtConfig({
             ],
         },
         workbox: {
-            navigateFallback: '/',
+            globPatterns: ['**/*.{js,css}'],
+            navigateFallback: null, // must be set even though null's the default value.
             runtimeCaching: [
                 {
-                    urlPattern: '/',
+                    urlPattern: /^https?.*/,
                     handler: 'NetworkFirst',
                     options: {
-                        cacheName: 'homepage',
+                        cacheName: 'all-resources',
                         expiration: {
-                            maxEntries: 10,
+                            maxEntries: 100,
                             maxAgeSeconds: 86400, // 24 hours
                         },
                         cacheableResponse: {
                             statuses: [0, 200],
                         },
                     },
-                },
-                {
-                    urlPattern: '/(highscore|settings)?',
-                    handler: 'NetworkOnly',
-                    method: 'GET'
                 },
             ],
         },
@@ -105,7 +107,7 @@ export default defineNuxtConfig({
             type: 'module',
         },
         client: {
-            installPrompt: false,
+            installPrompt: true,
         },
     },
     piniaPersistedstate: {

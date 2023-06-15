@@ -1335,6 +1335,29 @@
     unimport "^3.0.7"
     untyped "^1.3.2"
 
+"@nuxt/kit@npm:@nuxt/kit-edge@latest":
+  version "3.6.0-28112825.b37ec72f"
+  resolved "https://registry.yarnpkg.com/@nuxt/kit-edge/-/kit-edge-3.6.0-28112825.b37ec72f.tgz#8f283fea4f5bdae8fa8cc0961d3952a3aeb6617b"
+  integrity sha512-MJfQFDM1Ydz5uc69vIIGewNve2VCdW26ekoWNreRW9YE43/SxVyJu8BGOlNsp1UFu8CT5q7QbXve2SRsf8G2iQ==
+  dependencies:
+    "@nuxt/schema" "npm:@nuxt/schema-edge@3.6.0-28112825.b37ec72f"
+    c12 "^1.4.1"
+    consola "^3.1.0"
+    defu "^6.1.2"
+    globby "^13.1.4"
+    hash-sum "^2.0.0"
+    ignore "^5.2.4"
+    jiti "^1.18.2"
+    knitwork "^1.0.0"
+    mlly "^1.3.0"
+    pathe "^1.1.1"
+    pkg-types "^1.0.3"
+    scule "^1.0.0"
+    semver "^7.5.1"
+    unctx "^2.3.1"
+    unimport "^3.0.8"
+    untyped "^1.3.2"
+
 "@nuxt/schema@3.5.3":
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/@nuxt/schema/-/schema-3.5.3.tgz#acea27a12fbcc24112abea84d0dddf899ce0343d"
@@ -1348,6 +1371,21 @@
     std-env "^3.3.3"
     ufo "^1.1.2"
     unimport "^3.0.7"
+    untyped "^1.3.2"
+
+"@nuxt/schema@npm:@nuxt/schema-edge@3.6.0-28112825.b37ec72f":
+  version "3.6.0-28112825.b37ec72f"
+  resolved "https://registry.yarnpkg.com/@nuxt/schema-edge/-/schema-edge-3.6.0-28112825.b37ec72f.tgz#74f0a0b5763e08f9ca3ccc5e61197450cf56ff2d"
+  integrity sha512-6USn64BgXNm6AiIv0+0MAhyfcibuqmtJuRU/cMlPM27S1m//hbVnXxom4SUT6xBYz5RbTM3P4r75gKb/FAfvsw==
+  dependencies:
+    defu "^6.1.2"
+    hookable "^5.5.3"
+    pathe "^1.1.1"
+    pkg-types "^1.0.3"
+    postcss-import-resolver "^2.0.0"
+    std-env "^3.3.3"
+    ufo "^1.1.2"
+    unimport "^3.0.8"
     untyped "^1.3.2"
 
 "@nuxt/telemetry@^2.2.0":
@@ -4435,6 +4473,15 @@ nuxt-icon@^0.4.1:
     "@iconify/vue" "^4.1.1"
     "@nuxt/kit" "^3.5.0"
 
+nuxt-svgo@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/nuxt-svgo/-/nuxt-svgo-3.1.0.tgz#59f5645dff7ab5340e8a0ae2c3b1d9c3efa97db0"
+  integrity sha512-gqRYVUxN6kDJ2Hco/xLNUr56t665xdSwG78Ba/5o1TiYQLeIux1xErS4yR/1+ju/nIWj1DGwnBpDCw9GfX9QGA==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    "@vue/compiler-sfc" "^3.2.47"
+    svgo "^3.0.2"
+
 nuxt@^3.5.2:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.5.3.tgz#2997a62b8c1088c4b8eeae358838732f5dad0653"
@@ -5839,7 +5886,7 @@ unicode-property-aliases-ecmascript@^2.0.0:
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-2.1.0.tgz#43d41e3be698bd493ef911077c9b131f827e8ccd"
   integrity sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==
 
-unimport@^3.0.6, unimport@^3.0.7:
+unimport@^3.0.6, unimport@^3.0.7, unimport@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/unimport/-/unimport-3.0.8.tgz#f77faa0468f3390844899040849c051570736e3f"
   integrity sha512-AOt6xj3QMwqcTZRPB+NhFkyVEjCKnpTVoPm5x6424zz2NYYtCfym2bpJofzPHIJKPNIh5ko2/t2q46ZIMgdmbw==

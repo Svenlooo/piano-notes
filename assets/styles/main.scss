@@ -1,3 +1,5 @@
+@import 'mixins/appSize';
+
 :root {
     --color-light: #FBF7F5;
     --color-light2: #F6E8E1;
@@ -13,6 +15,10 @@
     --font-weight-bold: bold;
     --font-size-sm: 14px;
     --font-size-md: 14px;
+    --content-portrait-max-width: #{map-get($contentMaxSizes, 'portrait-max-width')};
+    --content-portrait-max-height: #{map-get($contentMaxSizes, 'portrait-max-height')};
+    --content-landscape-max-width: #{map-get($contentMaxSizes, 'landscape-max-width')};
+    --content-landscape-max-height: #{map-get($contentMaxSizes, 'landscape-max-height')};
 }
 
 [data-theme="dark"] {
