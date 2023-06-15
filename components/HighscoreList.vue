@@ -40,11 +40,12 @@ const store = useGamesStore();
 
 /**
  * Gets the list of past games from the store.
+ * It must be reversed to be in chronological order.
  * @returns {Array<Game>} - the list
  */
 const pastGames = computed(() => {
   const pastGames = store.getPastGames();
-  return pastGames;
+  return pastGames.slice().reverse();
 });
 
 /**
