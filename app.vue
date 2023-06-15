@@ -3,13 +3,11 @@
     <VitePwaManifest />
     <LoadingScreen />
     <NuxtLayout>
-      <ClientOnly>
-        <DesktopTitle
-          class="title"
-          :title="$t('title')"
-          :subline="$t('subline')"
-        />
-      </ClientOnly>
+      <DesktopTitle
+        class="title"
+        :title="t('title')"
+        :subline="t('subline')"
+      />
       <DesktopFrame />
       <NuxtPage class="page-wrapper" />
     </NuxtLayout>
@@ -20,6 +18,7 @@
 import { useSettingsStore } from "~/store/settings";
 
 const settings = useSettingsStore();
+const { t } = useI18n();
 
 // Set theme on init
 watch(
