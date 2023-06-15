@@ -53,6 +53,7 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
         'nuxt-icon',
+        '@nuxtjs/i18n',
     ],
     pwa: {
         manifest: {
