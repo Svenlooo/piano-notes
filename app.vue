@@ -5,8 +5,8 @@
     <NuxtLayout>
       <DesktopTitle
         class="title"
-        title="test"
-        subline="test"
+        :title="$t('title')"
+        :subline="$t('subline')"
       />
       <DesktopFrame />
       <NuxtPage class="page-wrapper" />
