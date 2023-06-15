@@ -1,0 +1,31 @@
+/**
+ * Sets the size of the app, according to breakpoint situations.
+ * @param {px} $addition - Any additional pixels, e.g. for borders, etc.
+ * @param {string}  $orientation - both, landscape or portrait
+ */
+ @mixin appSize($addition: 0px, $orientation: 'both') {
+    height: 100dvh;
+    width: 100dvw;
+
+    @if $orientation == 'both' or $orientation == 'portrait' {
+        @if $addition !=0px {
+            max-height: calc(var(--content-portrait-max-height) + #{$addition});
+            max-width: calc(var(--content-portrait-max-width) + #{$addition});
+        } @else {
+            max-height: var(--content-portrait-max-height);
+            max-width: var(--content-portrait-max-width);
+        }
+    }
+
+    @if $orientation == 'both' or $orientation == 'landscape' {
+        @media #{map-get($mediaSituations, 'landscape')} {
+            @if $addition !=0px {
+                max-height: calc(var(--content-landscape-max-height) + #{$addition});
+                max-width: calc(var(--content-landscape-max-width) + #{$addition});
+            } @else {
+                max-height: var(--content-landscape-max-height);
+                max-width: var(--content-landscape-max-width);
+            }
+        }
+    }
+}

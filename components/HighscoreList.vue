@@ -153,9 +153,6 @@ const handleDelete = (index) => {
       color: var(--color-white);
       opacity: .8;
     }
-    &__label {
-
-    }
   }
 }
 </style>

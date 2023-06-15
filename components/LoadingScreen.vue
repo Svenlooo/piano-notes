@@ -3,8 +3,8 @@
     :style="`--loading-duration-ms: ${config.animationDuration}ms;`"
     :class="[
       $style.loadingScreen,
-      statusStore.loading ? $style.loading : $style.loaded,
-      animationsRunning && $style.animating,
+      statusStore.appResourcesLoading ? $style.loading : $style.loaded,
+      statusStore.loadingScreenAnimationInProgress && $style.animating,
     ]"
   >
     <SvgoClef
@@ -25,41 +25,31 @@ const statusStore = useStatusStore();
 
 const nuxtApp = useNuxtApp();
 
-const animationsRunning = ref(false);
-
 const config = {
   animationDuration: 600,
 };
+
+nuxtApp.hook("app:mounted", () => loadingComplete());
 
 /**
  * Functions to perform after the loading has been completed.
  */
 const loadingComplete = () => {
-  animationsRunning.value = true;
+  statusStore.loadingScreenAnimationInProgress = true;
 
   // Wait until the animation has completed, before hiding the loading screen.
   setTimeout(() => {
-    statusStore.loading = false;
-    animationsRunning.value = false;
+    statusStore.appResourcesLoading = false;
+    statusStore.loadingScreenAnimationComplete = true;
+    statusStore.loadingScreenAnimationInProgress = false;
   }, config.animationDuration);
 };
-
-onBeforeMount(() => {
-  if (document.readyState === "complete") {
-    loadingComplete();
-  } else {
-    window.onload = loadingComplete;
-  }
-});
 </script>
 
 <style lang="scss" module>
 .loadingScreen {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   z-index: 10;
   display: flex;
   justify-content: center;
