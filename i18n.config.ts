@@ -1,31 +1,14 @@
-import en from './lang/en-US';
-import de from './lang/de-DE';
-
 export default defineI18nConfig(() => ({
-    legacy: false,
-    locales: [
-        {
-          code: 'en',
-          iso: 'en-US',
-          name: 'English'
-        },
-        {
-          code: 'de',
-          iso: 'de-DE',
-          name: 'Deutsch'
-        },
-    ],
-    lazy: true,
+    locales: ['en','de'],
     defaultLocale: 'en',
-    fallbackLocale: 'en',
-    missingWarn: false,
     messages: {
-        en: en,
-        de: de,
-    },
-    detectBrowserLanguage: {
-        alwaysRedirect: true,
-        redirectOn: 'all',
-        cookieKey: 'piano-lang',
+        en: {
+            title: 'Piano Notes',
+            subline: 'by Sven Lochner',
+        },
+        de: {
+            title: 'Noten lernen',
+            subline: 'von Sven Lochner',
+        },
     },
 }))
