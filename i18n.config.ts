@@ -24,7 +24,8 @@ export default defineI18nConfig(() => ({
         de: de,
     },
     detectBrowserLanguage: {
-        useCookie: false,
-        redirectOn: 'root',
+        alwaysRedirect: true,
+        redirectOn: 'all',
+        cookieKey: 'piano-lang',
     },
 }))
