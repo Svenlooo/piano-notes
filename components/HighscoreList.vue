@@ -135,6 +135,7 @@ const handleDelete = (index) => {
     right: 16px;
     width: 32px;
     height: 32px;
+    cursor: pointer;
   }
 
   &__meta {
