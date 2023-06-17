@@ -8,14 +8,14 @@
       </SettingsOption>
 
       <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
-        <UIComponentsToggle id="blackKeysToggle" v-model="settings.blackKeys" />
+        <UIComponentsToggle id="blackKeysToggle" v-model="settingsStore.blackKeys" />
       </SettingsOption>
 
       <SettingsOption
         label="Show only successful plays"
         icon="fluent:music-note-1-24-filled"
       >
-        <UIComponentsToggle id="successOnly" v-model="settings.successOnly" />
+        <UIComponentsToggle id="successOnly" v-model="settingsStore.successOnly" />
       </SettingsOption>
     </main>
     <Navigation />
@@ -36,15 +36,15 @@ useServerSeoMeta({
   twitterImage: "https://piano-notes.netlify.app/images/titleImage.jpg",
 });
 
-const settings = useSettingsStore();
+const settingsStore = useSettingsStore();
 
 /**
  * Returns or sets the current theme.
  * @param {"light" | "dark"} theme name
  */
 const isDarkMode = computed({
-  get: () => (settings.theme === "dark" ? true : false),
-  set: (value) => settings.setTheme(value),
+  get: () => (settingsStore.theme === "dark" ? true : false),
+  set: (value) => settingsStore.setTheme(value),
 });
 </script>
 
