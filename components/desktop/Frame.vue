@@ -74,6 +74,10 @@ onUnmounted(() => {
     z-index: 0;
     @include appSize(10px);
 
+    @media #{map-get($mediaSituations, 'fills-screen')} {
+      display: none;
+    }
+
     & .animated-rect {
       width: var(--width);
       height: var(--height);
