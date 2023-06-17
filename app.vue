@@ -17,11 +17,11 @@
 <script setup>
 import { useSettingsStore } from "~/store/settings";
 
-const settings = useSettingsStore();
+const settingsStore = useSettingsStore();
 
 // Set theme on init
 watch(
-  () => settings.theme,
+  () => settingsStore.theme,
   (newTheme) => {
     if (process.client) {
       document.documentElement.setAttribute("data-theme", newTheme);
