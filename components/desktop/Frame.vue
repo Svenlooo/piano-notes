@@ -28,11 +28,11 @@ import { useStatusStore } from "~/store/status";
 
 const statusStore = useStatusStore();
 
-let svgWidth = ref("1034");
-let svgHeight = ref("460");
-let svgViewBox = ref("0 0 1034 460");
-let rectWidth = ref("100%");
-let rectHeight = ref("100%");
+const svgWidth = ref("1034");
+const svgHeight = ref("460");
+const svgViewBox = ref("0 0 1034 460");
+const rectWidth = ref("100%");
+const rectHeight = ref("100%");
 
 /**
  * Sets the SVG's size attributes, according to the screen's orientation.
