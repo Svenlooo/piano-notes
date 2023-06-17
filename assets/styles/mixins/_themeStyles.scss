@@ -39,14 +39,14 @@ $transitionTime_bgFade: 500ms;
 
         // Light mode background
         &::before {
-            background: linear-gradient(179.6deg, var(--color-light-persist) 1.07%, var(--color-light2-persist) 98.55%);
+            background: linear-gradient(180deg, var(--color-light-persist) 0%, var(--color-light2-persist) 100%);
             opacity: 1;
             z-index: -1;
         }
 
         // Dark mode background
         &::after {
-            background: linear-gradient(179.6deg, var(--color-dark-persist) 1.07%, var(--color-dark2-persist) 98.55%);
+            background: linear-gradient(180deg, var(--color-dark-persist) 0%, var(--color-dark2-persist) 100%);
             z-index: -2;
             opacity: 0;
         }
