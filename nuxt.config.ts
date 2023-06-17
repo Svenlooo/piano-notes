@@ -6,7 +6,7 @@ export default defineNuxtConfig({
             viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no',
             meta: [
                 { name: 'application-name', content: 'Piano Notes'},
-                { name: 'theme-color', content: '#FBF7F5'},
+                { name: 'theme-color', content: 'currentColor'},
 
                 /** Android */
                 { name: 'mobile-web-app-capable', content: 'yes'},
