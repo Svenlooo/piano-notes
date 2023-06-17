@@ -1,11 +1,8 @@
 <template>
-  <div>
+  <main>
     <StatusBar />
-    <main>
-      <Piano />
-    </main>
-    <Navigation />
-  </div>
+    <Piano />
+  </main>
 </template>
 
 <script setup>
@@ -17,7 +14,7 @@ useServerSeoMeta({
   ogDescription: "Learn how to read piano notes in a fun and simple way!",
   twitterDescription: "Learn how to read piano notes in a fun and simple way!",
   ogImage: "https://piano-notes.netlify.app/images/titleImage.jpg",
-  twitterImage: 'https://piano-notes.netlify.app/images/titleImage.jpg',
+  twitterImage: "https://piano-notes.netlify.app/images/titleImage.jpg",
 });
 </script>
 

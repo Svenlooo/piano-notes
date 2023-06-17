@@ -1,25 +1,28 @@
 <template>
-  <div>
-    <main>
-      <h1>Settings</h1>
+  <main>
+    <h1>Settings</h1>
 
-      <SettingsOption label="Dark Mode" icon="bi:yin-yang">
-        <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
-      </SettingsOption>
+    <SettingsOption label="Dark Mode" icon="bi:yin-yang">
+      <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
+    </SettingsOption>
 
-      <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
-        <UIComponentsToggle id="blackKeysToggle" v-model="settingsStore.blackKeys" />
-      </SettingsOption>
+    <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
+      <UIComponentsToggle
+        id="blackKeysToggle"
+        v-model="settingsStore.blackKeys"
+      />
+    </SettingsOption>
 
-      <SettingsOption
-        label="Show only successful plays"
-        icon="fluent:music-note-1-24-filled"
-      >
-        <UIComponentsToggle id="successOnly" v-model="settingsStore.successOnly" />
-      </SettingsOption>
-    </main>
-    <Navigation />
-  </div>
+    <SettingsOption
+      label="Show only successful plays"
+      icon="fluent:music-note-1-24-filled"
+    >
+      <UIComponentsToggle
+        id="successOnly"
+        v-model="settingsStore.successOnly"
+      />
+    </SettingsOption>
+  </main>
 </template>
 
 <script setup>

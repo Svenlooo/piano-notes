@@ -9,7 +9,10 @@
         subline="by Sven Lochner"
       />
       <DesktopFrame>
-        <NuxtPage class="page-wrapper" />
+        <div class="page-wrapper">
+          <NuxtPage class="page" />
+          <Navigation />
+        </div>
       </DesktopFrame>
     </NuxtLayout>
   </div>
@@ -92,7 +95,7 @@ watch(
       border: none;
     }
 
-    & > main {
+    & > .page {
       flex: 1;
     }
   }

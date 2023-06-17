@@ -1,11 +1,8 @@
 <template>
-  <div>
-    <main>
-      <h1>Past Games</h1>
-      <HighscoreList />
-    </main>
-    <Navigation />
-  </div>
+  <main>
+    <h1>Past Games</h1>
+    <HighscoreList />
+  </main>
 </template>
 
 <script setup>
