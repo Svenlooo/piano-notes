@@ -30,7 +30,6 @@ export default defineNuxtConfig({
                 { rel: 'mask-icon', href: '/images/pwa-icons/apple-touch-icon.png', sizes: '180x180'}
             ]
         },
-        pageTransition: { name: 'settings', mode: 'out-in' }
     },
     css: [
         'normalize.css/normalize.css',
