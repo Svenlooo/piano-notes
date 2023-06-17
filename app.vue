@@ -78,11 +78,6 @@ watch(
     box-sizing: content-box;
     border-radius: 28px;
     box-shadow: 10px 10px 71px 0px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(
-      179.6deg,
-      var(--color-light) 1.07%,
-      var(--color-light2) 98.55%
-    );
     z-index: 1;
     @include appSize;
 
