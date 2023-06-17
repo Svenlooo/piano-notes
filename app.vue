@@ -26,11 +26,6 @@ watch(
   (newTheme) => {
     if (process.client) {
       document.documentElement.setAttribute("data-theme", newTheme);
-      document.documentElement.setAttribute("theme-animating", true);
-
-      setTimeout(() => {
-        document.documentElement.removeAttribute("theme-animating");
-      }, 600);
     }
   },
   { immediate: true }
