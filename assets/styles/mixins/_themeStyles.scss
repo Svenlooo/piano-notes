@@ -7,8 +7,7 @@ $transitionTime_bgFade: 500ms;
 @mixin htmlThemeStyles() {
     @content;
     &[data-theme="dark"] {
-        & body::before,
-        & .page-wrapper::before {
+        & body::before {
             transition: opacity $transitionTime_bgFade;
             opacity: 0;
         }
