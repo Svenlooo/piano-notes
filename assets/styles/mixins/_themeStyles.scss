@@ -1,0 +1,40 @@
+/**
+* Collected here are all styles which change for the theme settings (light or dark mode).
+* Mixin naming convention: [selector]ThemeStyle.
+*/
+$transitionTime_bgFade: 500ms;
+
+@mixin htmlThemeStyles() {
+    @content;
+    &[data-theme="dark"] {
+        & body::before {
+            transition: opacity $transitionTime_bgFade;
+            opacity: 0;
+        }
+    }
+}
+
+@mixin bodyThemeStyles() {
+    @content;
+
+    &::before,
+    &::after {
+        content: '';
+        inset: 0;
+        position: fixed;
+    }
+
+    // Light mode background
+    &::before {
+        transition: opacity $transitionTime_bgFade;
+        background: linear-gradient(179.6deg, var(--color-light-persist) 1.07%, var(--color-light2-persist) 98.55%);
+        opacity: 1;
+        z-index: -1;
+    }
+
+    // Dark mode background
+    &::after {
+        background: linear-gradient(179.6deg, var(--color-dark-persist) 1.07%, var(--color-dark2-persist) 98.55%);
+        z-index: -2;
+    }
+}

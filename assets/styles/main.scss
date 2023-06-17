@@ -1,8 +1,13 @@
 @import 'mixins/appSize';
+@import 'mixins/themeStyles';
 
 :root {
     --color-light: #FBF7F5;
     --color-light2: #F6E8E1;
+    --color-light-persist: #FBF7F5;
+    --color-light2-persist: #F6E8E1;
+    --color-dark-persist: #2b2b2b;
+    --color-dark2-persist: #3b3b3b;
     --color-red: #BD3434;
     --color-green: #34bd3b;
     --color-piano-black: #2b2b2b;
@@ -42,6 +47,8 @@ html {
     overflow: hidden;
     min-height: calc(100% + env(safe-area-inset-top));
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+    @include htmlThemeStyles;
 }
 
 body {
@@ -51,10 +58,12 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     color: var(--color-black);
-    background: linear-gradient(179.6deg, var(--color-light) 1.07%, var(--color-light2) 98.55%);
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 
-    & #__nuxt, #app-wrapper {
+    @include bodyThemeStyles;
+
+    & #__nuxt,
+    #app-wrapper {
         min-height: inherit;
         min-width: inherit;
     }

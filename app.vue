@@ -8,8 +8,9 @@
         title="Piano Notes"
         subline="by Sven Lochner"
       />
-      <DesktopFrame />
-      <NuxtPage class="page-wrapper" />
+      <DesktopFrame>
+        <NuxtPage class="page-wrapper" />
+      </DesktopFrame>
     </NuxtLayout>
   </div>
 </template>
@@ -25,6 +26,11 @@ watch(
   (newTheme) => {
     if (process.client) {
       document.documentElement.setAttribute("data-theme", newTheme);
+      document.documentElement.setAttribute("theme-animating", true);
+
+      setTimeout(() => {
+        document.documentElement.removeAttribute("theme-animating");
+      }, 600);
     }
   },
   { immediate: true }
