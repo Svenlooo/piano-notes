@@ -20,7 +20,6 @@ useServerSeoMeta({
 
 <style lang="scss" scoped>
 .highscore {
-  height: 100%;
   padding: var(--content-padding);
 }
 </style>
