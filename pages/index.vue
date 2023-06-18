@@ -1,8 +1,6 @@
 <template>
-  <main>
-    <StatusBar />
-    <Piano />
-  </main>
+  <StatusBar />
+  <Piano />
 </template>
 
 <script setup>

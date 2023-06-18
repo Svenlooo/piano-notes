@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div class="settings">
     <h1>Settings</h1>
 
     <SettingsOption label="Dark Mode" icon="bi:yin-yang">
@@ -22,7 +22,7 @@
         v-model="settingsStore.successOnly"
       />
     </SettingsOption>
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -52,7 +52,7 @@ const isDarkMode = computed({
 </script>
 
 <style lang="scss" scoped>
-main {
+.settings {
   padding: var(--content-padding);
 }
 </style>

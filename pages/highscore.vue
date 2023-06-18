@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <div class="highscore">
     <h1>Past Games</h1>
     <HighscoreList />
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -19,8 +19,8 @@ useServerSeoMeta({
 </script>
 
 <style lang="scss" scoped>
-main {
-  overflow-y: auto;
+.highscore {
+  height: 100%;
   padding: var(--content-padding);
 }
 </style>
