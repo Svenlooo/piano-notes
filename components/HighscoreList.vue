@@ -3,7 +3,7 @@
     <ClientOnly fallback="Loading highscore list...">
       <ul class="highscoreList__list" v-if="pastGames.length > 0">
         <li v-for="(game, index) in pastGames" :key="index">
-          <HighscoreListGame :game="game" :index="index" />
+          <HighscoreListGame :game="game" :index="game.originalIndex" />
         </li>
       </ul>
       <div v-else class="highscoreList--empty">
@@ -23,15 +23,18 @@ import { useGamesStore } from "~/store/games";
 const store = useGamesStore();
 
 /**
- * Gets the list of past games from the store.
+ * Gets the chronological list of past games from the store.
  * It must be reversed to be in chronological order.
+ * To ensure correct mapping to the store, the original index must be saved.
  * @returns {Array<Game>} - the list
  */
 const pastGames = computed(() => {
   const pastGames = store.getPastGames();
-  return pastGames.slice().reverse();
+  const pastGamesWithOriginalIndex = pastGames.map((game, index) => {
+    return { ...game, originalIndex: index };
+  });
+  return pastGamesWithOriginalIndex.slice().reverse();
 });
-
 </script>
 
 <style lang="scss" scoped>
