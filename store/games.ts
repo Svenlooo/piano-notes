@@ -21,7 +21,7 @@ export const useGamesStore = defineStore('games', () => {
     })
 
     /**
-     * All games in chronological order.
+     * All games in reverse chronological order.
      */
     const gameList = ref<Array<Game>>([])
 
