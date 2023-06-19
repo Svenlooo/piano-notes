@@ -1,18 +1,32 @@
 <template>
   <div class="highscoreListGame">
-    <Icon
-      class="highscoreListGame__icon"
-      name="game-icons:trash-can"
-      @click="handleDelete(index)"
-    />
-    <div class="highscoreListGame__meta">
-      {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
-    </div>
-    <div class="highscoreListGame__meta highscoreListGame__meta--score">
-      <span class="value">{{ game.score }}%</span>
-      <br />
-      <span class="label">Notes played correctly</span>
-    </div>
+    <Modal>
+      <template v-slot:trigger>
+        <div class="highscoreListGame__trigger">
+          <Icon
+            class="highscoreListGame__icon"
+            name="game-icons:trash-can"
+            @click="handleDelete(index)"
+          />
+          <div class="highscoreListGame__meta">
+            {{ parseDay(game.startDate) }}<br />{{
+              parseTime(game.startDate)
+            }}
+            Uhr
+          </div>
+          <div class="highscoreListGame__meta highscoreListGame__meta--score">
+            <span class="value">{{ game.score }}%</span>
+            <br />
+            <span class="label">Notes played correctly</span>
+          </div>
+        </div>
+      </template>
+      <template v-slot:content>
+        <div class="highscoreListGame__detail-view">
+          <h1>Game Detail Page</h1>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -37,7 +51,8 @@ const props = defineProps({
 
 /**
  * Returns the day the game has been started.
- * @param {string} dateString - e.g. 23.05.2023
+ * @param {string} dateString - e.g. 2023-06-19T07:12:08.364Z
+ * @return {string} - e.g. 19.06.2023
  */
 const parseDay = (dateString) => {
   const date = new Date(dateString);
@@ -48,13 +63,14 @@ const parseDay = (dateString) => {
 
 /**
  * Returns the time the game has been started.
- * @param {string} dateString - e.g. 19:45 Uhr
+ * @param {string} dateString - e.g. 2023-06-19T07:12:08.364Z
+ * @return {string} - e.g. 07:12
  */
 const parseTime = (dateString) => {
   const date = new Date(dateString);
   const optionsTime = { hour: "2-digit", minute: "2-digit", hour12: false };
   const time = new Intl.DateTimeFormat("de-DE", optionsTime).format(date);
-  return `${time} Uhr`;
+  return time;
 };
 
 /**
@@ -71,13 +87,16 @@ const handleDelete = (index) => {
 <style lang="scss">
 .highscoreListGame {
   position: relative;
-  padding: 16px;
-  background-color: var(--color-piano-black);
-  border-radius: 4px;
-  aspect-ratio: 1/1;
-  color: var(--color-light);
-  display: flex;
-  flex-flow: row wrap;
+
+  &__trigger {
+    padding: 16px;
+    background-color: var(--color-piano-black);
+    border-radius: 4px;
+    aspect-ratio: 1/1;
+    color: var(--color-light);
+    display: flex;
+    flex-flow: row wrap;
+  }
 
   &__icon {
     position: absolute;
@@ -86,17 +105,19 @@ const handleDelete = (index) => {
     width: 32px;
     height: 32px;
     cursor: pointer;
+    color: var(--color-light2);
   }
 
   &__meta {
     width: 100%;
+    color: var(--color-light2);
+    text-align: left;
 
     &--score {
       align-self: flex-end;
 
       & .value {
         font-size: 3em;
-        color: var(--color-light2);
       }
       & .label {
         font-size: 0.8em;
