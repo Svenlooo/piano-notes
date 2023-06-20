@@ -120,6 +120,23 @@ const startOpenAnimation = () => {
   }, 10);
 };
 
+/**
+ * Handles all keydown events fired, when the modal is open
+ * @param {Event} e
+ */
+const keydownHandler = (e) => {
+  // Close
+  if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
+    closeModal();
+
+    // Switch between games
+  } else if (e.key === "ArrowLeft" || e.keyCode === 37) {
+    console.log("Previous game");
+  } else if (e.key === "ArrowRight" || e.keyCode === 39) {
+    console.log("Next game");
+  }
+};
+
 watch(open, async (isOpen) => {
   if (isOpen) {
     await nextTick();
@@ -130,8 +147,11 @@ watch(open, async (isOpen) => {
       animatingDone.value = true;
       revealContent.value = true;
     }, props.openAnimationTime);
+
+    window.addEventListener("keydown", keydownHandler);
   } else {
     console.log("closing");
+    window.removeEventListener("keydown", keydownHandler);
   }
 });
 
