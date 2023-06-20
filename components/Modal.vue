@@ -9,10 +9,10 @@
       v-if="open"
       ref="modal"
     >
-      <button @click="toggleModal">close me!</button>
       <div
         :class="[$style.content, revealContent && $style['content--visible']]"
       >
+        <button @click="toggleModal">close me!</button>
         <slot name="content" />
       </div>
     </div>
@@ -35,7 +35,7 @@ const props = defineProps({
 
   openAnimationTime: {
     type: Number,
-    default: 2000,
+    default: 200,
     required: true,
   },
 });
@@ -52,9 +52,9 @@ const toggleModal = () => {
   /**
    * Trigger clicked ->
    *  open?
-   *      1. get position of trigger on screen
-   *      2. set top + left values of temporary overlay
-   *      3. enlargen it to match modal's size
+   *      1. get position of trigger on screen              √
+   *      2. set top + left values of temporary overlay     √
+   *      3. enlargen it to match modal's size              √
    *      4. hide temporary overlay while revealing modal
    *      5. animate content in
    */
@@ -68,36 +68,62 @@ const openModal = () => {
 
 const closeModal = () => {
   open.value = false;
+  animatingDone.value = false;
+  revealContent.value = false;
+};
+
+/**
+ * Calculates and applies the initial size of the trigger, before it is
+ * expanded to the full-sized modal.
+ * Enables the animation by
+ * 1) adding the calculated size and position values
+ * 2) removing them shortly after, to enable the transition to the modal's stylesheet.
+ */
+const startOpenAnimation = () => {
+  const frame = document.querySelector(".frame");
+  const framePosition = frame.getBoundingClientRect();
+  const triggerPosition = trigger.value.getBoundingClientRect();
+
+  let bottomDifference = 0;
+  if (framePosition.bottom < triggerPosition.bottom) {
+    bottomDifference += triggerPosition.bottom - framePosition.bottom;
+  }
+
+  let topDifference = 0;
+  if (framePosition.top > triggerPosition.top) {
+    topDifference += framePosition.top - triggerPosition.top;
+  }
+
+  modal.value.style.setProperty(
+    "--modal-open-animation-time",
+    `${props.openAnimationTime}ms`
+  );
+  modal.value.style.setProperty("transition", "none");
+  modal.value.style.setProperty(
+    "top",
+    `${triggerPosition.top + topDifference}px`
+  );
+  modal.value.style.setProperty("left", `${triggerPosition.left}px`);
+  modal.value.style.setProperty("width", `${triggerPosition.width}px`);
+  modal.value.style.setProperty(
+    "height",
+    `${triggerPosition.height - bottomDifference - topDifference}px`
+  );
+
+  // Remove for default styles to take effect.
+  setTimeout(() => {
+    modal.value.style.removeProperty("transition");
+    modal.value.style.removeProperty("top");
+    modal.value.style.removeProperty("left");
+    modal.value.style.removeProperty("width");
+    modal.value.style.removeProperty("height");
+  }, 10);
 };
 
 watch(open, async (isOpen) => {
   if (isOpen) {
     await nextTick();
-    const frame = document.querySelector(".frame");
-    const framePosition = frame.getBoundingClientRect();
-    const triggerPosition = trigger.value.getBoundingClientRect();
-
-    let bottomDifference = 0;
-    if (framePosition.bottom < triggerPosition.bottom) {
-      bottomDifference += triggerPosition.bottom - framePosition.bottom;
-    }
-
-    let topDifference = 0;
-    if (framePosition.top > triggerPosition.top) {
-      topDifference += framePosition.top - triggerPosition.top;
-    }
-
-    modal.value.style.transition = 'none';
-    modal.value.style.top = `${triggerPosition.top + topDifference}px`;
-    modal.value.style.left = `${triggerPosition.left}px`;
-    modal.value.style.width = `${triggerPosition.width}px`;
-    modal.value.style.height = `${
-      triggerPosition.height - bottomDifference - topDifference
-    }px`;
-
-    setTimeout(() => {
-      modal.value.removeAttribute("style");
-    }, 10)
+    startOpenAnimation();
 
     setTimeout(() => {
       animating.value = false;
@@ -108,6 +134,19 @@ watch(open, async (isOpen) => {
     console.log("closing");
   }
 });
+
+watch(
+  () => props.openAnimationTime,
+  (newVal) => {
+    if (modal.value) {
+      modal.value.style.setProperty(
+        "--modal-open-animation-time",
+        `${newVal}ms`
+      );
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" module>
@@ -120,17 +159,19 @@ watch(open, async (isOpen) => {
 .modal {
   position: fixed;
   z-index: 99;
+  border-radius: 32px;
   background-color: var(--color-piano-black);
-  transition: all 300ms;
+  color: var(--color-white);
+  transition: all var(--modal-open-animation-time);
   transform-origin: center;
-  inset: 5%;
-  width: calc(100vw - 10%);
-  height: calc(100vh - 10%);
+  inset: 8px;
+  width: calc(100vw - 16px);
+  height: calc(100vh - 16px);
 
   & .content {
     opacity: 0;
     padding: 40px;
-    transition: opacity 400ms;
+    transition: opacity var(--modal-open-animation-time);
 
     &--visible {
       opacity: 1;
