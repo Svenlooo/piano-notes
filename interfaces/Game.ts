@@ -1,4 +1,5 @@
 import NoteListElement from '~/interfaces/NoteListElement';
+import GameMetric from '~/interfaces/GameMetric';
 
 /**
  * Represents an entire game session.
@@ -11,5 +12,8 @@ export default interface Game {
     score: number,
 
     /** History of notes required from the player */
-    notes: Array<NoteListElement>
+    notes: Array<NoteListElement>,
+
+    /** Further Metrics for the game */
+    metrics: GameMetric | null
 }

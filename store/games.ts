@@ -10,6 +10,7 @@ export const useGamesStore = defineStore('games', () => {
         startDate: new Date(),
         score: 0,
         notes: [],
+        metrics: null,
     })
 
     /**
@@ -67,6 +68,15 @@ export const useGamesStore = defineStore('games', () => {
      */
     const setPlayed = (played: boolean) => {
         currentNote.value.played = played;
+    }
+
+    /**
+     * Gets a specific game from the store by index.
+     * @param {number} index 
+     * @returns {Game | boolean} - The Game or false
+     */
+    const getGame = (index: number) => {
+        return gameList.value[index] !== undefined && gameList.value[index];
     }
 
     /**
@@ -132,6 +142,7 @@ export const useGamesStore = defineStore('games', () => {
         syncGameList,
         addAttempt,
         setPlayed,
+        getGame,
         deleteGame,
         currentGameSuccessfulAttempts,
         currentGameFailedAttempts,

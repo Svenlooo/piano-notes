@@ -23,7 +23,7 @@
       </template>
       <template v-slot:content>
         <div class="highscoreListGame__detail-view">
-          <h1>Game Detail Page</h1>
+          Game yo!
         </div>
       </template>
     </Modal>
