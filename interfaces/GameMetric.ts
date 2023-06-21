@@ -1,8 +1,6 @@
-import { NoteLetter } from "~/interfaces/NoteLetter";
+import ScoredNote from "~/interfaces/GameMetrics/ScoredNote";
 
 export default interface GameMetric {
-  /** Notes with most correct plays, e.g. 80 would mean 80% */
-  notesCorrectPercentage: {
-    [K in NoteLetter]?: number;
-  };
+  /** Notes with most correct plays */
+  notesCorrectPercentage: Array<ScoredNote> | null;
 }

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import Game from '~/interfaces/Game';
 import NoteListElement from '~/interfaces/NoteListElement';
+import gameMetricNotesCorrectPercentage from '~/utils/gameMetricNotesCorrectPercentage';
 
 export const useGamesStore = defineStore('games', () => {
     /**
@@ -10,7 +11,9 @@ export const useGamesStore = defineStore('games', () => {
         startDate: new Date(),
         score: 0,
         notes: [],
-        metrics: null,
+        metrics: {
+            notesCorrectPercentage: null,
+        },
     })
 
     /**
@@ -39,6 +42,10 @@ export const useGamesStore = defineStore('games', () => {
      * Syncronizes the currentGame within the gameList.
      */
     const syncGameList = () => {
+        // Calculate metrics
+        console.log('currentGame', currentGame)
+        currentGame.metrics.notesCorrectPercentage = gameMetricNotesCorrectPercentage(currentGame.notes);
+
         // Add new game, if no last game is available OR if Date isn't the latest one
         if (!lastGame.value) {
             gameList.value.push(currentGame);

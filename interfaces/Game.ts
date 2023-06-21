@@ -15,5 +15,5 @@ export default interface Game {
     notes: Array<NoteListElement>,
 
     /** Further Metrics for the game */
-    metrics: GameMetric | null
+    metrics: GameMetric
 }
