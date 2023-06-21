@@ -1,50 +1,29 @@
 <template>
-  <div class="highscoreListGame">
-    <Modal>
-      <template v-slot:trigger>
-        <div class="highscoreListGame__trigger">
-          <Icon
-            class="highscoreListGame__icon"
-            name="game-icons:trash-can"
-            @click="handleDelete(index)"
-          />
-          <div class="highscoreListGame__meta">
-            {{ parseDay(game.startDate) }}<br />{{
-              parseTime(game.startDate)
-            }}
-            Uhr
-          </div>
-          <div class="highscoreListGame__meta highscoreListGame__meta--score">
-            <span class="value">{{ game.score }}%</span>
-            <br />
-            <span class="label">Notes played correctly</span>
-          </div>
-        </div>
-      </template>
-      <template v-slot:content>
-        <div class="highscoreListGame__detail-view">
-          Game yo!
-        </div>
-      </template>
-    </Modal>
+  <div class="gameTile">
+    <Icon
+      class="gameTile__icon"
+      name="game-icons:trash-can"
+      @click="handleDelete(index)"
+    />
+    <div class="gameTile__meta">
+      {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
+      Uhr
+    </div>
+    <div class="gameTile__meta gameTile__meta--score">
+      <span class="value">{{ game.score }}%</span>
+      <br />
+      <span class="label">Notes played correctly</span>
+    </div>
   </div>
 </template>
 
 <script setup>
-/**
- * Displays a single game.
- * Doubles as the modal's content.
- */
-import { useGamesStore } from "~/store/games";
-
-const store = useGamesStore();
-
 const props = defineProps({
-  game: {
-    required: true,
-  },
   index: {
     type: Number,
+    required: true,
+  },
+  game: {
     required: true,
   },
 });
@@ -85,18 +64,15 @@ const handleDelete = (index) => {
 </script>
 
 <style lang="scss">
-.highscoreListGame {
+.gameTile {
   position: relative;
-
-  &__trigger {
-    padding: 16px;
-    background-color: var(--color-piano-black);
-    border-radius: 4px;
-    aspect-ratio: 1/1;
-    color: var(--color-light);
-    display: flex;
-    flex-flow: row wrap;
-  }
+  padding: 16px;
+  background-color: var(--color-piano-black);
+  border-radius: 4px;
+  aspect-ratio: 1/1;
+  color: var(--color-light);
+  display: flex;
+  flex-flow: row wrap;
 
   &__icon {
     position: absolute;
