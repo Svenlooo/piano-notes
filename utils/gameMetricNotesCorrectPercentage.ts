@@ -1,32 +1,7 @@
 import NoteListElement from "~/interfaces/NoteListElement";
-import { NoteLetter } from "~/interfaces/NoteLetter";
-
 import ScoredNote from "~/interfaces/GameMetrics/ScoredNote";
 
-/**
- *
- *
- * Each note:
- * [{
- *  clef
- *  note
- *  octave
- *  scale
- *  failedAttempts
- *  successfulAttempts
- *  score
- * }]
- *
- *
- * 1Check if last note is in scoreList.
- *    yes:
- *      Re-calculate failed and successful attempts
- *      Re-calculate score
- *    no:
- *      Add to scoreList
- *      Calculate failed and successful attempts
- *      Calculate score
- */
+import compareNotes from "~/utils/compareNotes";
 
 /**
  * Calculates the percentage of correct plays for each note.
@@ -39,12 +14,8 @@ export default function gameMetricNotesCorrectPercentage(
   scoreList: Array<ScoredNote> = []
 ): Array<ScoredNote> {
   // Find index of last note
-  const index: number = scoreList.findIndex(
-    (scoreListEntry) =>
-      scoreListEntry.clef == lastlyPlayedNote.clef &&
-      scoreListEntry.note == lastlyPlayedNote.note &&
-      scoreListEntry.scale == lastlyPlayedNote.scale &&
-      scoreListEntry.octave == lastlyPlayedNote.octave
+  const index: number = scoreList.findIndex((scoreListEntry) =>
+    compareNotes(scoreListEntry, lastlyPlayedNote)
   );
 
   if (index > -1) {
@@ -61,8 +32,8 @@ export default function gameMetricNotesCorrectPercentage(
   } else {
     // Add new note
     const fails = lastlyPlayedNote.played
-      ? (lastlyPlayedNote.attempts ?? 0) - 1
-      : lastlyPlayedNote.attempts ?? 0;
+      ? lastlyPlayedNote.attempts - 1
+      : lastlyPlayedNote.attempts;
 
     const successes = lastlyPlayedNote.played ? 1 : 0;
 
@@ -72,10 +43,7 @@ export default function gameMetricNotesCorrectPercentage(
       score: calculateScore(fails, successes),
     };
 
-    const lastNote: any = { ...lastlyPlayedNote };
-    delete lastNote.attempts;
-    delete lastNote.played;
-
+    const { attempts, played, ...lastNote } = lastlyPlayedNote;
     scoreList.push({ ...lastNote, ...meta });
   }
 
