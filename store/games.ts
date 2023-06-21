@@ -14,7 +14,7 @@ export const useGamesStore = defineStore(
       score: 0,
       notes: [],
       metrics: {
-        notesCorrectPercentage: null,
+        notesCorrectPercentage: [],
       },
     });
 
@@ -46,10 +46,6 @@ export const useGamesStore = defineStore(
      * Syncronizes the currentGame within the gameList.
      */
     const syncGameList = () => {
-      // Calculate metrics
-      currentGame.metrics.notesCorrectPercentage =
-        gameMetricNotesCorrectPercentage(currentGame.notes);
-
       // Add new game, if no last game is available OR if Date isn't the latest one
       if (
         typeof lastGame.value === "boolean" ||
@@ -134,6 +130,17 @@ export const useGamesStore = defineStore(
     });
 
     /**
+     * Updates all the metrics of the current game.
+     */
+    const updateGameMetrics = () => {
+      currentGame.metrics.notesCorrectPercentage =
+        gameMetricNotesCorrectPercentage(
+          currentNote.value,
+          currentGame.metrics.notesCorrectPercentage
+        );
+    };
+
+    /**
      * Watch for any player attempts to calculate the current game's score.
      */
     watch(
@@ -163,6 +170,7 @@ export const useGamesStore = defineStore(
       lastGame,
       getGame,
       deleteGame,
+      updateGameMetrics,
       currentGameSuccessfulAttempts,
       currentGameFailedAttempts,
     };

@@ -21,6 +21,7 @@ const handleNote = (noteList) => {
 
   gamesStore.addAttempt();
   gamesStore.setPlayed(isCorrect);
+  gamesStore.updateGameMetrics();
   isCorrect ? sheet.value.assignNewNote() : sheet.value.shakeNote();
   gamesStore.syncGameList();
 };
