@@ -3,7 +3,7 @@
     <Icon
       class="gameTile__icon"
       name="game-icons:trash-can"
-      @click="handleDelete(index)"
+      @click="handleDelete(game.originalIndex)"
     />
     <div class="gameTile__meta">
       {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
@@ -21,10 +21,6 @@
 import { parseDay, parseTime } from '~/utils/dates';
 
 const props = defineProps({
-  index: {
-    type: Number,
-    required: true,
-  },
   game: {
     required: true,
   },

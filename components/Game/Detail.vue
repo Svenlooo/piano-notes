@@ -1,17 +1,19 @@
 <template>
-    <div class="gameDetailPage">
-        Game Ho!
-    </div>
+  <div class="gameDetailPage">
+    <h1>{{ parseDay(game.startDate) }} | {{ parseTime(game.startDate) }} Uhr</h1>
+  </div>
 </template>
 
 <script setup>
-    const props = defineProps({
-        index: {
-            type: Number,
-            required: true,
-        },
-        game: {
-            required: true,
-        }
-    });
+import { parseDay, parseTime } from "~/utils/dates";
+
+const props = defineProps({
+  game: {
+    required: true,
+  },
+});
+
+const adjacentIndexes = computed(() => {
+    
+})
 </script>

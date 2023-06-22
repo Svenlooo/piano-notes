@@ -5,10 +5,10 @@
         <li v-for="(game, index) in pastGames" :key="index">
           <Modal>
             <template v-slot:trigger>
-              <GameTile :index="game.originalIndex" :game="game" />
+              <GameTile :game="game" />
             </template>
             <template v-slot:content>
-              <GameDetail :index="game.originalIndex" :game="game" />
+              <GameDetail :game="game" />
             </template>
           </Modal>
         </li>
