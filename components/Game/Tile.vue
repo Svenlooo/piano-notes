@@ -18,6 +18,8 @@
 </template>
 
 <script setup>
+import { parseDay, parseTime } from '~/utils/dates';
+
 const props = defineProps({
   index: {
     type: Number,
@@ -27,30 +29,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-/**
- * Returns the day the game has been started.
- * @param {string} dateString - e.g. 2023-06-19T07:12:08.364Z
- * @return {string} - e.g. 19.06.2023
- */
-const parseDay = (dateString) => {
-  const date = new Date(dateString);
-  const optionsDate = { day: "2-digit", month: "2-digit", year: "numeric" };
-  const complete = new Intl.DateTimeFormat("de-DE", optionsDate).format(date);
-  return complete;
-};
-
-/**
- * Returns the time the game has been started.
- * @param {string} dateString - e.g. 2023-06-19T07:12:08.364Z
- * @return {string} - e.g. 07:12
- */
-const parseTime = (dateString) => {
-  const date = new Date(dateString);
-  const optionsTime = { hour: "2-digit", minute: "2-digit", hour12: false };
-  const time = new Intl.DateTimeFormat("de-DE", optionsTime).format(date);
-  return time;
-};
 
 /**
  * Handles the delete game click.

@@ -21,18 +21,6 @@
 
 <script setup>
 const props = defineProps({
-  /** Width at start of animation */
-  startWidth: {
-    type: Number,
-    required: false,
-  },
-
-  /** Height at start of animation  */
-  startHeight: {
-    type: Number,
-    required: false,
-  },
-
   openAnimationTime: {
     type: Number,
     default: 200,

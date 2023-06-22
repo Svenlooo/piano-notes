@@ -6,6 +6,10 @@
 
 <script setup>
     const props = defineProps({
+        index: {
+            type: Number,
+            required: true,
+        },
         game: {
             required: true,
         }
