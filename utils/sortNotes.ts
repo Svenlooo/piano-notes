@@ -9,6 +9,8 @@ import ScoredNote from "~/interfaces/GameMetrics/ScoredNote";
 export default function sortNotes(
   notes: Array<ScoredNote | Note>
 ): Array<ScoredNote | Note> {
+  const noteOrder = ["C", "D", "E", "F", "G", "A", "B"];
+
   return notes.sort((a, b) => {
     // Sort by octave first
     if (a.octave < b.octave) {
@@ -19,10 +21,10 @@ export default function sortNotes(
     }
 
     // If octave is the same, sort by note
-    if (a.note < b.note) {
+    if (noteOrder.indexOf(a.note) < noteOrder.indexOf(b.note)) {
       return -1;
     }
-    if (a.note > b.note) {
+    if (noteOrder.indexOf(a.note) > noteOrder.indexOf(b.note)) {
       return 1;
     }
 
