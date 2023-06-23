@@ -2,6 +2,7 @@ import NoteListElement from "~/interfaces/NoteListElement";
 import ScoredNote from "~/interfaces/GameMetrics/ScoredNote";
 
 import compareNotes from "~/utils/compareNotes";
+import sortNotes from "~/utils/sortNotes";
 
 /**
  * Calculates the percentage of correct plays for each note.
@@ -47,7 +48,7 @@ export default function gameMetricNotesCorrectPercentage(
     scoreList.push({ ...lastNote, ...meta });
   }
 
-  return scoreList;
+  return sortNotes(scoreList);
 }
 
 /**
