@@ -6,17 +6,10 @@
     <div id="chart">
       <ClientOnly>
         <apexchart
-          type="heatmap"
+          type="scatter"
           height="350"
-          :options="heatmapChartData.chartOptions"
-          :series="heatmapChartData.series"
-        ></apexchart>
-
-        <apexchart
-          type="bar"
-          height="350"
-          :options="barChartData.chartOptions"
-          :series="barChartData.series"
+          :options="scatterChartData.chartOptions"
+          :series="scatterChartData.series"
         ></apexchart>
       </ClientOnly>
     </div>
@@ -24,16 +17,16 @@
 </template>
 
 <script setup>
-import { useGamesStore } from "~/store/games";
 import { parseDay, parseTime } from "~/utils/dates";
-
-const gamesStore = useGamesStore();
+import noteOctaveSpelling from "~/utils/noteOctaveSpelling";
 
 const props = defineProps({
   game: {
     required: true,
   },
 });
+
+const chartClef = ref("violin");
 
 const adjacentIndexes = computed(() => {
   return [
@@ -79,109 +72,94 @@ const generateData = (count, yrange) => {
     });
     i++;
   }
+
   return series;
 };
 
-const heatmapChartData = reactive({
-  series: [
-    {
-      name: "Octave 1",
-      data: generateData(21, {
-        min: 0,
-        max: 100,
-      }),
+/**
+ * Data needed:
+ *
+ * - Total Notes which were asked (X axis)
+ *    - formatted for octaves
+ *    - sorted
+ */
+const collectScatterData = () => {
+  const gameMetric = props.game.metrics.notesCorrectPercentage;
+
+  // Octaves & Notes
+  const notes = [];
+  const noteOctaveScore = [];
+  gameMetric.forEach((note) => {
+    const fullNote = noteOctaveSpelling(note.note + note.scale, note.octave);
+    if (!notes.includes(fullNote)) {
+      notes.push(fullNote);
+      noteOctaveScore.push([note.octave, fullNote, note.score]);
+    }
+  });
+  console.log("Notes:", notes);
+  console.log("Notes + Meta:", noteOctaveScore);
+
+  return {
+    notes: notes,
+    notesMeta: noteOctaveScore,
+  };
+};
+
+const series = [];
+const scatterData = collectScatterData();
+console.log("scatterData", scatterData);
+const data = [];
+scatterData.notesMeta.forEach((note) => {
+  data.push({
+    x: note[1],
+    y: note[2],
+  });
+});
+
+series.push({
+  name: chartClef.value,
+  data: data,
+});
+
+console.log("chartData", series);
+
+/**
+ *  {
+      name: "Violin",
+      data: [
+        { x: "C1", y: 80},
+        { x: "D1", y: 20},
+        { x: "F1", y: 0},
+        { x: "G1", y: 0}
+      ]
     },
-    {
-      name: "Octave 2",
-      data: generateData(21, {
-        min: 0,
-        max: 100,
-      }),
-    },
-    {
-      name: "Octave 3",
-      data: generateData(21, {
-        min: 0,
-        max: 100,
-      }),
-    },
-    {
-      name: "Octave 4",
-      data: generateData(21, {
-        min: 0,
-        max: 100,
-      }),
-    },
-    {
-      name: "Octave 5",
-      data: generateData(21, {
-        min: 0,
-        max: 100,
-      }),
-    },
-  ],
+ */
+
+const scatterChartData = reactive({
+  series: series,
   chartOptions: {
     chart: {
       height: 350,
-      type: "heatmap",
+      zoom: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
     },
-    dataLabels: {
-      enabled: false,
+    xaxis: {
+      tickAmount: 10,
     },
-    colors: ["#008FFB"],
-    title: {
-      text: "HeatMap Chart (Single color)",
-    },
-  },
-});
-
-const barChartData = reactive({
-  series: [
-    {
-      data: [
-        0, 100, 80, 40, 90, 40, 50, 70, 0, 90, 40, 10, 100, 20, 56, 22, 0, 100,
-        0, 80, 10,
-      ],
-    },
-  ],
-  chartOptions: {
-    chart: {
-      type: "bar",
+    yaxis: {
+      tickAmount: 10,
     },
     plotOptions: {
       bar: {
-        borderRadius: 4,
+        borderRadius: 2,
         horizontal: false,
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
-    xaxis: {
-      categories: [
-        "Cb",
-        "C",
-        "C#",
-        "Db",
-        "D",
-        "D#",
-        "Eb",
-        "E",
-        "E#",
-        "Fb",
-        "F",
-        "F#",
-        "Gb",
-        "G",
-        "G#",
-        "Ab",
-        "A",
-        "A#",
-        "Bb",
-        "B",
-        "B#",
-      ],
-    },
+    colors: ["#fff"],
   },
 });
 </script>

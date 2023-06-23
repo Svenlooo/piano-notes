@@ -18,7 +18,9 @@
 </template>
 
 <script setup>
-import { parseDay, parseTime } from '~/utils/dates';
+import { parseDay, parseTime } from "~/utils/dates";
+import { useGamesStore } from "~/store/games";
+const gamesStore = useGamesStore();
 
 const props = defineProps({
   game: {
@@ -32,7 +34,7 @@ const props = defineProps({
  */
 const handleDelete = (index) => {
   if (confirm("Do you really want to delete this game?")) {
-    store.deleteGame(index);
+    gamesStore.deleteGame(index);
   }
 };
 </script>
