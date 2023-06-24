@@ -7,7 +7,7 @@
       <ClientOnly>
         <apexchart
           type="scatter"
-          height="350"
+          height="350px"
           :options="scatterChartData.chartOptions"
           :series="scatterChartData.series"
         ></apexchart>
@@ -83,51 +83,50 @@ const generateData = (count, yrange) => {
  *    - formatted for octaves
  *    - sorted
  */
-const collectScatterData = () => {
+const scatterData = computed(() => {
   const gameMetric = props.game.metrics.notesCorrectPercentage;
 
   // Octaves & Notes
   const notes = [];
   const noteOctaveScore = [];
   gameMetric.forEach((note) => {
-    const fullNote = noteOctaveSpelling(note.note + note.scale, note.octave);
-    if (!notes.includes(fullNote)) {
-      notes.push(fullNote);
-      noteOctaveScore.push([note.octave, fullNote, note.score]);
+    if (note.clef === chartClef.value) {
+      const fullNote = noteOctaveSpelling(note.note + note.scale, note.octave);
+      if (!notes.includes(fullNote)) {
+        notes.push(fullNote);
+        noteOctaveScore.push([note.octave, fullNote, note.score]);
+      }
     }
   });
-  console.log("Notes:", notes);
-  console.log("Notes + Meta:", noteOctaveScore);
 
   return {
     notes: notes,
     notesMeta: noteOctaveScore,
   };
-};
+});
 
-const series = [];
-const scatterData = collectScatterData();
-console.log("scatterData", scatterData);
-const data = [];
-scatterData.notesMeta.forEach((note) => {
-  data.push({
-    x: note[1],
-    y: note[2],
+const chartData = computed(() => {
+  const series = [];
+  const data = [];
+  scatterData.value.notesMeta.forEach((note) => {
+    data.push({
+      x: note[1],
+      y: note[2],
+    });
   });
-});
 
-series.push({
-  name: chartClef.value,
-  data: data,
-});
+  series.push({
+    name: chartClef.value,
+    data: data,
+  });
 
-console.log("chartData", series);
+  return series;
+});
 
 const scatterChartData = reactive({
-  series: series,
+  series: chartData,
   chartOptions: {
     chart: {
-      height: 350,
       zoom: {
         enabled: false,
       },
@@ -159,12 +158,6 @@ const scatterChartData = reactive({
     },
     yaxis: {
       tickAmount: 10,
-    },
-    plotOptions: {
-      bar: {
-        borderRadius: 2,
-        horizontal: false,
-      },
     },
     colors: ["#fff"],
   },
