@@ -134,27 +134,11 @@ const scatterChartData = reactive({
         show: false,
       },
     },
-    dataLabels: {
-      enabled: true,
-      formatter: function (val, opt) {
-        const xValue =
-          opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex].x;
-        return `${xValue}`;
-      },
-
-      style: {
-        fontSize: "11px",
-        fontWeight: "regular",
-      },
-      background: {
-        enabled: true,
-        foreColor: "#000",
-        borderRadius: 2,
-        padding: 6,
-      },
-    },
     xaxis: {
       tickAmount: 10,
+      labels: {
+        show: true,
+      },
     },
     yaxis: {
       tickAmount: 10,
