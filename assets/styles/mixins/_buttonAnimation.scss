@@ -1,0 +1,27 @@
+@mixin buttonAnimation($size: 'regular') {
+    transform-origin: center;
+
+    &:hover {
+        @if $size=='regular' {
+            transform: scale(1.02);
+        }
+
+        @else if $size=='small' {
+            transform: scale(1.1);
+        }
+
+        transition: all 400ms;
+    }
+
+    &:active {
+        @if $size=='regular' {
+            transform: scale(.95);
+        }
+
+        @else if $size=='small' {
+            transform: scale(.8);
+        }
+
+        transition: all 50ms;
+    }
+}

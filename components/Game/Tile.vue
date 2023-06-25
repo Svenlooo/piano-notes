@@ -62,6 +62,7 @@ const handleDelete = (index) => {
     height: 32px;
     cursor: pointer;
     color: var(--color-light2);
+    @include buttonAnimation;
   }
 
   &__meta {

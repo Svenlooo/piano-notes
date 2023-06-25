@@ -12,7 +12,6 @@
       <ClientOnly>
         <apexchart
           type="bar"
-          height="350px"
           :options="chartConfig.chartOptions"
           :series="chartConfig.series"
         ></apexchart>

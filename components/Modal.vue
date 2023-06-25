@@ -9,6 +9,11 @@
       v-if="open"
       ref="modal"
     >
+      <Icon
+        name="ic:round-close"
+        :class="$style.closeIcon"
+        @click="toggleModal"
+      />
       <div
         :class="[
           $style.modalBody,
@@ -188,6 +193,17 @@ watch(
     }
   }
 
+  & .closeIcon {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 200ms;
+
+    @include buttonAnimation('small');
+  }
+
   & .modalBody {
     display: flex;
     flex-direction: column;
@@ -207,7 +223,7 @@ watch(
 
   & .content {
     overflow-y: auto;
-    overflow-x: visible;
+    overflow-x: hidden;
     flex: 1;
   }
 
@@ -221,6 +237,8 @@ watch(
     border-radius: 8px;
     padding: 11px 16px 10px;
     cursor: pointer;
+
+    @include buttonAnimation;
   }
 }
 </style>
