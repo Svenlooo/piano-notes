@@ -8,8 +8,8 @@
         <apexchart
           type="scatter"
           height="350px"
-          :options="scatterChartData.chartOptions"
-          :series="scatterChartData.series"
+          :options="chartConfig.chartOptions"
+          :series="chartConfig.series"
         ></apexchart>
       </ClientOnly>
     </div>
@@ -28,6 +28,11 @@ const props = defineProps({
 
 const chartClef = ref("violin");
 
+/**
+ * Index of adjacent games.
+ * Used for prev and next arrows.
+ * @TODO: add the arrows
+ */
 const adjacentIndexes = computed(() => {
   return [
     props.game.originalIndex > 0 ? props.game.originalIndex : 0,
@@ -35,58 +40,14 @@ const adjacentIndexes = computed(() => {
   ];
 });
 
-const generateData = (count, yrange) => {
-  let i = 0;
-  let series = [];
-  const letters = [
-    "Cb",
-    "C",
-    "C#",
-    "Db",
-    "D",
-    "D#",
-    "Eb",
-    "E",
-    "E#",
-    "Fb",
-    "F",
-    "F#",
-    "Gb",
-    "G",
-    "G#",
-    "Ab",
-    "A",
-    "A#",
-    "Bb",
-    "B",
-    "B#",
-  ];
-  while (i < count) {
-    let x = (i + 1).toString();
-    let y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-
-    series.push({
-      x: letters[i],
-      y: y,
-    });
-    i++;
-  }
-
-  return series;
-};
-
 /**
- * Data needed:
- *
- * - Total Notes which were asked (X axis)
- *    - formatted for octaves
- *    - sorted
+ * Builds a collection of Notes, together with their octave and the player's score,
+ * ccording to the selected Clef.
+ * @return {Array<[number, string, number]>} - octave, note letter, score
  */
-const scatterData = computed(() => {
+const gameMetricNotes = computed(() => {
   const gameMetric = props.game.metrics.notesCorrectPercentage;
 
-  // Octaves & Notes
   const notes = [];
   const noteOctaveScore = [];
   gameMetric.forEach((note) => {
@@ -99,16 +60,17 @@ const scatterData = computed(() => {
     }
   });
 
-  return {
-    notes: notes,
-    notesMeta: noteOctaveScore,
-  };
+  return noteOctaveScore;
 });
 
+/**
+ * Formats the data to be usable for the chart.
+ * @return {object} - chart data
+ */
 const chartData = computed(() => {
   const series = [];
   const data = [];
-  scatterData.value.notesMeta.forEach((note) => {
+  gameMetricNotes.value.forEach((note) => {
     data.push({
       x: note[1],
       y: note[2],
@@ -123,7 +85,11 @@ const chartData = computed(() => {
   return series;
 });
 
-const scatterChartData = reactive({
+/**
+ * Configuration for the chart.
+ * See: https://apexcharts.com/vue-chart-demos/scatter-charts/basic/
+ */
+const chartConfig = reactive({
   series: chartData,
   chartOptions: {
     chart: {
@@ -138,10 +104,19 @@ const scatterChartData = reactive({
       tickAmount: 10,
       labels: {
         show: true,
+        style: {
+          colors: "#fff",
+        },
       },
     },
     yaxis: {
       tickAmount: 10,
+      max: 100,
+      labels: {
+        style: {
+          colors: "#fff",
+        },
+      },
     },
     colors: ["#fff"],
   },
