@@ -47,15 +47,6 @@ const animatingDone = ref(false);
 const revealContent = ref(false);
 
 const toggleModal = () => {
-  /**
-   * Trigger clicked ->
-   *  open?
-   *      1. get position of trigger on screen              √
-   *      2. set top + left values of temporary overlay     √
-   *      3. enlargen it to match modal's size              √
-   *      4. hide temporary overlay while revealing modal
-   *      5. animate content in
-   */
   !open.value ? openModal() : closeModal();
 };
 
@@ -127,7 +118,7 @@ const keydownHandler = (e) => {
   if (e.key === "Escape" || e.key === "Esc" || e.keyCode === 27) {
     closeModal();
 
-    // Switch between games
+    // TODO: Switch between games
   } else if (e.key === "ArrowLeft" || e.keyCode === 37) {
     console.log("Previous game");
   } else if (e.key === "ArrowRight" || e.keyCode === 39) {
@@ -187,6 +178,8 @@ watch(
   height: calc(100vh - 16px);
 
   @media #{map-get($mediaSituations, 'fills-screen')} {
+    border-radius: 16px;
+
     @media #{map-get($mediaSituations, 'portrait')} {
       height: calc(100vh - 86px);
     }

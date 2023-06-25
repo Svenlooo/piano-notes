@@ -1,8 +1,13 @@
 <template>
   <div class="gameDetailPage">
-    <h1>
+    <h2>
       {{ parseDay(game.startDate) }} | {{ parseTime(game.startDate) }} Uhr
-    </h1>
+    </h2>
+    <ul>
+      <li>
+        <strong>{{ game.notes.length }}</strong> Played notes
+      </li>
+    </ul>
     <div id="chart">
       <ClientOnly>
         <apexchart
@@ -116,6 +121,9 @@ const chartConfig = reactive({
     plotOptions: {
       bar: {
         horizontal: true,
+        dataLabels: {
+          position: "bottom",
+        },
       },
     },
     xaxis: {
@@ -123,7 +131,7 @@ const chartConfig = reactive({
       labels: {
         show: true,
         style: {
-          colors: "#fff",
+          colors: "#FBF7F5",
         },
       },
     },
@@ -132,11 +140,23 @@ const chartConfig = reactive({
       max: 100,
       labels: {
         style: {
-          colors: "#fff",
+          colors: "#FBF7F5",
         },
       },
     },
-    colors: ["#fff"],
+    colors: ["#F6E8E1"],
+    dataLabels: {
+      formatter: function (val) {
+        return val + " %";
+      },
+      offsetX: 16,
+      style: {
+        colors: ["#2b2b2b"],
+      },
+    },
+    tooltip: {
+      enabled: false,
+    },
   },
 });
 </script>
