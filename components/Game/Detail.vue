@@ -5,13 +5,14 @@
     </h2>
     <ul>
       <li>
-        <strong>{{ game.notes.length }}</strong> Played notes
+        <strong>{{ game.notes.length }}</strong> Played notes in 
       </li>
     </ul>
     <div id="chart">
       <ClientOnly>
         <apexchart
           type="bar"
+          height="400px"
           :options="chartConfig.chartOptions"
           :series="chartConfig.series"
         ></apexchart>
@@ -91,7 +92,7 @@ const chartData = computed(() => {
 
 /**
  * Configuration for the chart.
- * See: https://apexcharts.com/vue-chart-demos/scatter-charts/basic/
+ * See: https://apexcharts.com/docs/series/
  */
 const chartConfig = reactive({
   series: chartData,

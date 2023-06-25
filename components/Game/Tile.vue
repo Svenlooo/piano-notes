@@ -1,9 +1,13 @@
 <template>
   <div class="gameTile">
     <Icon
-      class="gameTile__icon"
+      class="gameTile__icon gameTile__icon--delete"
       name="game-icons:trash-can"
       @click.stop="handleDelete(game.originalIndex)"
+    />
+    <Icon
+      class="gameTile__icon gameTile__icon--expand"
+      name="ic:baseline-open-in-full"
     />
     <div class="gameTile__meta">
       {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
@@ -56,13 +60,20 @@ const handleDelete = (index) => {
 
   &__icon {
     position: absolute;
-    top: 16px;
-    right: 16px;
     width: 32px;
     height: 32px;
     cursor: pointer;
     color: var(--color-light2);
     @include buttonAnimation;
+
+    &--delete {
+      top: 16px;
+      right: 16px;
+    }
+    &--expand {
+      bottom: 16px;
+      right: 16px;
+    }
   }
 
   &__meta {
