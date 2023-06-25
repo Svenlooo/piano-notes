@@ -187,7 +187,12 @@ watch(
   height: calc(100vh - 16px);
 
   @media #{map-get($mediaSituations, 'fills-screen')} {
-    height: calc(100vh - 86px);
+    @media #{map-get($mediaSituations, 'portrait')} {
+      height: calc(100vh - 86px);
+    }
+    @media #{map-get($mediaSituations, 'landscape')} {
+      width: calc(100vw - 86px);
+    }
   }
 
   & .modalBody {
@@ -222,6 +227,7 @@ watch(
     background-color: var(--color-light);
     border-radius: 8px;
     padding: 11px 16px 10px;
+    cursor: pointer;
   }
 }
 </style>
