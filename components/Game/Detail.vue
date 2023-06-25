@@ -6,7 +6,7 @@
     <div id="chart">
       <ClientOnly>
         <apexchart
-          type="scatter"
+          type="bar"
           height="350px"
           :options="chartConfig.chartOptions"
           :series="chartConfig.series"
@@ -98,6 +98,24 @@ const chartConfig = reactive({
       },
       toolbar: {
         show: false,
+      },
+      animations: {
+        enabled: true,
+        easing: "easeinout",
+        speed: 300,
+        animateGradually: {
+          enabled: true,
+          delay: 150,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 300,
+        },
+      },
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
       },
     },
     xaxis: {

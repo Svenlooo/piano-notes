@@ -10,10 +10,20 @@
       ref="modal"
     >
       <div
-        :class="[$style.content, revealContent && $style['content--visible']]"
+        :class="[
+          $style.modalBody,
+          revealContent && $style['modalBody--visible'],
+        ]"
       >
-        <button @click="toggleModal">close me!</button>
-        <slot name="content" />
+        <div :class="$style.content">
+          <slot name="content" />
+        </div>
+
+        <div :class="$style.footer">
+          <button @click="toggleModal" :class="$style.closeButton">
+            Back to Games
+          </button>
+        </div>
       </div>
     </div>
   </Teleport>
@@ -176,7 +186,11 @@ watch(
   width: calc(100vw - 16px);
   height: calc(100vh - 16px);
 
-  & .content {
+  @media #{map-get($mediaSituations, 'fills-screen')} {
+    height: calc(100vh - 86px);
+  }
+
+  & .modalBody {
     opacity: 0;
     padding: 40px;
     transition: opacity var(--modal-open-animation-time);
@@ -184,6 +198,20 @@ watch(
     &--visible {
       opacity: 1;
     }
+  }
+
+  & .content {
+    overflow-y: auto;
+  }
+
+  & .footer {
+  }
+
+  & .closeButton {
+    border: none;
+    background-color: var(--color-light);
+    border-radius: 8px;
+    padding: 11px 16px 10px;
   }
 }
 </style>
