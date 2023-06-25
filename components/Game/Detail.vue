@@ -1,23 +1,23 @@
 <template>
   <div class="gameDetailPage">
-    <h2>
-      {{ parseDay(game.startDate) }} | {{ parseTime(game.startDate) }} Uhr
-    </h2>
-    <ul>
-      <li>
-        <strong>{{ game.notes.length }}</strong> Played notes in 
-      </li>
-    </ul>
-    <div id="chart">
-      <ClientOnly>
+    <ClientOnly>
+      <h2>
+        {{ parseDay(game.startDate) }} | {{ parseTime(game.startDate) }} Uhr
+      </h2>
+      <ul>
+        <li>
+          <strong>{{ game.notes.length }}</strong> Played notes in
+        </li>
+      </ul>
+      <div id="chart">
         <apexchart
           type="bar"
-          height="400px"
+          :height="`${chartHeight}px`"
           :options="chartConfig.chartOptions"
           :series="chartConfig.series"
         ></apexchart>
-      </ClientOnly>
-    </div>
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
@@ -32,6 +32,19 @@ const props = defineProps({
 });
 
 const chartClef = ref("violin");
+
+/**
+ * Calculates the chart height, depending on the amount of rows.
+ * @return {number} - height px value
+ */
+const chartHeight = computed(() => {
+  const chartMinHeight = 400;
+  const rowHeight = 35;
+  const rowCount = gameMetricNotes.value.length;
+  const chartTotalHeight = rowCount * rowHeight;
+
+  return chartTotalHeight > chartMinHeight ? chartTotalHeight : chartMinHeight;
+});
 
 /**
  * Index of adjacent games.
