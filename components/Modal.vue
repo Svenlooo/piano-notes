@@ -191,9 +191,16 @@ watch(
   }
 
   & .modalBody {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     opacity: 0;
-    padding: 40px;
+    padding: 16px;
     transition: opacity var(--modal-open-animation-time);
+
+    @media (min-width: map-get($breakpoints, "md")) {
+      padding: 40px;
+    }
 
     &--visible {
       opacity: 1;
@@ -202,9 +209,12 @@ watch(
 
   & .content {
     overflow-y: auto;
+    overflow-x: visible;
+    flex: 1;
   }
 
   & .footer {
+    text-align: center;
   }
 
   & .closeButton {

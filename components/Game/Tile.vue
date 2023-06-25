@@ -3,7 +3,7 @@
     <Icon
       class="gameTile__icon"
       name="game-icons:trash-can"
-      @click="handleDelete(game.originalIndex)"
+      @click.stop="handleDelete(game.originalIndex)"
     />
     <div class="gameTile__meta">
       {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
@@ -49,6 +49,10 @@ const handleDelete = (index) => {
   color: var(--color-light);
   display: flex;
   flex-flow: row wrap;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &__icon {
     position: absolute;
