@@ -9,12 +9,20 @@
           <strong>{{ game.notes.length }}</strong> Played notes in
         </li>
       </ul>
+      <div :class="$style.clefWrapper">
+        <Clef
+          type="violin"
+          :class="$style.clef"
+          @click="setChartClef('violin')"
+        />
+        <Clef type="bass" :class="$style.clef" @click="setChartClef('bass')" />
+      </div>
       <div id="chart">
         <apexchart
           type="bar"
           :height="`${chartHeight}px`"
-          :options="chartConfig.chartOptions"
-          :series="chartConfig.series"
+          :options="chartOptions"
+          :series="chartData"
         ></apexchart>
       </div>
     </ClientOnly>
@@ -32,6 +40,10 @@ const props = defineProps({
 });
 
 const chartClef = ref("violin");
+
+const setChartClef = (value) => {
+  chartClef.value = value;
+};
 
 /**
  * Calculates the chart height, depending on the amount of rows.
@@ -107,69 +119,82 @@ const chartData = computed(() => {
  * Configuration for the chart.
  * See: https://apexcharts.com/docs/series/
  */
-const chartConfig = reactive({
-  series: chartData,
-  chartOptions: {
-    chart: {
-      zoom: {
-        enabled: false,
-      },
-      toolbar: {
-        show: false,
-      },
-      animations: {
-        enabled: true,
-        easing: "easeinout",
-        speed: 300,
-        animateGradually: {
-          enabled: true,
-          delay: 150,
-        },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 300,
-        },
-      },
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: "bottom",
-        },
-      },
-    },
-    xaxis: {
-      tickAmount: 10,
-      labels: {
-        show: true,
-        style: {
-          colors: "#FBF7F5",
-        },
-      },
-    },
-    yaxis: {
-      tickAmount: 10,
-      max: 100,
-      labels: {
-        style: {
-          colors: "#FBF7F5",
-        },
-      },
-    },
-    colors: ["#F6E8E1"],
-    dataLabels: {
-      formatter: function (val) {
-        return val + " %";
-      },
-      offsetX: 16,
-      style: {
-        colors: ["#2b2b2b"],
-      },
-    },
-    tooltip: {
+const chartOptions = reactive({
+  chart: {
+    zoom: {
       enabled: false,
     },
+    toolbar: {
+      show: false,
+    },
+    animations: {
+      enabled: true,
+      easing: "easeinout",
+      speed: 300,
+      animateGradually: {
+        enabled: true,
+        delay: 150,
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 300,
+      },
+    },
+  },
+  plotOptions: {
+    bar: {
+      horizontal: true,
+      dataLabels: {
+        position: "bottom",
+      },
+    },
+  },
+  xaxis: {
+    tickAmount: 10,
+    labels: {
+      show: true,
+      style: {
+        colors: "#FBF7F5",
+      },
+    },
+  },
+  yaxis: {
+    tickAmount: 10,
+    max: 100,
+    labels: {
+      style: {
+        colors: "#FBF7F5",
+      },
+    },
+  },
+  colors: ["#F6E8E1"],
+  dataLabels: {
+    formatter: function (val) {
+      return val + " %";
+    },
+    offsetX: 16,
+    style: {
+      colors: ["#2b2b2b"],
+    },
+  },
+  tooltip: {
+    enabled: false,
   },
 });
 </script>
+
+<style lang="scss" module>
+.clefWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .clef {
+    height: 24px;
+    margin-right: 24px;
+
+    & svg {
+      height: 100%;
+    }
+  }
+}
+</style>
