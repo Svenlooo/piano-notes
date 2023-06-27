@@ -25,9 +25,9 @@
         </div>
 
         <div :class="$style.footer">
-          <button @click="toggleModal" :class="$style.closeButton">
+          <UIComponentsButton @click="toggleModal">
             Back to Games
-          </button>
+          </UIComponentsButton>
         </div>
       </div>
     </div>
@@ -229,16 +229,6 @@ watch(
 
   & .footer {
     text-align: center;
-  }
-
-  & .closeButton {
-    border: none;
-    background-color: var(--color-light);
-    border-radius: 8px;
-    padding: 11px 16px 10px;
-    cursor: pointer;
-
-    @include buttonAnimation;
   }
 }
 </style>

@@ -10,12 +10,16 @@
         </li>
       </ul>
       <div :class="$style.clefWrapper">
-        <Clef
-          type="violin"
-          :class="$style.clef"
-          @click="setChartClef('violin')"
-        />
-        <Clef type="bass" :class="$style.clef" @click="setChartClef('bass')" />
+        <button @click="setChartClef('violin')">
+          <Clef type="violin" :class="$style.clef" />
+        </button>
+        <button @click="setChartClef('violin')">
+          <Clef
+            type="bass"
+            :class="$style.clef"
+            @click="setChartClef('bass')"
+          />
+        </button>
       </div>
       <div :class="$style.chart">
         <apexchart
@@ -64,7 +68,7 @@ const calculateChartHeight = (chartData) => {
   const rowCount = chartData.length;
   const chartTotalHeight = rowCount * props.chartRowHeight;
 
-  // Fix incorrect chart width issue 
+  // Fix incorrect chart width issue
   const calculation = () => {
     chartHeight.value = Math.max(chartTotalHeight, props.chartMinHeight);
   };
