@@ -6,7 +6,7 @@
       </h2>
       <ul>
         <li>
-          <strong>{{ game.notes.length }}</strong> Played notes in
+          <strong>{{ game.notes.length }}</strong> Played notes
         </li>
       </ul>
       <div :class="$style.clefWrapper">
