@@ -64,3 +64,4 @@ Here is a list of external resources used for this project, with a big thanks to
 
 - Icons: https://nuxt.com/modules/icon
 - Pinia localstorage: https://github.com/prazdevs/pinia-plugin-persistedstate
+- Charts: https://apexcharts.com/ & https://www.npmjs.com/package/vue3-apexcharts
