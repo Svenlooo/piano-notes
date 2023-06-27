@@ -142,6 +142,13 @@ const chartData = computed(() => {
   return series;
 });
 
+// CSS Variables for chart
+// TODO: Refactor to make properly reactive on theme change
+const style = getComputedStyle(document.body);
+const colorAxis = ref(style.getPropertyValue("--color-light").trim());
+const colorBars = ref(style.getPropertyValue("--color-light2").trim());
+const colorDataLabels = ref(style.getPropertyValue("--color-piano-black-key").trim());
+
 /**
  * Configuration for the chart.
  * See: https://apexcharts.com/docs/series/
@@ -181,7 +188,7 @@ const chartOptions = reactive({
     labels: {
       show: true,
       style: {
-        colors: "#FBF7F5",
+        colors: colorAxis.value,
       },
     },
   },
@@ -190,18 +197,18 @@ const chartOptions = reactive({
     max: 100,
     labels: {
       style: {
-        colors: "#FBF7F5",
+        colors: colorAxis.value,
       },
     },
   },
-  colors: ["#F6E8E1"],
+  colors: [colorBars.value],
   dataLabels: {
     formatter: function (val) {
       return val + " %";
     },
     offsetX: 16,
     style: {
-      colors: ["#2b2b2b"],
+      colors: [colorDataLabels.value],
     },
   },
   tooltip: {
