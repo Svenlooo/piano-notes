@@ -30,4 +30,24 @@ function parseTime(dateString: string): string {
   return time;
 }
 
-export { parseDay, parseTime };
+/**
+ * Converts an amount of seconds to a readable string for the user.
+ * @param {number} seconds - amount of seconds
+ * @returns {string} Hours:Minutes:Seconds + suffix
+ */
+function secondsToHMS(seconds: number): string {
+  let hours = Math.floor(seconds / 3600);
+  let minutes = Math.floor((seconds % 3600) / 60);
+  let remainingSeconds = seconds % 60;
+
+  if (hours >= 1) {
+      return `${hours}:${('0' + minutes).slice(-2)} hours`;
+  } else if (minutes >= 1) {
+      return `${minutes}:${('0' + remainingSeconds).slice(-2)} minutes`;
+  } else {
+      return `${remainingSeconds} seconds`;
+  }
+}
+
+
+export { parseDay, parseTime, secondsToHMS };

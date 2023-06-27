@@ -1,12 +1,12 @@
 <template>
   <div class="gameDetailPage">
     <ClientOnly>
-      <h2>
-        {{ parseDay(game.startDate) }} | {{ parseTime(game.startDate) }} Uhr
-      </h2>
+      <h2>{{ parseDay(game.startDate) }}</h2>
       <ul>
         <li>
-          <strong>{{ game.notes.length }}</strong> Played notes
+          You played <strong>{{ game.notes.length }} notes</strong> in
+          <strong>{{ secondsToHMS(game.metrics.durationInSeconds) }}</strong
+          >!
         </li>
       </ul>
       <div :class="$style.clefWrapper">
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { parseDay, parseTime } from "~/utils/dates";
+import { parseDay, secondsToHMS } from "~/utils/dateTime";
 import noteOctaveSpelling from "~/utils/noteOctaveSpelling";
 
 const props = defineProps({

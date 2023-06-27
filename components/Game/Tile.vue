@@ -10,8 +10,7 @@
       name="ic:baseline-open-in-full"
     />
     <div class="gameTile__meta">
-      {{ parseDay(game.startDate) }}<br />{{ parseTime(game.startDate) }}
-      Uhr
+      {{ parseDay(game.startDate) }}<br />{{ secondsToHMS(game.metrics.durationInSeconds) }}
     </div>
     <div class="gameTile__meta gameTile__meta--score">
       <span class="value">{{ game.score }}%</span>
@@ -22,7 +21,7 @@
 </template>
 
 <script setup>
-import { parseDay, parseTime } from "~/utils/dates";
+import { parseDay, secondsToHMS } from "~/utils/dateTime";
 import { useGamesStore } from "~/store/games";
 const gamesStore = useGamesStore();
 

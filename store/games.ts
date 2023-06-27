@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import Game from "~/interfaces/Game";
 import NoteListElement from "~/interfaces/NoteListElement";
+import gameMetricDuration from "~/utils/gameMetricDuration";
 import gameMetricNotesCorrectPercentage from "~/utils/gameMetricNotesCorrectPercentage";
 
 export const useGamesStore = defineStore(
@@ -14,6 +15,7 @@ export const useGamesStore = defineStore(
       score: 0,
       notes: [],
       metrics: {
+        durationInSeconds: 0,
         notesCorrectPercentage: [],
       },
     });
@@ -119,7 +121,7 @@ export const useGamesStore = defineStore(
     });
 
     /**
-     * Returns the amount of time the player has failed to play a note within the currently active game.
+     * Returns the amount of times the player has failed to play a note within the currently active game.
      * @returns {number} - total amount of failed tries
      */
     const currentGameFailedAttempts = computed<number>(() => {
@@ -133,6 +135,10 @@ export const useGamesStore = defineStore(
      * Updates all the metrics of the current game.
      */
     const updateGameMetrics = () => {
+      currentGame.metrics.durationInSeconds = gameMetricDuration(
+        currentGame.startDate,
+        new Date()
+      );
       currentGame.metrics.notesCorrectPercentage =
         gameMetricNotesCorrectPercentage(
           currentNote.value,
@@ -141,7 +147,8 @@ export const useGamesStore = defineStore(
     };
 
     /**
-     * Watch for any player attempts to calculate the current game's score.
+     * Watch for any player attempts to play a note.
+     * Calculate the current game's score.
      */
     watch(
       () => currentGame.notes.map((note) => [note.attempts, note.played]),
@@ -167,10 +174,10 @@ export const useGamesStore = defineStore(
       syncGameList,
       addAttempt,
       setPlayed,
+      updateGameMetrics,
       lastGame,
       getGame,
       deleteGame,
-      updateGameMetrics,
       currentGameSuccessfulAttempts,
       currentGameFailedAttempts,
     };
