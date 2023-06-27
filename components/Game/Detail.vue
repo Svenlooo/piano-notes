@@ -63,18 +63,16 @@ const setChartClef = (value) => {
 const calculateChartHeight = (chartData) => {
   const rowCount = chartData.length;
   const chartTotalHeight = rowCount * props.chartRowHeight;
+
+  // Fix incorrect chart width issue 
   const calculation = () => {
-    chartHeight.value =
-      chartTotalHeight > props.chartMinHeight
-        ? chartTotalHeight
-        : props.chartMinHeight;
+    chartHeight.value = Math.max(chartTotalHeight, props.chartMinHeight);
   };
 
-  // Fix incorrect chart width issue
+  // Use nextTick only after the initial calculation
+  // ensuring that the ApexChart instance is initialized.
   if (process.client && chartHeightCalculated.value) {
-    nextTick(() => {
-      calculation();
-    });
+    nextTick(calculation);
   } else {
     calculation();
     chartHeightCalculated.value = true;
