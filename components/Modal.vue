@@ -201,7 +201,7 @@ watch(
     cursor: pointer;
     transition: all 200ms;
 
-    @include buttonAnimation('small');
+    @include buttonAnimation("small");
   }
 
   & .modalBody {
@@ -229,6 +229,8 @@ watch(
 
   & .footer {
     text-align: center;
+    box-shadow: 0px -16px 16px 0px var(--color-piano-black);
+    z-index: 1;
   }
 }
 </style>
