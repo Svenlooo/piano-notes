@@ -60,8 +60,8 @@ const handleDelete = (index) => {
 
   &__icon {
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     color: var(--color-light2);
     @include buttonAnimation;
