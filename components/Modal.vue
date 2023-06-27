@@ -144,7 +144,6 @@ watch(open, async (isOpen) => {
 
     window.addEventListener("keydown", keydownHandler);
   } else {
-    console.log("closing");
     window.removeEventListener("keydown", keydownHandler);
   }
 });
