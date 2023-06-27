@@ -17,10 +17,9 @@
         />
         <Clef type="bass" :class="$style.clef" @click="setChartClef('bass')" />
       </div>
-      <div id="chart">
+      <div :class="$style.chart">
         <apexchart
           type="bar"
-          width="100%"
           :height="`${chartHeight}px`"
           :options="chartOptions"
           :series="chartData"
@@ -38,10 +37,19 @@ const props = defineProps({
   game: {
     required: true,
   },
+  chartMinHeight: {
+    type: Number,
+    default: 400,
+  },
+  chartRowHeight: {
+    type: Number,
+    default: 35,
+  },
 });
 
 const chartClef = ref("violin");
-const chartHeight = ref(400);
+const chartHeight = ref(props.chartMinHeight);
+const chartHeightCalculated = ref(false);
 
 const setChartClef = (value) => {
   chartClef.value = value;
@@ -49,19 +57,27 @@ const setChartClef = (value) => {
 
 /**
  * Calculates the chart height, depending on the amount of rows.
+ * @param {object} - The chart's data (must be gameMetricNotes)
  * @return {number} - height px value
  */
 const calculateChartHeight = (chartData) => {
-  const chartMinHeight = 400;
-  const rowHeight = 35;
   const rowCount = chartData.length;
-  const chartTotalHeight = rowCount * rowHeight;
+  const chartTotalHeight = rowCount * props.chartRowHeight;
+  const calculation = () => {
+    chartHeight.value =
+      chartTotalHeight > props.chartMinHeight
+        ? chartTotalHeight
+        : props.chartMinHeight;
+  };
 
-  if (process.client) {
+  // Fix incorrect chart width issue
+  if (process.client && chartHeightCalculated.value) {
     nextTick(() => {
-      chartHeight.value =
-        chartTotalHeight > chartMinHeight ? chartTotalHeight : chartMinHeight;
+      calculation();
     });
+  } else {
+    calculation();
+    chartHeightCalculated.value = true;
   }
 };
 
@@ -189,9 +205,13 @@ const chartOptions = reactive({
   },
 });
 
-watch(gameMetricNotes, (newVal) => {
-  calculateChartHeight(newVal);
-});
+watch(
+  gameMetricNotes,
+  (newVal) => {
+    calculateChartHeight(newVal);
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" module>
@@ -206,6 +226,14 @@ watch(gameMetricNotes, (newVal) => {
     & svg {
       height: 100%;
     }
+  }
+}
+
+.chart {
+  width: 100%;
+
+  & .apexcharts-canvas {
+    width: 100% !important;
   }
 }
 </style>
