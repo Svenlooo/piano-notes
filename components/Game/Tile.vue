@@ -16,7 +16,7 @@
     <div class="gameTile__meta gameTile__meta--score">
       <span class="value">{{ game.score }}%</span>
       <br />
-      <span class="label">Notes played correctly</span>
+      <span class="label">Correct plays</span>
     </div>
   </div>
 </template>
