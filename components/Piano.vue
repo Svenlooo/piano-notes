@@ -8,7 +8,7 @@
 <script setup>
 import { useGamesStore } from "~/store/games";
 
-const store = useGamesStore();
+const gamesStore = useGamesStore();
 const sheet = ref();
 
 /**
@@ -19,10 +19,11 @@ const handleNote = (noteList) => {
   const result = noteList.map((note) => sheet.value.checkNote(note));
   const isCorrect = result.some((value) => value === true);
 
-  store.addAttempt();
-  store.setPlayed(isCorrect);
+  gamesStore.addAttempt();
+  gamesStore.setPlayed(isCorrect);
+  gamesStore.updateGameMetrics();
   isCorrect ? sheet.value.assignNewNote() : sheet.value.shakeNote();
-  store.syncGameList();
+  gamesStore.syncGameList();
 };
 </script>
 

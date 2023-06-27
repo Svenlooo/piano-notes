@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { Theme } from '~/interfaces/Theme';
 
 export const useSettingsStore = defineStore('settings', () => {
     
@@ -9,7 +10,7 @@ export const useSettingsStore = defineStore('settings', () => {
     const successOnly = ref<boolean>(false);
 
     /** Adjust theme according to user's system settings */
-    const theme = ref<string>(process.client 
+    const theme = ref<Theme>(process.client 
         && window.matchMedia('(prefers-color-scheme: dark)').matches? 'dark' : 'light');
 
     /**

@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <main>
-      <h1>Past Games</h1>
-      <HighscoreList />
-    </main>
-    <Navigation />
+  <div class="highscore">
+    <h1>Past Games</h1>
+    <HighscoreList />
   </div>
 </template>
 
@@ -22,8 +19,7 @@ useServerSeoMeta({
 </script>
 
 <style lang="scss" scoped>
-main {
-  overflow-y: auto;
+.highscore {
   padding: var(--content-padding);
 }
 </style>
