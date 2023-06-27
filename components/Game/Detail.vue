@@ -20,6 +20,7 @@
       <div id="chart">
         <apexchart
           type="bar"
+          width="100%"
           :height="`${chartHeight}px`"
           :options="chartOptions"
           :series="chartData"
@@ -40,6 +41,7 @@ const props = defineProps({
 });
 
 const chartClef = ref("violin");
+const chartHeight = ref(400);
 
 const setChartClef = (value) => {
   chartClef.value = value;
@@ -49,14 +51,19 @@ const setChartClef = (value) => {
  * Calculates the chart height, depending on the amount of rows.
  * @return {number} - height px value
  */
-const chartHeight = computed(() => {
+const calculateChartHeight = (chartData) => {
   const chartMinHeight = 400;
   const rowHeight = 35;
-  const rowCount = gameMetricNotes.value.length;
+  const rowCount = chartData.length;
   const chartTotalHeight = rowCount * rowHeight;
 
-  return chartTotalHeight > chartMinHeight ? chartTotalHeight : chartMinHeight;
-});
+  if (process.client) {
+    nextTick(() => {
+      chartHeight.value =
+        chartTotalHeight > chartMinHeight ? chartTotalHeight : chartMinHeight;
+    });
+  }
+};
 
 /**
  * Index of adjacent games.
@@ -180,6 +187,10 @@ const chartOptions = reactive({
   tooltip: {
     enabled: false,
   },
+});
+
+watch(gameMetricNotes, (newVal) => {
+  calculateChartHeight(newVal);
 });
 </script>
 
