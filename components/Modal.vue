@@ -201,6 +201,7 @@ watch(
     font-size: 24px;
     cursor: pointer;
     transition: all 200ms;
+    z-index: 1;
 
     @include buttonAnimation("small");
   }
