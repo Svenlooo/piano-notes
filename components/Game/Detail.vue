@@ -10,16 +10,18 @@
         </li>
       </ul>
       <div :class="$style.clefWrapper">
-        <button @click="setChartClef('violin')">
-          <Clef type="violin" :class="$style.clef" />
-        </button>
-        <button @click="setChartClef('violin')">
-          <Clef
-            type="bass"
-            :class="$style.clef"
-            @click="setChartClef('bass')"
-          />
-        </button>
+        <UIComponentsButton
+          @click="setChartClef('violin')"
+          :active="chartClef === 'violin'"
+          icon="game-icons:g-clef"
+          >Violin notes
+        </UIComponentsButton>
+        <UIComponentsButton
+          @click="setChartClef('bass')"
+          :active="chartClef === 'bass'"
+          icon="game-icons:f-clef"
+          >Bass notes</UIComponentsButton
+        >
       </div>
       <div :class="$style.chart">
         <apexchart
@@ -220,17 +222,8 @@ watch(
 .clefWrapper {
   display: flex;
   flex-flow: row nowrap;
-
-  .clef {
-    height: 24px;
-    margin-right: 24px;
-
-    & svg {
-      height: 100%;
-    }
-  }
+  gap: 16px;
 }
-
 .chart {
   width: 100%;
 
