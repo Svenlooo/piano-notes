@@ -2,7 +2,7 @@
   <div class="highscoreList">
     <ClientOnly fallback="Loading highscore list...">
       <ul class="highscoreList__list" v-if="pastGames.length > 0">
-        <li v-for="(game, index) in pastGames" :key="index">
+        <li v-for="(game, index) in pastGames" :key="index" class="highscoreList__list-item">
           <Modal>
             <template v-slot:trigger>
               <GameTile :game="game" />

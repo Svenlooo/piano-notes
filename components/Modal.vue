@@ -165,6 +165,7 @@ watch(
 
 <style lang="scss" module>
 .trigger {
+  width: 100%;
   padding: 0;
   border: 0;
   background: transparent;
