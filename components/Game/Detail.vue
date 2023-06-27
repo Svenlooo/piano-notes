@@ -13,12 +13,14 @@
         <UIComponentsButton
           @click="setChartClef('violin')"
           :active="chartClef === 'violin'"
+          :class="$style.button"
           icon="game-icons:g-clef"
           >Violin notes
         </UIComponentsButton>
         <UIComponentsButton
           @click="setChartClef('bass')"
           :active="chartClef === 'bass'"
+          :class="$style.button"
           icon="game-icons:f-clef"
           >Bass notes</UIComponentsButton
         >
@@ -147,7 +149,9 @@ const chartData = computed(() => {
 const style = getComputedStyle(document.body);
 const colorAxis = ref(style.getPropertyValue("--color-light").trim());
 const colorBars = ref(style.getPropertyValue("--color-light2").trim());
-const colorDataLabels = ref(style.getPropertyValue("--color-piano-black-key").trim());
+const colorDataLabels = ref(
+  style.getPropertyValue("--color-piano-black-key").trim()
+);
 
 /**
  * Configuration for the chart.
@@ -228,8 +232,23 @@ watch(
 <style lang="scss" module>
 .clefWrapper {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   gap: 16px;
+
+  @media screen and (min-width: #{map-get($breakpoints, 'xs')}) {
+    flex-flow: row nowrap;
+  }
+
+  & .button {
+    width: 100%;
+
+    @media screen and (min-width: #{map-get($breakpoints, 'xs')}) {
+      width: 50%;
+    }
+    @media screen and (min-width: #{map-get($breakpoints, 'md')}) {
+      width: auto;
+    }
+  }
 }
 .chart {
   width: 100%;
