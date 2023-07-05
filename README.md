@@ -13,6 +13,7 @@ This app showcases the following features within a Nuxt 3 app:
 - Progressive Web App caching via Service Worker
 - Routing
 - Variable themes (light + dark mode)
+- e2e tests via Cypress
 
 ## Setup
 
