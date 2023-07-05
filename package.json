@@ -27,9 +27,10 @@
     "@nuxtjs/manifest": "^3.0.0-beta.16",
     "@pinia/nuxt": "^0.4.11",
     "@vite-pwa/nuxt": "^0.0.9",
+    "apexcharts": "^3.41.0",
+    "cypress": "^12.16.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.3",
-    "apexcharts": "^3.41.0",
     "vue3-apexcharts": "^1.4.1"
   }
 }
