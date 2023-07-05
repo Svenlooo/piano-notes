@@ -29,6 +29,14 @@
   height: $navigationHeight;
   background-color: var(--color-piano-black);
 
+  @media #{map-get($mediaSituations, 'fills-screen')} {
+    @media #{map-get($mediaSituations, 'portrait')} {
+      position: fixed;
+      bottom: 0;
+      bottom: env(safe-area-inset-bottom);
+    }
+  }
+
   @media #{map-get($mediaSituations, 'landscape')} {
     width: $navigationHeight;
     height: 100%;

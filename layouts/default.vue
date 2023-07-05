@@ -67,6 +67,13 @@
   & > .page {
     flex: 1;
     overflow-y: auto;
+
+    // Media queries for navigation
+    @media #{map-get($mediaSituations, 'fills-screen')} {
+      @media #{map-get($mediaSituations, 'portrait')} {
+        padding-bottom: calc($navigationHeight + env(safe-area-inset-bottom));
+      }
+    }
   }
 }
 </style>

@@ -64,6 +64,11 @@ body {
     #app-wrapper {
         min-height: inherit;
         min-width: inherit;
+
+        @media #{map-get($mediaSituations, 'fills-screen')} {
+            min-height: unset;
+            min-width: unset;
+        }
     }
 }
 
