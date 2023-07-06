@@ -12,6 +12,7 @@
 import { useSettingsStore } from "~/store/settings";
 
 const settingsStore = useSettingsStore();
+const { t } = useI18n();
 
 // Set theme on init
 watch(

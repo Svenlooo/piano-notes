@@ -53,6 +53,7 @@ export default defineNuxtConfig({
         '@vite-pwa/nuxt',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
+        '@nuxtjs/i18n',
         'nuxt-icon',
         'nuxt-svgo',
     ],

@@ -2,9 +2,13 @@
   <div class="settings">
     <h1>Settings</h1>
 
-    <SettingsOption label="Dark Mode" icon="bi:yin-yang">
-      <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
-    </SettingsOption>
+      <SettingsOption label="Language" icon="bi:globe2">
+        <UIComponentsLanguagePicker />
+      </SettingsOption>
+
+      <SettingsOption label="Dark Mode" icon="bi:yin-yang">
+        <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
+      </SettingsOption>
 
     <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
       <UIComponentsToggle

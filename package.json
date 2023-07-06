@@ -2,10 +2,6 @@
   "name": "piano-notes",
   "private": true,
   "type": "module",
-  "engines": {
-    "npm": ">=9.0.0",
-    "node": ">=16.0.0"
-  },
   "scripts": {
     "start": "node .output/server/index.mjs",
     "build": "nuxt build",
@@ -15,6 +11,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/i18n": "^8.0.0-beta.12",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^18",
     "nuxt": "^3.5.2",
