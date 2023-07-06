@@ -2,11 +2,19 @@
   <div class="settings">
     <h1>Settings</h1>
 
-    <SettingsOption label="Dark Mode" icon="bi:yin-yang">
+    <SettingsOption
+      label="Dark Mode"
+      icon="bi:yin-yang"
+      data-cy="settingsDarkMode"
+    >
       <UIComponentsToggle id="darkmode" v-model="isDarkMode" />
     </SettingsOption>
 
-    <SettingsOption label="Include black keys" icon="game-icons:piano-keys">
+    <SettingsOption
+      label="Include black keys"
+      icon="game-icons:piano-keys"
+      data-cy="settingsblackKeysToggle"
+    >
       <UIComponentsToggle
         id="blackKeysToggle"
         v-model="settingsStore.blackKeys"
@@ -16,6 +24,7 @@
     <SettingsOption
       label="Show only successful plays"
       icon="fluent:music-note-1-24-filled"
+      data-cy="settingsSuccessOnly"
     >
       <UIComponentsToggle
         id="successOnly"
