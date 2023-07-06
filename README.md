@@ -54,6 +54,20 @@ npm run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
+## Tests
+
+Open the Cypress interactive GUI:
+
+```bash
+yarn cypress open
+```
+
+Run tests from the CLI:
+
+```bash
+yarn cypress run
+```
+
 ## Deployment
 
 Done via Netlify.
