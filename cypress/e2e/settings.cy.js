@@ -7,16 +7,14 @@ describe("Settings: Option Toggles", () => {
     cy.get('[data-cy="settingsDarkMode"]').click();
     cy.get("html").should("have.attr", "data-theme", "dark");
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.theme).to.equal("dark");
     });
 
     cy.get('[data-cy="settingsDarkMode"]').click();
     cy.get("html").should("have.attr", "data-theme", "light");
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.theme).to.equal("light");
     });
   });
@@ -24,15 +22,13 @@ describe("Settings: Option Toggles", () => {
   it("Toggles Black Keys", () => {
     cy.get('[data-cy="settingsblackKeysToggle"]').click();
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.blackKeys).to.be.false;
     });
 
     cy.get('[data-cy="settingsblackKeysToggle"]').click();
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.blackKeys).to.be.true;
     });
   });
@@ -40,15 +36,13 @@ describe("Settings: Option Toggles", () => {
   it("Toggles Success option", () => {
     cy.get('[data-cy="settingsSuccessOnly"]').click();
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.successOnly).to.be.true;
     });
 
     cy.get('[data-cy="settingsSuccessOnly"]').click();
 
-    cy.window().then((win) => {
-      const settings = JSON.parse(win.localStorage.getItem("settings"));
+    cy.getSettings().then((settings) => {
       expect(settings.successOnly).to.be.false;
     });
   });
