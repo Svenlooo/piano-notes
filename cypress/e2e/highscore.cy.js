@@ -12,7 +12,7 @@ describe("Highscore Page tests", () => {
 
     const playEachKey = () => {
       cy.get('[data-cy="keyboard"] button').each(($item) => {
-        cy.wrap($item).click();
+        cy.wrap($item).click({force: true}); // Prevent error of element being covered by another.
       });
     };
 
