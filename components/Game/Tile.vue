@@ -3,6 +3,7 @@
     <Icon
       class="gameTile__icon gameTile__icon--delete"
       name="game-icons:trash-can"
+      data-cy="game-delete"
       @click.stop="handleDelete(game.originalIndex)"
     />
     <Icon
@@ -10,7 +11,9 @@
       name="ic:baseline-open-in-full"
     />
     <div class="gameTile__meta">
-      {{ parseDay(game.startDate) }}<br />{{ secondsToHMS(game.metrics.durationInSeconds) }}
+      {{ parseDay(game.startDate) }}<br />{{
+        secondsToHMS(game.metrics.durationInSeconds)
+      }}
     </div>
     <div class="gameTile__meta gameTile__meta--score">
       <span class="value">{{ game.score }}%</span>

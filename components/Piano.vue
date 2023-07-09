@@ -1,7 +1,7 @@
 <template>
   <div class="piano">
     <Sheet ref="sheet" />
-    <Keyboard @play="handleNote($event)" />
+    <Keyboard @play="handleNote($event)" data-cy="keyboard" />
   </div>
 </template>
 

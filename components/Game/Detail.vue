@@ -15,6 +15,7 @@
           :active="chartClef === 'violin'"
           :class="$style.button"
           icon="game-icons:g-clef"
+          data-cy="violin-notes"
           >Violin notes
         </UIComponentsButton>
         <UIComponentsButton
@@ -22,6 +23,7 @@
           :active="chartClef === 'bass'"
           :class="$style.button"
           icon="game-icons:f-clef"
+          data-cy="bass-notes"
           >Bass notes</UIComponentsButton
         >
       </div>

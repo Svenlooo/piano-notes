@@ -1,5 +1,10 @@
 <template>
-  <button :class="$style.trigger" @click="toggleModal" ref="trigger">
+  <button
+    :class="$style.trigger"
+    @click="toggleModal"
+    ref="trigger"
+    data-cy="modalTrigger"
+  >
     <slot name="trigger" />
   </button>
 
@@ -8,10 +13,12 @@
       :class="[$style.modal, animatingDone && $style.fullSize]"
       v-if="open"
       ref="modal"
+      data-cy="modalContent"
     >
       <Icon
         name="ic:round-close"
         :class="$style.closeIcon"
+        data-cy="modal-close"
         @click="toggleModal"
       />
       <div

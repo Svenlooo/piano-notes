@@ -2,19 +2,27 @@
   <div class="navigation">
     <ul class="navigation__list">
       <li class="navigation__list-item">
-        <NuxtLink to="/highscore" class="navigation__button">
+        <NuxtLink
+          to="/highscore"
+          class="navigation__button"
+          data-cy="nav-highscore"
+        >
           <Icon name="game-icons:scroll-unfurled" />
           <span class="label">Score</span>
         </NuxtLink>
       </li>
       <li class="navigation__list-item">
-        <NuxtLink to="/" class="navigation__button">
+        <NuxtLink to="/" class="navigation__button" data-cy="nav-play">
           <Icon name="game-icons:grand-piano" />
           <span class="label">Play</span>
         </NuxtLink>
       </li>
       <li class="navigation__list-item">
-        <NuxtLink to="/settings" class="navigation__button">
+        <NuxtLink
+          to="/settings"
+          class="navigation__button"
+          data-cy="nav-settings"
+        >
           <Icon name="ion:md-options" />
           <span class="label">Settings</span>
         </NuxtLink>
