@@ -1,7 +1,6 @@
 describe("Highscore Page tests", () => {
   /**
-   * Tests if a game is playable and if it is being added to the
-   * Highscore page.
+   * Tests if a game is playable and if it is being added to the Highscore page.
    * Opens the game's modal
    * Checks the toggle between Bass and Violin notes
    * Closes the modal
