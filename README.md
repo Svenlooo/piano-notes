@@ -1,8 +1,7 @@
 # Piano Notes
 
 A web-app for learning to read piano notes from a sheet.
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Uses Vue 3 and Nuxt 3.
 
 ## Features
 
@@ -26,8 +25,6 @@ yarn install
 # npm
 npm install
 
-# pnpm
-pnpm install
 ```
 
 ## Development Server
@@ -36,6 +33,7 @@ Start the development server on `http://localhost:3000`
 
 ```bash
 npm run dev
+yarn dev
 ```
 
 ## Production
@@ -44,12 +42,14 @@ Build the application for production:
 
 ```bash
 npm run build
+yarn build
 ```
 
 Locally preview production build:
 
 ```bash
 npm run preview
+yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
@@ -68,10 +68,10 @@ Run tests from the CLI:
 yarn cypress run
 ```
 
-## Deployment
+## Deployment & Play
 
-Done via Netlify.
-Preview: https://piano-notes.netlify.app/
+Deployment is done automagically via Netlify.
+View the latest version here: https://piano-notes.netlify.app/
 
 ## Resources
 
