@@ -51,7 +51,7 @@ export const useGamesStore = defineStore(
       // Add new game, if no last game is available OR if Date isn't the latest one
       if (
         typeof lastGame.value === "boolean" ||
-        lastGame.value.startDate !== currentGame.startDate
+        new Date(lastGame.value.startDate).getTime() !== new Date(currentGame.startDate).getTime()
       ) {
         gameList.value.push(currentGame);
       }
