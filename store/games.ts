@@ -141,7 +141,7 @@ export const useGamesStore = defineStore(
       currentGame.endDate = new Date();
       currentGame.metrics.durationInSeconds = gameMetricDuration(
         currentGame.startDate,
-        new Date()
+        currentGame.endDate
       );
       currentGame.metrics.notesCorrectPercentage =
         gameMetricNotesCorrectPercentage(
