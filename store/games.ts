@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import _ from "lodash";
 import Game from "~/interfaces/Game";
 import NoteListElement from "~/interfaces/NoteListElement";
 import gameMetricDuration from "~/utils/gameMetricDuration";
@@ -12,6 +13,7 @@ export const useGamesStore = defineStore(
      */
     const currentGame = reactive<Game>({
       startDate: new Date(),
+      endDate: null,
       score: 0,
       notes: [],
       metrics: {
@@ -51,7 +53,8 @@ export const useGamesStore = defineStore(
       // Add new game, if no last game is available OR if Date isn't the latest one
       if (
         typeof lastGame.value === "boolean" ||
-        new Date(lastGame.value.startDate).getTime() !== new Date(currentGame.startDate).getTime()
+        new Date(lastGame.value.startDate).getTime() !==
+          new Date(currentGame.startDate).getTime()
       ) {
         gameList.value.push(currentGame);
       }
@@ -135,6 +138,7 @@ export const useGamesStore = defineStore(
      * Updates all the metrics of the current game.
      */
     const updateGameMetrics = () => {
+      currentGame.endDate = new Date();
       currentGame.metrics.durationInSeconds = gameMetricDuration(
         currentGame.startDate,
         new Date()
@@ -144,6 +148,50 @@ export const useGamesStore = defineStore(
           currentNote.value,
           currentGame.metrics.notesCorrectPercentage
         );
+    };
+
+    /**
+     * Persists and quits the current game.
+     * Resets everything for a fresh start.
+     */
+    const quitGame = () => {
+      // Create copy of last note for resetting
+      const tempLastNote = currentNote.value;
+      tempLastNote.attempts = 0;
+
+      // Override last gameList game with clone to remove reference
+      const deepClone = _.cloneDeep(toRaw(currentGame));
+      deleteGame(gameList.value.length - 1);
+      gameList.value.push(deepClone);
+
+      // Reset currentGame
+      currentGame.startDate = new Date();
+      currentGame.endDate = null;
+      currentGame.score = 0;
+      currentGame.notes = [tempLastNote];
+      currentGame.metrics = {
+        durationInSeconds: 0,
+        notesCorrectPercentage: [],
+      };
+    };
+
+    /**
+     * Continuously checks if the user has stopped playing.
+     * Automatically quits and persists the currentGame after a timeout period.
+     * This prevents hour-long games if the App isn't closed.
+     */
+    const checkForGameEnd = () => {
+      const timeoutPeriod = 60000 * 5; // Last factor is minutes
+      const checkInterval = 3000; // How often to check
+
+      setInterval(() => {
+        if (currentGame.endDate !== null) {
+          const now = new Date().getTime();
+          const timeSinceInput = now - currentGame.endDate.getTime();
+
+          timeSinceInput >= timeoutPeriod && quitGame();
+        }
+      }, checkInterval);
     };
 
     /**
@@ -165,6 +213,8 @@ export const useGamesStore = defineStore(
           currentGame.score = Math.round((100 / totalTries) * totalSuccesses);
       }
     );
+
+    onMounted(checkForGameEnd);
 
     return {
       currentGame,

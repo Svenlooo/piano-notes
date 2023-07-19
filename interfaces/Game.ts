@@ -7,6 +7,9 @@ import GameMetric from '~/interfaces/GameMetric';
 export default interface Game {
     /** The exact date + time when the game was started */
     startDate: Date,
+
+    /** The exact date + time when the last user interaction has taken place */
+    endDate: Date | null,
     
     /** The score reached, represented in % */
     score: number,
